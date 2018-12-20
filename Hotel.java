@@ -1,5 +1,5 @@
 
-package proyectohotel;
+package ProyectoHotel;
 
 public class Hotel {
     
