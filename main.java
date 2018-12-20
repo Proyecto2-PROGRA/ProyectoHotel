@@ -1,5 +1,5 @@
 
-package proyectohotel;
+package ProyectoHotel;
 
 import java.io.IOException;
 
