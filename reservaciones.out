@@ -1,0 +1,74 @@
+RESERVACION--(09/07/2011)
+	Titular: 11111111
+	Habitacion INDIV del 17/07/2011 al 19/07/2011 (2 dias)
+RESERVACION--(10/07/2011)
+	Titular: 21111111
+	Habitacion INDIV del 19/07/2011 al 22/07/2011 (3 dias)
+RESERVACION--(10/07/2011)
+	Titular: 31111111
+	Habitacion INDIV del 11/07/2011 al 13/07/2011 (2 dias)
+RESERVACION--(11/07/2011)
+	Titular: 41111111
+	Habitacion INDIV del 12/07/2011 al 15/07/2011 (3 dias)
+CHECK-IN-----(11/07/2011 18:33)
+	Titular: 31111111
+	Habitacion: 001001
+CHECK-IN-----(12/07/2011 15:02)
+	Titular: 41111111
+	Habitacion: 001002
+RESERVACION--(14/07/2011)
+	Titular: 51111111
+	Habitacion INDIV del 16/07/2011 al 22/07/2011 (6 dias)
+RESERVACION--(15/07/2011)
+	Titular: 99111111
+	Habitacion MATRI del 16/07/2011 al 18/07/2011 (2 dias)
+RESERVACION--(15/07/2011)
+	Titular: 98811111
+	Habitacion MATRI del 19/07/2011 al 22/07/2011 (3 dias)
+CHECK-OUT----(16/07/2011 19:21)
+	Titular: 41111111
+	Cancelo: 750.00
+CHECK-IN-----(16/07/2011 19:21)
+	Titular: 51111111
+	Habitacion: 001002
+CHECK-OUT----(17/07/2011 14:30)
+	Titular: 31111111
+	Cancelo: 1050.00
+CHECK-IN-----(17/07/2011 14:30)
+	Titular: 11111111
+	Habitacion: 001001
+CHECK-OUT----(19/07/2011 09:30)
+	Titular: 11111111
+	Cancelo: 300.00
+CHECK-IN-----(19/07/2011 17:56)
+	Titular: 21111111
+	Habitacion: 001001
+CHECK-OUT----(22/07/2011 11:02)
+	Titular: 51111111
+	Cancelo: 900.00
+RESERVACION--(23/07/2011)
+	Titular: 61111111
+	Habitacion SUITE del 27/07/2011 al 05/08/2011 (9 dias)
+RESERVACION--(23/07/2011)
+	Titular: 81111111
+	Habitacion INDIV del 29/07/2011 al 02/08/2011 (4 dias)
+RESERVACION--(23/07/2011)
+	Titular: 12345678
+	Habitacion INDIV del 25/07/2011 al 02/08/2011 (8 dias)
+RESERVACION--(23/07/2011)
+	Titular: 12345679
+	Habitacion INDIV del 03/08/2011 al 05/08/2011 (2 dias)
+CHECK-OUT----(24/07/2011 13:02)
+	Titular: 21111111
+	Cancelo: 900.00
+CHECK-IN-----(27/07/2011 17:33)
+	Titular: 61111111
+	Habitacion: 002002
+CANCELACION--(28/07/2011 12:00)
+	Titular: 81111111
+RESERVACION--(28/07/2011)
+	Titular: 13246578
+	Habitacion INDIV del 29/07/2011 al 06/08/2011 (8 dias)
+CHECK-OUT----(02/08/2011 09:00)
+	Titular: 61111111
+	Cancelo: 9450.00
