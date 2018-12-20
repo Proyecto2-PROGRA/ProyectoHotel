@@ -26,6 +26,15 @@ public class ArchivoEntrada {
                 System.out.println(cadena);
             } }
 }
+    public void operaciones()throws IOException {
+        String cadena;
+      FileReader f = new FileReader("operaciones.in");
+        try (BufferedReader b = new BufferedReader(f)) {
+            while((cadena = b.readLine())!=null) {
+                System.out.println(cadena);
+            } }
+    
+    }
 
 
 
