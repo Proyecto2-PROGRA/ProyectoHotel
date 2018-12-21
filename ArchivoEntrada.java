@@ -6,10 +6,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
 public class ArchivoEntrada {
-    
-        
+         
     public void inicializar() throws IOException {
         String cadena;
       FileReader f = new FileReader("inicializar.in");

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class ArchivoSalida {
     protected int diaLlegada;
     protected int diaSalida;
@@ -40,7 +41,6 @@ public class ArchivoSalida {
     
     public void reservaciones() throws FileNotFoundException, IOException {
                 
-   
         try (BufferedReader BR = new BufferedReader (new FileReader ("operaciones.in"))) {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
@@ -95,20 +95,30 @@ public class ArchivoSalida {
     }
     
      public void contabilidad()throws IOException{
+        
+             
+         
         String s1;
         String s2;
+       
         BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
         
         // Leemos la primera linea
         s1 = br.readLine();
+        
         s2 = br.readLine();
-        System.out.println("   Debe   "+" | "+"Haber");
-        System.out.println (s2+" | " +s1 );
+        //int saldo = Integer.parseInt(s1);
+        
+        
+        
+        System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
+        System.out.println (s2+" | " +s1 +"     | "  );
         
         BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"));
-    }
+        
+    
      
-     
+     } 
     public void reportes(){
         
     }
