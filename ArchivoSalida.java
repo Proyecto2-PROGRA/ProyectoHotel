@@ -47,7 +47,7 @@ public class ArchivoSalida {
             
             try{
                 testDate=df.parse(fechaInicial);
-                fecha.setTime(testDate);//FechaSsumando
+                fecha.setTime(testDate);//FechaSumando
                 
                 
                
@@ -94,7 +94,14 @@ public class ArchivoSalida {
                 if (cadena.equals("1")){
                     cadena = BR.readLine();
                 }else{
-                            
+                   personaEnHabitacion=Integer.parseInt(cadena);
+                   for(int i=0;i<personaEnHabitacion; i++){
+                       campoPersona = cadena.split(" ");
+                       cadena = BR.readLine();
+                       if(campoPersona[0].equals("A")){
+                           break;
+                       }
+                   }
                 }   
                 campoPersona = cadena.split(" ");
                 System.out.println("RESERVACIÓN--("+diaActual+"/"+mesActual+"/"+annioActual+")");
@@ -136,7 +143,7 @@ public class ArchivoSalida {
                     
                     System.out.println("CHECK-OUT----("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
                     System.out.println("    Titular: "+ campoPersona[0]);
-                    System.out.println("    Habitación "+ campoPersona[1]);
+                    System.out.println("    Cancelo: "+ campoPersona[1]);
                 break;
                 
             case "5":
@@ -166,9 +173,10 @@ public class ArchivoSalida {
      
                 break;
             case "7":
-                        break;
-                    default:
-                        break;
+                
+                break;
+            default:
+                break;
                 }
                
             }
