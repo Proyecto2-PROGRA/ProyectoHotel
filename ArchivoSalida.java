@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ArhivoSalida {
+public class ArchivoSalida {
     protected int diaLlegada;
     protected int diaSalida;
     protected int mesLlegada;
@@ -18,7 +18,7 @@ public class ArhivoSalida {
     protected String campoPersona="";
     protected String cadena;
     
-    public ArhivoSalida(){
+    public ArchivoSalida() throws FileNotFoundException{
         FileReader lector = new FileReader("inicializar.in");
         BufferedReader BR= new BufferedReader(lector); 
     }
