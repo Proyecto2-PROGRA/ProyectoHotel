@@ -1,7 +1,9 @@
 package ProyectoHotel;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class ArhivoSalida {
     protected int diaLlegada;
@@ -10,62 +12,71 @@ public class ArhivoSalida {
     protected int mesSalida;
     protected int annioLlegada;
     protected int annioSalida;
+    protected int personaEnHabitacion;
+    protected String tipoHabitacion;
+    protected String rutPersona;
+    protected String campoPersona="";
+    protected String cadena;
     
-    public void reservaciones(){
-        
-        String cadena="";
-        
-        try {
-            FileReader lector = new FileReader("operaciones.in");
-            BufferedReader BR = new BufferedReader(lector);
-            
-            while ((cadena = BR.readLine()) != null) {
+    public ArhivoSalida(){
+        FileReader lector = new FileReader("inicializar.in");
+        BufferedReader BR= new BufferedReader(lector); 
+    }
+    
+    
+    public void reservaciones() throws FileNotFoundException, IOException {
                 
-                if (cadena.equals("0")) {
-                     System.out.println("Sumar dia");
-                     
-                } 
-                else if (cadena.equals("1")) {
-                    
-                    cadena = BR.readLine();
-                    String[] campos = cadena.split(" ");
+        FileReader lector = new FileReader("operaciones.in");
+        try (BufferedReader BR = new BufferedReader(lector)) {
+        while ((cadena = BR.readLine()) != null) {
+        switch (cadena) {
+            case "0":
+                System.out.println("Sumar dia");
+                break;
+            case "1":
+                 cadena = BR.readLine();
+                String[] campos = cadena.split(" ");
+                 try{
                     diaLlegada =Integer.parseInt(campos[0]);
                     mesLlegada =Integer.parseInt(campos[1]);
                     annioLlegada =Integer.parseInt(campos[2]);
                     diaSalida =Integer.parseInt(campos[3]);
-                    mesSalida =Integer.parseInt(campos[4]);
+                    mesSalida =Integer.parseInt(campos[4]); 
                     annioSalida =Integer.parseInt(campos[5]);
-                    
-                    
-                    
-                    System.out.println("RESERVACIÓN--("+"dia"+"/"+"mes"+"/"+"año");
-                    System.out.println("    Títular: "+"rut");
-                    System.out.println("Habitación "+"dobl"+" del "+"dia"+"/"+"mes"+"/"+"año"+" al" +"dia"+"/"+"mes"+"/"+"año"+ "7"+" dias");
-                    
-                    
-                }
-                else if (cadena.equals("2")) {
-                     
-                }
-                else if (cadena.equals("3")) {
-                     
-                }else if (cadena.equals("4")) {
-                     
-                }else if (cadena.equals("5")) {
-                     
-                }else if (cadena.equals("6")) {
-                     
-                }else if (cadena.equals("7")) {
-                     
+                }catch(Exception ex){}
+                 
+                cadena = BR.readLine();
+                tipoHabitacion=cadena;
+                cadena = BR.readLine();
+                if (cadena.equals("1")){
+                    cadena = BR.readLine();
+                }else{
+                            
+                }   
+                String[] campoPersona = cadena.split(" ");
+                System.out.println("RESERVACIÓN--("+"dia"+"/"+"mes"+"/"+"año");
+                System.out.println("    Titular: "+ campoPersona[1]);
+                System.out.println("Habitación "+tipoHabitacion+" del "+campos[0]+"/"+campos[1]+"/"+campos[2]+" al " +campos[3]+"/"+campos[4]+"/"+campos[5]+ "7"+" dias");
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    case "4":
+                        break;
+                    case "5":
+                        break;
+                    case "6":
+                        break;
+                    case "7":
+                        break;
+                    default:
+                        break;
                 }
                 System.out.println(cadena);
             }
-
-            BR.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-
         }
+        
 
     }
     
