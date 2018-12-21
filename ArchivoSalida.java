@@ -18,7 +18,6 @@ public class ArchivoSalida {
     protected int annioActual;
     protected String tipoHabitacion;
     protected String rutPersona;
-
     protected String cadena;
     protected SimpleDateFormat df;
     protected String fechaInicial;
@@ -27,10 +26,12 @@ public class ArchivoSalida {
     protected Calendar fecha;
     protected String[] campos;
     protected String[] campoPersona;
+    protected Integer servicioSolicitado;
+    protected float debeServicioSolicitado;
+    protected int comidaRestaurant;
+    protected float debeComidaRestaurant;
  
-    
-    
-    
+
  public ArchivoSalida()  throws FileNotFoundException, IOException{
         df = new SimpleDateFormat("dd/MM/yyyy");
         fecha = Calendar.getInstance();
@@ -66,7 +67,6 @@ public class ArchivoSalida {
         switch (cadena) {
             case "0":
                 fecha.add(Calendar.DAY_OF_WEEK, 1);
-                System.out.println("Entro");
                 break;
             case "1":
                                
@@ -139,11 +139,33 @@ public class ArchivoSalida {
                     System.out.println("    Habitación "+ campoPersona[1]);
                 break;
                 
-                    case "5":
-                        break;
-                    case "6":
-                        break;
-                    case "7":
+            case "5":
+                    cadena = BR.readLine();
+                    comidaRestaurant=Integer.parseInt(cadena);
+                    for(int i=0;i<comidaRestaurant;i++){
+                        cadena= BR.readLine();
+                        String[] campos = cadena.split(" ");
+                        if(campos[0].equals("ESP_C")){
+                            debeComidaRestaurant+=(float) 55.00;  
+                        }else if(campos[0].equals("LOM_M")){
+                            debeComidaRestaurant+=(float) 71.50;
+                        }else if(campos[0].equals("JUG_L")){
+                            debeComidaRestaurant+=(float) 10.00;
+                        }else if(campos[0].equals("MALTA")){
+                            debeComidaRestaurant+=(float) 6.00;  
+                        }
+                    }
+                    System.out.println("leeeeeeeeeeeer "+debeComidaRestaurant);
+                 break;
+            case "6":
+                    cadena = BR.readLine();
+                    System.out.println("Rut "+cadena);
+                    cadena = BR.readLine();
+                    servicioSolicitado = Integer.parseInt(cadena);
+                    debeServicioSolicitado = (float) 50.00*servicioSolicitado;
+     
+                break;
+            case "7":
                         break;
                     default:
                         break;
