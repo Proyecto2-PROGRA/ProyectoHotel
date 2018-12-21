@@ -46,6 +46,7 @@ public class ArchivoSalida {
             case "1":
                  cadena = BR.readLine();
                 String[] campos = cadena.split(" ");
+                
                  try{
                     diaLlegada =Integer.parseInt(campos[0]);
                     mesLlegada =Integer.parseInt(campos[1]);
@@ -91,30 +92,52 @@ public class ArchivoSalida {
     }
     
      public void contabilidad()throws IOException{
-        
-             
          
+        int rut = 0;
+        int otro = 0;
         String s1;
         String s2;
        
         BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
-        
-        // Leemos la primera linea
+
         s1 = br.readLine();
-        
         s2 = br.readLine();
+        
         float saldo = Float.parseFloat(s1);
         
-        
-        
-        System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
-        System.out.println (s2+" | " +saldo+"      | " + "              |" +saldo + "       |" + "saldo inicial");
-        
-        BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"));
-        
-    
+            System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
+            System.out.println (s2+" | " +s1+"     | " + "              |" +saldo + "       |" + "saldo inicial");
+
+        try (BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"))) {
+            
+            while ((cadena = br2.readLine()) != null) {
+                switch (cadena) {
+                    case "6":
+                         cadena = br2.readLine();
+                        String[] campos = cadena.split(" ");
+
+                            try{
+                               rut =Integer.parseInt(campos[0]);
+
+                               
+                           }catch(Exception ex){}
+                             
+                cadena = br2.readLine();
+                tipoHabitacion=cadena;
+                cadena = br2.readLine();
+                if (cadena.equals("1")){
+                    cadena = br2.readLine();
+                }else{
+                            
+                }   
+                String[] campopersona = cadena.split(" ");
+                        System.out.println(rut);
+                        break;
+                }
+            }
+        }
+   } 
      
-     } 
     public void reportes(){
         
     }
