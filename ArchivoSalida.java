@@ -95,6 +95,7 @@ public class ArchivoSalida {
          
         int rut = 0;
         int otro = 0;
+        float precio;
         String s1;
         String s2;
        
@@ -104,9 +105,11 @@ public class ArchivoSalida {
         s2 = br.readLine();
         
         float saldo = Float.parseFloat(s1);
+        saldo=saldo;
         
             System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
             System.out.println (s2+" | " +s1+"     | " + "              |" +saldo + "       |" + "saldo inicial");
+            System.out.println();
 
         try (BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"))) {
             
@@ -118,10 +121,25 @@ public class ArchivoSalida {
 
                             try{
                                rut =Integer.parseInt(campos[0]);
-
+                               cadena = br2.readLine();
+                               otro = Integer.parseInt(cadena);
                                
-                           }catch(Exception ex){}
-                             
+                               
+                               for(int i = 0; i<otro;i++){
+                                   cadena=br2.readLine();
+                                   
+                                   campos = cadena.split(" ");
+                                   
+                                   if(campos[0].equals("CAM_A")){
+                                       precio=(float) 50.00;
+                                       System.out.println(precio);     
+                                   }
+                                   else if(cadena.equals("CAJ_F")){
+                                       precio=(float) 50.00;
+                                       System.out.println(precio);
+                                   }
+                               }
+                           }catch(Exception ex){}                             
                 cadena = br2.readLine();
                 tipoHabitacion=cadena;
                 cadena = br2.readLine();
@@ -131,9 +149,10 @@ public class ArchivoSalida {
                             
                 }   
                 String[] campopersona = cadena.split(" ");
-                        System.out.println(rut);
+                        System.out.println(rut);                       
                         break;
                 }
+                
             }
         }
    } 
