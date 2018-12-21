@@ -41,7 +41,7 @@ public class ArchivoSalida {
     public void reservaciones() throws FileNotFoundException, IOException {
                 
    
-        try (BufferedReader BR = new BufferedReader(lector)) {
+        try (BufferedReader BR = new BufferedReader (new FileReader ("operaciones.in"))) {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
             case "0":
@@ -97,18 +97,15 @@ public class ArchivoSalida {
      public void contabilidad()throws IOException{
         String s1;
         String s2;
-        try{
-            BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
-            s1 = br.readLine();
+        BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
+        
+        // Leemos la primera linea
+        s1 = br.readLine();
         s2 = br.readLine();
         System.out.println("   Debe   "+" | "+"Haber");
         System.out.println (s2+" | " +s1 );
         
         BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"));
-        }catch(Exception ex){}
-
-        // Leemos la primera linea
-        
     }
      
      
