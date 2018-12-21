@@ -12,7 +12,7 @@ public class main {
         //a.precios();
          //System.out.println(" \n ------------ OPERACIONES.IN ------------  ");
          //a.operaciones();
-         ArhivoSalida s= new ArhivoSalida();
+         ArchivoSalida s= new ArchivoSalida();
          s.contabilidad();
          //s.reservaciones();
     }

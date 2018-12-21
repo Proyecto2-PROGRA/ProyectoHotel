@@ -21,7 +21,6 @@ public class ArhivoSalida {
     protected String campoPersona;
     protected String cadena;
     
-    
     public ArhivoSalida() throws FileNotFoundException, IOException{
         FileReader lector = new FileReader("inicializar.in");
         BufferedReader BR= new BufferedReader(lector); 
@@ -31,7 +30,6 @@ public class ArhivoSalida {
         diaActual = Integer.parseInt(campos[0]);
         mesActual = Integer.parseInt(campos[1]);
         annioActual = Integer.parseInt(campos[2]);
-        
     }
     
     

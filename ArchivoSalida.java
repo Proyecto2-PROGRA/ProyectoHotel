@@ -13,20 +13,34 @@ public class ArchivoSalida {
     protected int annioLlegada;
     protected int annioSalida;
     protected int personaEnHabitacion;
+    protected int diaActual;
+    protected int mesActual;
+    protected int annioActual;
     protected String tipoHabitacion;
     protected String rutPersona;
-    protected String campoPersona="";
+    protected String campoPersona;
     protected String cadena;
     
-    public ArchivoSalida() throws FileNotFoundException{
-        FileReader lector = new FileReader("inicializar.in");
-        BufferedReader BR= new BufferedReader(lector); 
+    
+ public ArchivoSalida()  throws FileNotFoundException, IOException{
+        
+        try{
+            BufferedReader BR = new BufferedReader (new FileReader ("inicializar.in"));
+            BR.readLine();
+        cadena = BR.readLine();
+        String[] campos = cadena.split(" ");
+        diaActual = Integer.parseInt(campos[0]);
+        mesActual = Integer.parseInt(campos[1]);
+        annioActual = Integer.parseInt(campos[2]);
+        }catch(Exception ex){}
+        
+        
     }
     
     
     public void reservaciones() throws FileNotFoundException, IOException {
                 
-        FileReader lector = new FileReader("operaciones.in");
+   
         try (BufferedReader BR = new BufferedReader(lector)) {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
@@ -83,15 +97,18 @@ public class ArchivoSalida {
      public void contabilidad()throws IOException{
         String s1;
         String s2;
-        BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
-        
-        // Leemos la primera linea
-        s1 = br.readLine();
+        try{
+            BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
+            s1 = br.readLine();
         s2 = br.readLine();
         System.out.println("   Debe   "+" | "+"Haber");
         System.out.println (s2+" | " +s1 );
         
         BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"));
+        }catch(Exception ex){}
+
+        // Leemos la primera linea
+        
     }
      
      
