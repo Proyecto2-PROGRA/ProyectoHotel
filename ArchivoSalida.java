@@ -1,6 +1,9 @@
 package ProyectoHotel;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ArchivoSalida {
     protected int diaLlegada;
@@ -15,20 +18,41 @@ public class ArchivoSalida {
     protected int annioActual;
     protected String tipoHabitacion;
     protected String rutPersona;
-    protected String campoPersona;
+
     protected String cadena;
+    protected SimpleDateFormat df;
+    protected String fechaInicial;
+    protected String date;
+    protected Date testDate;
+    protected Calendar fecha;
+    protected String[] campos;
+    protected String[] campoPersona;
+ 
+    
     
     
  public ArchivoSalida()  throws FileNotFoundException, IOException{
-        
+        df = new SimpleDateFormat("dd/MM/yyyy");
+        fecha = Calendar.getInstance();
         try{
             BufferedReader BR = new BufferedReader (new FileReader ("inicializar.in"));
             BR.readLine();
-        cadena = BR.readLine();
-        String[] campos = cadena.split(" ");
-        diaActual = Integer.parseInt(campos[0]);
-        mesActual = Integer.parseInt(campos[1]);
-        annioActual = Integer.parseInt(campos[2]);
+            cadena = BR.readLine();
+            String[] campos = cadena.split(" ");
+            diaActual = Integer.parseInt(campos[0]);
+            mesActual = Integer.parseInt(campos[1]);
+            annioActual = Integer.parseInt(campos[2]);
+            fechaInicial = (campos[0]+"/"+campos[1]+"/"+campos[2]);
+            
+            try{
+                testDate=df.parse(fechaInicial);
+                fecha.setTime(testDate);//FechaSsumando
+                
+                
+               
+                
+            }catch(Exception ex){}
+            
         }catch(Exception ex){}
         
         
@@ -41,11 +65,17 @@ public class ArchivoSalida {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
             case "0":
-                System.out.println("Sumar dia");
+                fecha.add(Calendar.DAY_OF_WEEK, 1);
+                System.out.println("Entro");
                 break;
             case "1":
-                 cadena = BR.readLine();
-                String[] campos = cadena.split(" ");
+                               
+                annioActual = fecha.get(Calendar.YEAR);
+                mesActual = fecha.get(Calendar.MONTH)+1;
+                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+                
+                cadena = BR.readLine();
+                campos = cadena.split(" ");
                 
                  try{
                     diaLlegada =Integer.parseInt(campos[0]);
@@ -54,6 +84,8 @@ public class ArchivoSalida {
                     diaSalida =Integer.parseInt(campos[3]);
                     mesSalida =Integer.parseInt(campos[4]); 
                     annioSalida =Integer.parseInt(campos[5]);
+//Diferencia entre dias                    
+//int dias=(int) ((fechaActual.getTime()-fechaUltimaSincro.getTime())/86400000);
                 }catch(Exception ex){}
                  
                 cadena = BR.readLine();
@@ -64,17 +96,49 @@ public class ArchivoSalida {
                 }else{
                             
                 }   
-                String[] campoPersona = cadena.split(" ");
-                System.out.println("RESERVACIÓN--("+"dia"+"/"+"mes"+"/"+"año");
+                campoPersona = cadena.split(" ");
+                System.out.println("RESERVACIÓN--("+diaActual+"/"+mesActual+"/"+annioActual+")");
                 System.out.println("    Titular: "+ campoPersona[1]);
-                System.out.println("Habitación "+tipoHabitacion+" del "+campos[0]+"/"+campos[1]+"/"+campos[2]+" al " +campos[3]+"/"+campos[4]+"/"+campos[5]+ "7"+" dias");
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    case "4":
-                        break;
+                System.out.println("    Habitación "+tipoHabitacion+" del "+campos[0]+"/"+campos[1]+"/"+campos[2]+" al " +campos[3]+"/"+campos[4]+"/"+campos[5]+ "7"+" dias");
+                break;
+            case "2":
+                annioActual = fecha.get(Calendar.YEAR);
+                mesActual = fecha.get(Calendar.MONTH)+1;
+                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+                cadena = BR.readLine();
+                campoPersona = cadena.split(" ");
+                
+                System.out.println("CANCELACIÓN--("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
+                System.out.println("    Titular: "+ campoPersona[0]);
+                
+                
+                break;
+            case "3":
+                annioActual = fecha.get(Calendar.YEAR);
+                mesActual = fecha.get(Calendar.MONTH)+1;
+                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+                cadena = BR.readLine();
+                campoPersona = cadena.split(" ");
+                    
+                System.out.println("CHECK-IN-----("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
+                System.out.println("    Titular: "+ campoPersona[0]);
+                System.out.println("    Habitación "+ campoPersona[1]);
+                System.out.println(cadena);
+                
+                break;
+                
+            case "4":
+                    annioActual = fecha.get(Calendar.YEAR);
+                    mesActual = fecha.get(Calendar.MONTH)+1;
+                    diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+                    cadena = BR.readLine();
+                    campoPersona = cadena.split(" ");
+                    
+                    System.out.println("CHECK-OUT----("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
+                    System.out.println("    Titular: "+ campoPersona[0]);
+                    System.out.println("    Habitación "+ campoPersona[1]);
+                break;
+                
                     case "5":
                         break;
                     case "6":
@@ -84,7 +148,7 @@ public class ArchivoSalida {
                     default:
                         break;
                 }
-                System.out.println(cadena);
+               
             }
         }
         
@@ -92,7 +156,7 @@ public class ArchivoSalida {
     }
     
      public void contabilidad()throws IOException{
-         
+         /*
         int rut = 0;
         int otro = 0;
         float precio;
@@ -108,7 +172,7 @@ public class ArchivoSalida {
         saldo=saldo;
         
             System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
-            System.out.println (s2+" | " +s1+"     | " + "              |" +saldo + "       |" + "saldo inicial");
+            System.out.println (fechaInicial+" | " +s1+"     | " + "              |" +saldo + "       |" + "saldo inicial");
             System.out.println();
 
         try (BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"))) {
@@ -154,7 +218,7 @@ public class ArchivoSalida {
                 }
                 
             }
-        }
+        }*/
    } 
      
     public void reportes(){

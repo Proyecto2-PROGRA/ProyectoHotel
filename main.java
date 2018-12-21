@@ -13,8 +13,8 @@ public class main {
          //System.out.println(" \n ------------ OPERACIONES.IN ------------  ");
          //a.operaciones();
          ArchivoSalida s= new ArchivoSalida();
-         s.contabilidad();
-         //s.reservaciones();
+         //s.contabilidad();
+         s.reservaciones();
     }
     
 }
