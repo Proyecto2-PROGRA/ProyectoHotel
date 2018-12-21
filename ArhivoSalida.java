@@ -13,14 +13,25 @@ public class ArhivoSalida {
     protected int annioLlegada;
     protected int annioSalida;
     protected int personaEnHabitacion;
+    protected int diaActual;
+    protected int mesActual;
+    protected int annioActual;
     protected String tipoHabitacion;
     protected String rutPersona;
-    protected String campoPersona="";
+    protected String campoPersona;
     protected String cadena;
     
-    public ArhivoSalida(){
+    
+    public ArhivoSalida() throws FileNotFoundException, IOException{
         FileReader lector = new FileReader("inicializar.in");
         BufferedReader BR= new BufferedReader(lector); 
+        BR.readLine();
+        cadena = BR.readLine();
+        String[] campos = cadena.split(" ");
+        diaActual = Integer.parseInt(campos[0]);
+        mesActual = Integer.parseInt(campos[1]);
+        annioActual = Integer.parseInt(campos[2]);
+        
     }
     
     
