@@ -1,10 +1,6 @@
 package ProyectoHotel;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.io.*;
 
 public class ArchivoSalida {
     protected int diaLlegada;
@@ -107,12 +103,12 @@ public class ArchivoSalida {
         s1 = br.readLine();
         
         s2 = br.readLine();
-        //int saldo = Integer.parseInt(s1);
+        float saldo = Float.parseFloat(s1);
         
         
         
         System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
-        System.out.println (s2+" | " +s1 +"     | "  );
+        System.out.println (s2+" | " +saldo+"      | " + "              |" +saldo + "       |" + "saldo inicial");
         
         BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"));
         

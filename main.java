@@ -14,7 +14,7 @@ public class main {
          //a.operaciones();
          ArchivoSalida s= new ArchivoSalida();
          s.contabilidad();
-         s.reservaciones();
+         //s.reservaciones();
     }
     
 }
