@@ -1,35 +1,43 @@
 package ProyectoHotel;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 public class ArchivoSalida {
-    protected int diaLlegada;
-    protected int diaSalida;
-    protected int mesLlegada;
-    protected int mesSalida;
-    protected int annioLlegada;
-    protected int annioSalida;
     protected int personaEnHabitacion;
     protected int diaActual;
     protected int mesActual;
     protected int annioActual;
+    protected int servicioSolicitado;
+    protected int comidaRestaurant;
+    protected float debeServicioSolicitado;
+    protected float debeComidaRestaurant;
     protected String tipoHabitacion;
     protected String rutPersona;
     protected String cadena;
     protected SimpleDateFormat df;
-    protected String fechaInicial;
+    protected String fechaInicial;   
+    protected String fechaLlegada;
+    protected String fechaSalida;
     protected String date;
-    protected Date testDate;
-    protected Calendar fecha;
     protected String[] campos;
     protected String[] campoPersona;
-    protected Integer servicioSolicitado;
-    protected float debeServicioSolicitado;
-    protected int comidaRestaurant;
-    protected float debeComidaRestaurant;
+    protected String[] fechaActual;
+    protected Date testDate;
+    protected Date fechaLlegadaSuma;
+    protected Date fechaSalidaSuma;
+    protected Calendar fecha;
+    
+   
+    
+    
+    
  
 
  public ArchivoSalida()  throws FileNotFoundException, IOException{
@@ -40,52 +48,37 @@ public class ArchivoSalida {
             BR.readLine();
             cadena = BR.readLine();
             String[] campos = cadena.split(" ");
-            diaActual = Integer.parseInt(campos[0]);
-            mesActual = Integer.parseInt(campos[1]);
-            annioActual = Integer.parseInt(campos[2]);
             fechaInicial = (campos[0]+"/"+campos[1]+"/"+campos[2]);
             
             try{
                 testDate=df.parse(fechaInicial);
                 fecha.setTime(testDate);//FechaSumando
-                
-                
-               
-                
-            }catch(Exception ex){}
-            
+            }catch(Exception ex){}  
         }catch(Exception ex){}
-        
-        
     }
-    
-    
+ 
     public void reservaciones() throws FileNotFoundException, IOException {
-                
+        FileWriter fichero = new FileWriter("reservaciones.out");
+        
         try (BufferedReader BR = new BufferedReader (new FileReader ("operaciones.in"))) {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
+            
             case "0":
                 fecha.add(Calendar.DAY_OF_WEEK, 1);
                 break;
-            case "1":
-                               
-                annioActual = fecha.get(Calendar.YEAR);
-                mesActual = fecha.get(Calendar.MONTH)+1;
-                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
                 
+            case "1":
                 cadena = BR.readLine();
                 campos = cadena.split(" ");
-                
                  try{
-                    diaLlegada =Integer.parseInt(campos[0]);
-                    mesLlegada =Integer.parseInt(campos[1]);
-                    annioLlegada =Integer.parseInt(campos[2]);
-                    diaSalida =Integer.parseInt(campos[3]);
-                    mesSalida =Integer.parseInt(campos[4]); 
-                    annioSalida =Integer.parseInt(campos[5]);
-//Diferencia entre dias                    
-//int dias=(int) ((fechaActual.getTime()-fechaUltimaSincro.getTime())/86400000);
+                    fechaLlegada = (campos[0]+"/"+campos[1]+"/"+campos[2]);
+                    fechaSalida =(campos[3]+"/"+campos[4]+"/"+campos[5]);
+                    
+                    try{
+                        fechaLlegadaSuma=df.parse(fechaLlegada);                        
+                        fechaSalidaSuma=df.parse(fechaSalida);
+                    }catch(Exception ex){}  
                 }catch(Exception ex){}
                  
                 cadena = BR.readLine();
@@ -104,46 +97,30 @@ public class ArchivoSalida {
                    }
                 }   
                 campoPersona = cadena.split(" ");
-                System.out.println("RESERVACIÓN--("+diaActual+"/"+mesActual+"/"+annioActual+")");
-                System.out.println("    Titular: "+ campoPersona[1]);
-                System.out.println("    Habitación "+tipoHabitacion+" del "+campos[0]+"/"+campos[1]+"/"+campos[2]+" al " +campos[3]+"/"+campos[4]+"/"+campos[5]+ "7"+" dias");
+                int diasTotal =(int) ((fechaSalidaSuma.getTime()-fechaLlegadaSuma.getTime())/86400000);
+                fichero.append("RESERVACIÓN--("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+")\n");
+                fichero.write("    Titular: "+ cadena.split(" ")[1]+"\n");
+                fichero.write("    Habitación "+tipoHabitacion+" del "+fechaLlegada+" "+fechaSalida+ " ("+diasTotal+" dias)"+"\n");
                 break;
+                
             case "2":
-                annioActual = fecha.get(Calendar.YEAR);
-                mesActual = fecha.get(Calendar.MONTH)+1;
-                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
                 cadena = BR.readLine();
-                campoPersona = cadena.split(" ");
-                
-                System.out.println("CANCELACIÓN--("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
-                System.out.println("    Titular: "+ campoPersona[0]);
-                
-                
+                fichero.write("CANCELACIÓN--("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+" "+cadena.split(" ")[1]+")\n");
+                fichero.write("    Titular: "+ cadena.split(" ")[0]+"\n");
                 break;
-            case "3":
-                annioActual = fecha.get(Calendar.YEAR);
-                mesActual = fecha.get(Calendar.MONTH)+1;
-                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
-                cadena = BR.readLine();
-                campoPersona = cadena.split(" ");
-                    
-                System.out.println("CHECK-IN-----("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
-                System.out.println("    Titular: "+ campoPersona[0]);
-                System.out.println("    Habitación "+ campoPersona[1]);
-                System.out.println(cadena);
                 
+            case "3":
+                cadena = BR.readLine();
+                fichero.write("CHECK-IN-----("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+" "+cadena.split(" ")[1]+")\n");
+                fichero.write("    Titular: "+ cadena.split(" ")[0]+"\n");
+                fichero.write("    Habitación "+ cadena.split(" ")[0]+"\n");
                 break;
                 
             case "4":
-                    annioActual = fecha.get(Calendar.YEAR);
-                    mesActual = fecha.get(Calendar.MONTH)+1;
-                    diaActual = fecha.get(Calendar.DAY_OF_MONTH);
-                    cadena = BR.readLine();
-                    campoPersona = cadena.split(" ");
-                    
-                    System.out.println("CHECK-OUT----("+diaActual+"/"+mesActual+"/"+annioActual+" "+campoPersona[1]+")");
-                    System.out.println("    Titular: "+ campoPersona[0]);
-                    System.out.println("    Cancelo: "+ campoPersona[1]);
+                    cadena = BR.readLine();                    
+                    fichero.write("CHECK-OUT----("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+" "+cadena.split(" ")[1]+")\n");
+                    fichero.write("    Titular: "+ cadena.split(" ")[0]+"\n");
+                    fichero.write("    Cancelo: "+ cadena.split(" ")[1]+"\n");
                 break;
                 
             case "5":
@@ -162,8 +139,8 @@ public class ArchivoSalida {
                             debeComidaRestaurant+=(float) 6.00;  
                         }
                     }
-                    System.out.println("leeeeeeeeeeeer "+debeComidaRestaurant);
                  break;
+                 
             case "6":
                     cadena = BR.readLine();
                     System.out.println("Rut "+cadena);
@@ -173,86 +150,36 @@ public class ArchivoSalida {
      
                 break;
             case "7":
-                
                 break;
+                
             default:
                 break;
                 }
-               
             }
         }
+        fichero.close();
+        contabilidad(debeServicioSolicitado, debeComidaRestaurant);
         
 
     }
     
-     public void contabilidad()throws IOException{
-         /*
-        int rut = 0;
-        int otro = 0;
-        float precio;
-        String s1;
-        String s2;
-       
-        BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
-
-        s1 = br.readLine();
-        s2 = br.readLine();
-        
-        float saldo = Float.parseFloat(s1);
-        saldo=saldo;
-        
-            System.out.println("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO");
-            System.out.println (fechaInicial+" | " +s1+"     | " + "              |" +saldo + "       |" + "saldo inicial");
-            System.out.println();
-
-        try (BufferedReader br2 = new BufferedReader (new FileReader ("operaciones.in"))) {
-            
-            while ((cadena = br2.readLine()) != null) {
-                switch (cadena) {
-                    case "6":
-                         cadena = br2.readLine();
-                        String[] campos = cadena.split(" ");
-
-                            try{
-                               rut =Integer.parseInt(campos[0]);
-                               cadena = br2.readLine();
-                               otro = Integer.parseInt(cadena);
-                               
-                               
-                               for(int i = 0; i<otro;i++){
-                                   cadena=br2.readLine();
-                                   
-                                   campos = cadena.split(" ");
-                                   
-                                   if(campos[0].equals("CAM_A")){
-                                       precio=(float) 50.00;
-                                       System.out.println(precio);     
-                                   }
-                                   else if(cadena.equals("CAJ_F")){
-                                       precio=(float) 50.00;
-                                       System.out.println(precio);
-                                   }
-                               }
-                           }catch(Exception ex){}                             
-                cadena = br2.readLine();
-                tipoHabitacion=cadena;
-                cadena = br2.readLine();
-                if (cadena.equals("1")){
-                    cadena = br2.readLine();
-                }else{
-                            
-                }   
-                String[] campopersona = cadena.split(" ");
-                        System.out.println(rut);                       
-                        break;
-                }
-                
-            }
-        }*/
-   } 
+     public void contabilidad(float debeServicioSolicitado, float debeComidaRestaurant)throws IOException{
+         FileWriter fichero = new FileWriter("contabilidad.out");
+         fichero.append("FECHA|DEBE|HABER|SALDO|CONCEPTO\n");
+         
+    } 
      
     public void reportes(){
         
     }
-
+    public String[] actualizarFecha(){
+        String fechaActualizada;
+        annioActual = fecha.get(Calendar.YEAR);
+        mesActual = fecha.get(Calendar.MONTH)+1;
+        diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+        
+        fechaActualizada=diaActual+" "+mesActual+" "+annioActual;
+        fechaActual = fechaActualizada.split(" ");
+        return fechaActual;
+    }
 }

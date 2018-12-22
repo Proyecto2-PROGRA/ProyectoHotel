@@ -15,6 +15,7 @@ public class main {
          ArchivoSalida s= new ArchivoSalida();
          //s.contabilidad();
          s.reservaciones();
+         //s.actualizarFecha();
     }
     
 }
