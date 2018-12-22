@@ -33,6 +33,11 @@ public class ArchivoSalida {
     protected Date fechaLlegadaSuma;
     protected Date fechaSalidaSuma;
     protected Calendar fecha;
+    protected int reportes;
+    protected int BanderaCancelacion;
+    protected int BanderaEfectivo;
+    protected int BanderaAdulto;
+    protected int BanderaNiño;
     
    
     
@@ -44,7 +49,7 @@ public class ArchivoSalida {
         df = new SimpleDateFormat("dd/MM/yyyy");
         fecha = Calendar.getInstance();
         try{
-            BufferedReader BR = new BufferedReader (new FileReader ("inicializar.in"));
+            BufferedReader BR = new BufferedReader (new FileReader ("/Users/dripis/NetBeansProjects/Proyectohotel/src/ProyectoHotel/inicializar.ini"));
             BR.readLine();
             cadena = BR.readLine();
             String[] campos = cadena.split(" ");
@@ -60,7 +65,7 @@ public class ArchivoSalida {
     public void reservaciones() throws FileNotFoundException, IOException {
         FileWriter fichero = new FileWriter("reservaciones.out");
         
-        try (BufferedReader BR = new BufferedReader (new FileReader ("operaciones.in"))) {
+        try (BufferedReader BR = new BufferedReader (new FileReader ("/Users/dripis/NetBeansProjects/Proyectohotel/src/ProyectoHotel/operaciones.in"))) {
         while ((cadena = BR.readLine()) != null) {
         switch (cadena) {
             
@@ -92,6 +97,7 @@ public class ArchivoSalida {
                        campoPersona = cadena.split(" ");
                        cadena = BR.readLine();
                        if(campoPersona[0].equals("A")){
+                           BanderaAdulto ++;
                            break;
                        }
                    }
@@ -101,12 +107,14 @@ public class ArchivoSalida {
                 fichero.append("RESERVACIÓN--("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+")\n");
                 fichero.write("    Titular: "+ cadena.split(" ")[1]+"\n");
                 fichero.write("    Habitación "+tipoHabitacion+" del "+fechaLlegada+" "+fechaSalida+ " ("+diasTotal+" dias)"+"\n");
+                BanderaEfectivo ++;
                 break;
                 
             case "2":
                 cadena = BR.readLine();
                 fichero.write("CANCELACIÓN--("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+" "+cadena.split(" ")[1]+")\n");
                 fichero.write("    Titular: "+ cadena.split(" ")[0]+"\n");
+                BanderaCancelacion ++; 
                 break;
                 
             case "3":
@@ -123,7 +131,7 @@ public class ArchivoSalida {
                     fichero.write("    Cancelo: "+ cadena.split(" ")[1]+"\n");
                 break;
                 
-            case "5":
+            case "5":   
                     cadena = BR.readLine();
                     comidaRestaurant=Integer.parseInt(cadena);
                     for(int i=0;i<comidaRestaurant;i++){
@@ -138,30 +146,92 @@ public class ArchivoSalida {
                         }else if(campos[0].equals("MALTA")){
                             debeComidaRestaurant+=(float) 6.00;  
                         }
+                        
+                        
                     }
                  break;
                  
             case "6":
                     cadena = BR.readLine();
-                    System.out.println("Rut "+cadena);
+                    System.out.println("Rut "+cadena);;
                     cadena = BR.readLine();
                     servicioSolicitado = Integer.parseInt(cadena);
                     debeServicioSolicitado = (float) 50.00*servicioSolicitado;
      
                 break;
             case "7":
-                break;
+                cadena = BR.readLine();
+                System.out.println(cadena);
+                reportes = Integer.parseInt(cadena);
+                for(int i=0; i<reportes; i++){
+                        cadena= BR.readLine();
+                        String[] campos = cadena.split(" ");
+            switch (campos[0]) {
+                case "a":
+                    //System.out.println(campos[0]+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+campos[4]+" "+campos[5]+" "+campos[6]+" "+BanderaCancelacion );
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaCancelacion+"       "+"RESERVACIONES CANCELADAS");
+                    break;
+                case "b":
+                    //System.out.println(campos[0]+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+campos[4]+" "+campos[5]+" "+campos[6]+" "+BanderaEfectivo);
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"RESERVACIONES EFECTIVAS");
+                    break;
+                case "c":
+                    //System.out.println(campos[0]+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+campos[4]+" "+campos[5]+" "+campos[6]+" "+" nºAdultos: "+BanderaAdulto+" nºNiños:" +BanderaNiño);
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+ "Adultos Atendidos: "+BanderaAdulto+"\n"+
+                            "                                     " +"Niños Atendidos:" +BanderaNiño);
+                    break;
+                case "d":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"INGRESOS POR CAMAS ADICIONALES");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"INGRESOS POR CAMAS ADICIONALES");
+                    break;
+                case "e":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"PISO CON MAYOR USO");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"PISO CON MAYOR USO");
+                    break;
+                case "f":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"TRANSFERENCIAS TOTALES");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"TRANSFERENCIAS TOTALES");
+                    break;
+                case "g":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"INGRESOS POR USO DE CAJA FUERTE");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"INGRESOS POR USO DE CAFA FUERTE");
+                    break;
+                case "h":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"%DE OCUPACION DIARIA");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"%PDE OCUPACION DIARIA");
+                    break;
+                case "i":
+                    System.out.println("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"PROMEDIO DE OCUPACION DIARIA");
+                    fichero.write("Del"+" "+campos[1]+" "+campos[2]+" "+campos[3]+" "+"al"+" "+campos[4]+" "+campos[5]+" "+campos[6]+"      "+BanderaEfectivo+"       "+"PROMEDIO DE OCUPACION DIARIA");
+                    break;
+            //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+            //fichero.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                case "j":
+                    break;
+            //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+            //fichero.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                case "k":
+                    break;
+            //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+            //fichero.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                case "l":
+                    break;
+                default:
+                    break;
+            }
+                }
                 
+                break;
+        
             default:
                 break;
-                }
-            }
-        }
+        }}
+            
         fichero.close();
         contabilidad(debeServicioSolicitado, debeComidaRestaurant);
         
 
-    }
+        }}
     
      public void contabilidad(float debeServicioSolicitado, float debeComidaRestaurant)throws IOException{
          FileWriter fichero = new FileWriter("contabilidad.out");
@@ -169,9 +239,10 @@ public class ArchivoSalida {
          
     } 
      
-    public void reportes(){
+    public void reportes() throws IOException{
+        FileWriter fichero = new FileWriter("reportes.out");}
         
-    }
+    
     public String[] actualizarFecha(){
         String fechaActualizada;
         annioActual = fecha.get(Calendar.YEAR);
