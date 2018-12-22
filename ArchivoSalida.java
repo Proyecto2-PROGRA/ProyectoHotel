@@ -1,6 +1,5 @@
 package ProyectoHotel;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -33,12 +32,8 @@ public class ArchivoSalida {
     protected Date fechaLlegadaSuma;
     protected Date fechaSalidaSuma;
     protected Calendar fecha;
-    
-   
-    
-    
-    
- 
+    protected String SaldoInicial;
+    protected double Nomina=25000.00;
 
  public ArchivoSalida()  throws FileNotFoundException, IOException{
         df = new SimpleDateFormat("dd/MM/yyyy");
@@ -66,6 +61,7 @@ public class ArchivoSalida {
             
             case "0":
                 fecha.add(Calendar.DAY_OF_WEEK, 1);
+                
                 break;
                 
             case "1":
@@ -147,6 +143,7 @@ public class ArchivoSalida {
                     cadena = BR.readLine();
                     servicioSolicitado = Integer.parseInt(cadena);
                     debeServicioSolicitado = (float) 50.00*servicioSolicitado;
+                    
      
                 break;
             case "7":
@@ -157,16 +154,36 @@ public class ArchivoSalida {
                 }
             }
         }
+        
         fichero.close();
+        
         contabilidad(debeServicioSolicitado, debeComidaRestaurant);
         
-
     }
     
      public void contabilidad(float debeServicioSolicitado, float debeComidaRestaurant)throws IOException{
-         FileWriter fichero = new FileWriter("contabilidad.out");
-         fichero.append("FECHA|DEBE|HABER|SALDO|CONCEPTO\n");
-         
+        
+        BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
+        SaldoInicial = br.readLine();        
+	float SaldoActual = Float.parseFloat(SaldoInicial);
+
+            FileWriter fichero2 = new FileWriter("contabilidad.out");
+            fichero2.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
+
+            fichero2.append(fechaInicial+"      |" +SaldoInicial+"      |" + "      |" +SaldoActual + "      |" + "Saldo inicial\n");
+
+            SaldoActual+=debeServicioSolicitado;
+            fichero2.append(fechaInicial+"      |" +debeServicioSolicitado+"      |" + "      |" +SaldoActual + "      |" + "Servicios\n");
+
+            SaldoActual+=debeComidaRestaurant;
+            fichero2.append(fechaInicial+"      |" +debeComidaRestaurant+"      |" + "      |" +SaldoActual + "      |" + "Restaurant\n");
+           
+            SaldoActual-=Nomina;
+            fichero2.append(fechaInicial+"      |" +"      |"+Nomina + "      |" +SaldoActual + "      |" + "Nomina\n");
+                    
+
+            fichero2.close();
+       
     } 
      
     public void reportes(){
