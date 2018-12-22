@@ -155,7 +155,6 @@ public class ArchivoSalida {
                                 if (rut.equals(a.get(i))) {
                                     i++;
                                     pago = (float) a.get(i);
-                                    System.out.println(rut + " : " + pago);
 
                                 } else {
                                     bandera = 0;
@@ -165,6 +164,8 @@ public class ArchivoSalida {
                         }
 
                         fichero.write("    Cancelo: " + pago + "\n");
+                        contabilidadCheck_Out(pago);
+
                         break;
 
                     case "5":
@@ -235,6 +236,7 @@ public class ArchivoSalida {
         SaldoInicial = br.readLine();
         SaldoActual = Float.parseFloat(SaldoInicial);
 
+<<<<<<< HEAD
 
             FileWriter fichero = new FileWriter("contabilidad.out");
             fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
@@ -267,10 +269,10 @@ public class ArchivoSalida {
      
     public void reportes() throws IOException{
         
+=======
+>>>>>>> ccd29b21c4a10fbdf205a87047e0b7e5c31498e3
         FileWriter fichero = new FileWriter("contabilidad.out");
         fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
-
-        fichero.append(fechaInicial + "      |" + SaldoInicial + "      |" + "      |" + SaldoActual + "      |" + "Saldo inicial\n");
 
         fichero.close();
 
@@ -296,8 +298,18 @@ public class ArchivoSalida {
      * @throws IOException
      */
 
+<<<<<<< HEAD
 
     
+=======
+    public void contabilidadCheck_Out(float pago) throws IOException {
+        FileWriter fichero = new FileWriter("contabilidad.out", true);
+        SaldoActual += pago;
+        fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + pago + "      |" + "      |" + SaldoActual + "      |" + "Check-Out\n");
+
+        fichero.close();
+    }
+>>>>>>> ccd29b21c4a10fbdf205a87047e0b7e5c31498e3
 
     public String[] actualizarFecha() {
         String fechaActualizada;
