@@ -218,11 +218,115 @@ public class ArchivoSalida {
                         }
                         debeServicioSolicitado = (float) 50.00 * servicioSolicitado;
                         contabilidadServicios(debeServicioSolicitado);
-
+         
                         break;
                     case "7":
-                        
+                        FileWriter fichero2 = new FileWriter("reportes.out");
 
+                        cadena = BR.readLine();
+                        System.out.println(cadena);
+                int reportes = Integer.parseInt(cadena);
+                        for (int i = 0; i < reportes; i++) {
+                            cadena = BR.readLine();
+                            String[] campos = cadena.split(" ");
+                            switch (campos[0]) {
+                                case "a":
+                            {
+                                String BanderaCancelacion = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaCancelacion + "       " + "RESERVACIONES CANCELADAS\n");
+                            }
+                                    break;
+                                case "b":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "RESERVACIONES EFECTIVAS\n");
+                            }
+                                    break;
+                                case "c":
+                            {
+                                char[] BanderaNiño = null;
+                                String BanderaAdulto = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + "Adultos Atendidos: " + BanderaAdulto + "\n"
+                                        + "                                     " + "Niños Atendidos:" + BanderaNiño+"\n");
+                            }
+                                    break;
+                                case "d":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "INGRESOS POR CAMAS ADICIONALES\n");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "INGRESOS POR CAMAS ADICIONALES\n");
+                            }
+                                    break;
+                                case "e":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "PISO CON MAYOR USO\n");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "PISO CON MAYOR USO\n");
+                            }
+                                    break;
+                                case "f":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "TRANSFERENCIAS TOTALES\n");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "TRANSFERENCIAS TOTALES\n");
+                            }
+                                    break;
+                                case "g":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "INGRESOS POR USO DE CAJA FUERTE\n");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "INGRESOS POR USO DE CAFA FUERTE\n");
+                            }
+                                    break;
+                                case "h":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "%DE OCUPACION DIARIA");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "%PDE OCUPACION DIARIA\n");
+                            }
+                                    break;
+                                case "i":
+                            {
+                                String BanderaEfectivo = null;
+                                fichero.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "PROMEDIO DE OCUPACION DIARIA\n");
+                            }
+                            {
+                                String BanderaEfectivo = null;
+                                fichero2.write("Del" + " " + campos[1] + " " + campos[2] + " " + campos[3] + " " + "al" + " " + campos[4] + " " + campos[5] + " " + campos[6] + "      " + BanderaEfectivo + "       " + "PROMEDIO DE OCUPACION DIARIA\n");
+                            }
+                                    break;
+                                //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                //fichero2.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                case "j":
+                                    break;
+                                //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                //fichero2.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                case "k":
+                                    break;
+                                //System.out.println("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                //fichero2.write("Al"+" "+campos[4]+" "+campos[5]+" "+campos[6]);
+                                case "l":
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        fichero2.close();
                         break;
 
                     default:
