@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 public class ArchivoSalida {
@@ -33,8 +34,9 @@ public class ArchivoSalida {
     protected Date fechaLlegadaSuma;
     protected Date fechaSalidaSuma;
     protected Calendar fecha;
-    
-   
+    protected String rut;
+    protected int bandera;
+    ArrayList a = new ArrayList();
     
     
     
@@ -101,6 +103,11 @@ public class ArchivoSalida {
                 fichero.append("RESERVACIÓN--("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+")\n");
                 fichero.write("    Titular: "+ cadena.split(" ")[1]+"\n");
                 fichero.write("    Habitación "+tipoHabitacion+" del "+fechaLlegada+" "+fechaSalida+ " ("+diasTotal+" dias)"+"\n");
+                String var_1=cadena.split(" ")[1];
+                a.add(var_1);
+                float var_5 =tipoDeHabitacion(tipoHabitacion, diasTotal);
+                a.add(var_5);
+                
                 break;
                 
             case "2":
@@ -117,10 +124,30 @@ public class ArchivoSalida {
                 break;
                 
             case "4":
+                    bandera=0;
                     cadena = BR.readLine();                    
                     fichero.write("CHECK-OUT----("+actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+" "+cadena.split(" ")[1]+")\n");
                     fichero.write("    Titular: "+ cadena.split(" ")[0]+"\n");
-                    fichero.write("    Cancelo: "+ cadena.split(" ")[1]+"\n");
+                    rut=cadena.split(" ")[0];
+                    float pago=0;
+                    for (int i = 0; i < a.size(); i++){
+                        
+                        if((i % 2)==0){
+                            
+                            if(rut.equals(a.get(i))){
+                                i++;
+                                pago=(float) a.get(i);
+                                System.out.println(rut+" : "+pago);
+                                
+                            }else{
+                                bandera=0;
+                            }
+                        }
+                           
+                                
+                    }
+                    
+                    fichero.write("    Cancelo: "+ pago+"\n");
                 break;
                 
             case "5":
@@ -142,11 +169,31 @@ public class ArchivoSalida {
                  break;
                  
             case "6":
+                    float servicioPor = 0;
+                    bandera=0;
                     cadena = BR.readLine();
                     System.out.println("Rut "+cadena);
+                    rut = cadena;
                     cadena = BR.readLine();
                     servicioSolicitado = Integer.parseInt(cadena);
-                    debeServicioSolicitado = (float) 50.00*servicioSolicitado;
+                    
+                    debeServicioSolicitado = (float) 50.00*servicioSolicitado+debeServicioSolicitado ;//Arreglar
+                    
+                    servicioPor= (float) 50.00*servicioSolicitado;
+                    for (int i = 0; i < a.size(); i++){
+                        if((i%2)==0){
+                            if(rut.equals(a.get(i))){
+                                i++;
+                                Float var_2 = (Float) a.get(i);
+                                var_2=var_2+servicioPor;
+                                a.set(i,var_2);
+                            }else{
+                                bandera=0;
+                            }
+                        }
+                           
+                                
+                    }
      
                 break;
             case "7":
@@ -181,5 +228,21 @@ public class ArchivoSalida {
         fechaActualizada=diaActual+" "+mesActual+" "+annioActual;
         fechaActual = fechaActualizada.split(" ");
         return fechaActual;
+    }
+    
+    public Float tipoDeHabitacion(String Habitacion, Integer dias){
+        float b=0;
+        if(Habitacion.equals("INDIV")){
+            b=(float) 150.00*dias;
+        }else if(Habitacion.equals("DOBLE")){
+            b=(float) 200.00*dias;
+        }else if(Habitacion.equals("MATRI")){
+            b=(float) 180.00*dias;
+        }else if(Habitacion.equals("CUADR")){
+            b=(float) 380.00*dias;
+        }else{
+            b=(float) 900.00*dias;
+        }
+        return b;
     }
 }
