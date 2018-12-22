@@ -273,6 +273,7 @@ public class ArchivoSalida {
         SaldoActual += pago;
         fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + pago + "      |" + "      |" + SaldoActual + "      |" + "Check-Out\n");
 
+        
         fichero.close();
     }
 
