@@ -277,6 +277,9 @@ public class ArchivoSalida {
     }
 
     public void reportes() {
+        
+        
+       
 
     }
 
