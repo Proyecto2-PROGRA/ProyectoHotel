@@ -155,7 +155,6 @@ public class ArchivoSalida {
                                 if (rut.equals(a.get(i))) {
                                     i++;
                                     pago = (float) a.get(i);
-                                    System.out.println(rut + " : " + pago);
 
                                 } else {
                                     bandera = 0;
@@ -165,6 +164,8 @@ public class ArchivoSalida {
                         }
 
                         fichero.write("    Cancelo: " + pago + "\n");
+                        contabilidadCheck_Out(pago);
+
                         break;
 
                     case "5":
@@ -263,6 +264,14 @@ public class ArchivoSalida {
         FileWriter fichero = new FileWriter("contabilidad.out", true);
         SaldoActual -= Nomina;
         fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + "      |" + Nomina + "      |" + SaldoActual + "      |" + "Nomina\n");
+
+        fichero.close();
+    }
+
+    public void contabilidadCheck_Out(float pago) throws IOException {
+        FileWriter fichero = new FileWriter("contabilidad.out", true);
+        SaldoActual += pago;
+        fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + pago + "      |" + "      |" + SaldoActual + "      |" + "Check-Out\n");
 
         fichero.close();
     }
