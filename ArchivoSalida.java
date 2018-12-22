@@ -252,11 +252,14 @@ public class ArchivoSalida {
        
     } 
      public void contabilidadNomina() throws IOException{
-         FileWriter fichero = new FileWriter("contabilidad.out",true);
+         
+         FileWriter fichero = new FileWriter("contabilidad.out", true);
+         
          SaldoActual-=Nomina;
          fichero.append(actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+"      |" +"      |"+Nomina + "      |" +SaldoActual + "      |" + "Nomina\n");
          
-         fichero.close();
+
+         System.out.println("Hola");
      }
      
      
