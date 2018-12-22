@@ -1,6 +1,5 @@
 package ProyectoHotel;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -36,11 +35,15 @@ public class ArchivoSalida {
     protected Calendar fecha;
     protected String rut;
     protected int bandera;
+    protected float SaldoActual; 
     ArrayList a = new ArrayList();
     
     
     
  
+    protected String SaldoInicial;
+    protected double Nomina=25000.00;
+
 
  public ArchivoSalida()  throws FileNotFoundException, IOException{
         df = new SimpleDateFormat("dd/MM/yyyy");
@@ -55,6 +58,7 @@ public class ArchivoSalida {
             try{
                 testDate=df.parse(fechaInicial);
                 fecha.setTime(testDate);//FechaSumando
+                
             }catch(Exception ex){}  
         }catch(Exception ex){}
     }
@@ -68,6 +72,13 @@ public class ArchivoSalida {
             
             case "0":
                 fecha.add(Calendar.DAY_OF_WEEK, 1);
+               
+                diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+                
+                if(diaActual==16||diaActual==1){
+                    contabilidadNomina();
+                }
+                
                 break;
                 
             case "1":
@@ -92,10 +103,11 @@ public class ArchivoSalida {
                    personaEnHabitacion=Integer.parseInt(cadena);
                    for(int i=0;i<personaEnHabitacion; i++){
                        campoPersona = cadena.split(" ");
-                       cadena = BR.readLine();
+                       
                        if(campoPersona[0].equals("A")){
                            break;
                        }
+                       cadena = BR.readLine();
                    }
                 }   
                 campoPersona = cadena.split(" ");
@@ -176,6 +188,7 @@ public class ArchivoSalida {
                     rut = cadena;
                     cadena = BR.readLine();
                     servicioSolicitado = Integer.parseInt(cadena);
+
                     
                     debeServicioSolicitado = (float) 50.00*servicioSolicitado+debeServicioSolicitado ;//Arreglar
                     
@@ -194,6 +207,10 @@ public class ArchivoSalida {
                            
                                 
                     }
+
+                    debeServicioSolicitado = (float) 50.00*servicioSolicitado;
+                    
+
      
                 break;
             case "7":
@@ -204,17 +221,44 @@ public class ArchivoSalida {
                 }
             }
         }
+        
         fichero.close();
+        
         contabilidad(debeServicioSolicitado, debeComidaRestaurant);
         
-
     }
     
      public void contabilidad(float debeServicioSolicitado, float debeComidaRestaurant)throws IOException{
-         FileWriter fichero = new FileWriter("contabilidad.out");
-         fichero.append("FECHA|DEBE|HABER|SALDO|CONCEPTO\n");
-         
+        
+        BufferedReader br = new BufferedReader (new FileReader ("inicializar.in"));
+        SaldoInicial = br.readLine();        
+        SaldoActual = Float.parseFloat(SaldoInicial);
+
+            FileWriter fichero = new FileWriter("contabilidad.out");
+            fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
+
+            fichero.append(fechaInicial+"      |" +SaldoInicial+"      |" + "      |" +SaldoActual + "      |" + "Saldo inicial\n");
+
+            SaldoActual+=debeServicioSolicitado;
+            fichero.append(fechaInicial+"      |" +debeServicioSolicitado+"      |" + "      |" +SaldoActual + "      |" + "Servicios\n");
+
+            SaldoActual+=debeComidaRestaurant;
+            fichero.append(fechaInicial+"      |" +debeComidaRestaurant+"      |" + "      |" +SaldoActual + "      |" + "Restaurant\n");
+           
+            
+                    
+
+            fichero.close();
+       
     } 
+     public void contabilidadNomina() throws IOException{
+         FileWriter fichero = new FileWriter("contabilidad.out",true);
+         SaldoActual-=Nomina;
+         fichero.append(actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+"      |" +"      |"+Nomina + "      |" +SaldoActual + "      |" + "Nomina\n");
+         
+         fichero.close();
+     }
+     
      
     public void reportes(){
         
