@@ -39,6 +39,7 @@ public class ArchivoSalida {
     protected int bandera;
     protected float SaldoActual;
     ArrayList a = new ArrayList();
+    ArrayList fechasCancelar = new ArrayList();
 
     protected String SaldoInicial;
     protected double Nomina = 25000.00;
@@ -132,6 +133,8 @@ public class ArchivoSalida {
                         cadena = BR.readLine();
                         fichero.write("CANCELACIÓN--(" + actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + " " + cadena.split(" ")[1] + ")\n");
                         fichero.write("    Titular: " + cadena.split(" ")[0] + "\n");
+                        String Can = (String) actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] ;
+                        
                         break;
 
                     case "3":
@@ -218,6 +221,35 @@ public class ArchivoSalida {
 
                         break;
                     case "7":
+                        cadena = BR.readLine();
+                        int report = Integer.parseInt(cadena);
+                        for(int i = 0; i < report; i++){
+                            cadena=BR.readLine();
+                            campos = cadena.split(" ");
+                            if(campos[0].equals("a")){
+                                System.out.println("Del "+campos[1]+"/"+campos[2]+"/"+campos[3]+" al "+campos[4]+"/"+campos[5]+"/"+campos[6]);
+                            }else if(campos[0].equals("b")){
+                                
+                            }else if(campos[0].equals("c")){
+                                
+                            }else if(campos[0].equals("d")){
+                                
+                            }else if(campos[0].equals("f")){
+                                
+                            }else if(campos[0].equals("g")){
+                                
+                            }else if(campos[0].equals("j")){
+                                
+                            }else if(campos[0].equals("l")){
+                                
+                            }else if(campos[0].equals("e")){
+                                
+                            }else if(campos[0].equals("h")){
+                                
+                            }else if(campos[0].equals("i")){
+                                
+                            }
+                        }
                         break;
 
                     default:
@@ -235,8 +267,6 @@ public class ArchivoSalida {
         BufferedReader br = new BufferedReader(new FileReader("inicializar.in"));
         SaldoInicial = br.readLine();
         SaldoActual = Float.parseFloat(SaldoInicial);
-
-<<<<<<< HEAD
 
             FileWriter fichero = new FileWriter("contabilidad.out");
             fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
@@ -269,8 +299,7 @@ public class ArchivoSalida {
      
     public void reportes() throws IOException{
         
-=======
->>>>>>> ccd29b21c4a10fbdf205a87047e0b7e5c31498e3
+
         FileWriter fichero = new FileWriter("contabilidad.out");
         fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
 
@@ -298,10 +327,7 @@ public class ArchivoSalida {
      * @throws IOException
      */
 
-<<<<<<< HEAD
 
-    
-=======
     public void contabilidadCheck_Out(float pago) throws IOException {
         FileWriter fichero = new FileWriter("contabilidad.out", true);
         SaldoActual += pago;
@@ -309,7 +335,7 @@ public class ArchivoSalida {
 
         fichero.close();
     }
->>>>>>> ccd29b21c4a10fbdf205a87047e0b7e5c31498e3
+
 
     public String[] actualizarFecha() {
         String fechaActualizada;
@@ -337,4 +363,39 @@ public class ArchivoSalida {
         }
         return b;
     }
+    
+    public void reservacionCancelada(String fechaInicio){
+        
+    }
+    public void reservacionEdectiva(String fechaInicio){
+        
+    }
+    public void adultosAtendidos(String fechaInicio){
+        
+    }
+    public void ninnioAtendidos(String fechaInicio){
+        
+    }
+    public void camaAdicional(String fechaInicio){
+        
+    }
+    public void transferenciaTotales(String fechaInicio){
+        
+    }
+    public void cajaFuerte(String fechaInicio){
+        
+    }
+    public void habitacionOcupada(String fechaInicio){
+        
+    }
+    public void habitacionLibre(String fechaInicio){
+        
+    }
+    public void pisoConMayorUso(String fechaInicio){
+        
+    }
+    public void ocupacionDiaria(String fechaInicio){
+        
+    }
+    
 }
