@@ -236,47 +236,11 @@ public class ArchivoSalida {
         SaldoInicial = br.readLine();
         SaldoActual = Float.parseFloat(SaldoInicial);
 
-<<<<<<< HEAD
-            FileWriter fichero = new FileWriter("contabilidad.out");
-            fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
-
-            fichero.append(fechaInicial+"      |" +SaldoInicial+"      |" + "      |" +SaldoActual + "      |" + "Saldo inicial\n");
-
-            SaldoActual+=debeServicioSolicitado;
-            fichero.append(fechaInicial+"      |" +debeServicioSolicitado+"      |" + "      |" +SaldoActual + "      |" + "Servicios\n");
-
-            SaldoActual+=debeComidaRestaurant;
-            fichero.append(fechaInicial+"      |" +debeComidaRestaurant+"      |" + "      |" +SaldoActual + "      |" + "Restaurant\n");
-           
-            
-                    
-
-            fichero.close();
-       
-    } 
-     public void contabilidadNomina() throws IOException{
-         
-         FileWriter fichero = new FileWriter("contabilidad.out", true);
-         
-         SaldoActual-=Nomina;
-         fichero.append(actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+"      |" +"      |"+Nomina + "      |" +SaldoActual + "      |" + "Nomina\n");
-         
-
-         System.out.println("Hola");
-     }
-     
-     
-    public void reportes(){
-        
-=======
         FileWriter fichero = new FileWriter("contabilidad.out");
         fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
 
-        fichero.append(fechaInicial + "      |" + SaldoInicial + "      |" + "      |" + SaldoActual + "      |" + "Saldo inicial\n");
-
         fichero.close();
 
->>>>>>> 994114a0089967d32c3f75505218cce3ff76865e
     }
 
     public void contabilidadServicios(float debeServicioSolicitado) throws IOException {
@@ -307,15 +271,7 @@ public class ArchivoSalida {
         SaldoActual += pago;
         fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + pago + "      |" + "      |" + SaldoActual + "      |" + "Check-Out\n");
 
-        
         fichero.close();
-    }
-
-    public void reportes() {
-        
-        
-       
-
     }
 
     public String[] actualizarFecha() {
