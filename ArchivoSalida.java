@@ -235,7 +235,7 @@ public class ArchivoSalida {
         SaldoInicial = br.readLine();
         SaldoActual = Float.parseFloat(SaldoInicial);
 
-<<<<<<< HEAD
+
             FileWriter fichero = new FileWriter("contabilidad.out");
             fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
 
@@ -265,9 +265,8 @@ public class ArchivoSalida {
      }
      
      
-    public void reportes(){
+    public void reportes() throws IOException{
         
-=======
         FileWriter fichero = new FileWriter("contabilidad.out");
         fichero.append("FECHA      |DEBE           |HABER          |SALDO          |CONCEPTO\n");
 
@@ -275,7 +274,6 @@ public class ArchivoSalida {
 
         fichero.close();
 
->>>>>>> 994114a0089967d32c3f75505218cce3ff76865e
     }
 
     public void contabilidadServicios(float debeServicioSolicitado) throws IOException {
@@ -293,17 +291,13 @@ public class ArchivoSalida {
         fichero.close();
     }
 
-    public void contabilidadNomina() throws IOException {
-        FileWriter fichero = new FileWriter("contabilidad.out", true);
-        SaldoActual -= Nomina;
-        fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + "      |" + Nomina + "      |" + SaldoActual + "      |" + "Nomina\n");
+    /**
+     *
+     * @throws IOException
+     */
 
-        fichero.close();
-    }
 
-    public void reportes() {
-
-    }
+    
 
     public String[] actualizarFecha() {
         String fechaActualizada;
