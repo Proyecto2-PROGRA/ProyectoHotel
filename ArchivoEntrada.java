@@ -16,6 +16,7 @@ public class ArchivoEntrada {
                 System.out.println(cadena);
             } }
 }
+    
     public void precios() throws IOException {
         String cadena;
       FileReader f = new FileReader("precios.in");
