@@ -40,6 +40,15 @@ public class ArchivoSalida {
     protected float SaldoActual;
     ArrayList a = new ArrayList();
     ArrayList fechasCancelar = new ArrayList();
+    ArrayList fechasReservar = new ArrayList();
+    ArrayList  listAdultos = new ArrayList();
+    ArrayList  listninnios = new ArrayList();
+    ArrayList  listCama = new ArrayList();
+    ArrayList  listTransferencia = new ArrayList();
+    ArrayList  listCajaFuerte = new ArrayList();
+    ArrayList  listHabitacionOcupada = new ArrayList();
+    ArrayList  listHabitacionLibre = new ArrayList();
+    ArrayList  listConMayorUso = new ArrayList();
 
     protected String SaldoInicial;
     protected double Nomina = 25000.00;
@@ -124,6 +133,7 @@ public class ArchivoSalida {
                         fichero.write("    Habitación " + tipoHabitacion + " del " + fechaLlegada + " " + fechaSalida + " (" + diasTotal + " dias)" + "\n");
                         String var_1 = cadena.split(" ")[1];
                         a.add(var_1);
+                        fechasReservar.add(fechaLlegada);
                         float var_5 = tipoDeHabitacion(tipoHabitacion, diasTotal);
                         a.add(var_5);
 
@@ -134,7 +144,7 @@ public class ArchivoSalida {
                         fichero.write("CANCELACIÓN--(" + actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + " " + cadena.split(" ")[1] + ")\n");
                         fichero.write("    Titular: " + cadena.split(" ")[0] + "\n");
                         String Can = (String) actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] ;
-                        
+                        fechasCancelar.add(Can);
                         break;
 
                     case "3":
@@ -216,40 +226,19 @@ public class ArchivoSalida {
                             }
 
                         }
+                        cadena = BR.readLine();
+                        campos = cadena.split(" ");
+                        if(campos[0].equals("CAM_A")){
+                            listCama.add(actualizarFecha() );
+                        }else{
+                            listCajaFuerte.add(actualizarFecha());
+                        }
                         debeServicioSolicitado = (float) 50.00 * servicioSolicitado;
                         contabilidadServicios(debeServicioSolicitado);
 
                         break;
                     case "7":
-                        cadena = BR.readLine();
-                        int report = Integer.parseInt(cadena);
-                        for(int i = 0; i < report; i++){
-                            cadena=BR.readLine();
-                            campos = cadena.split(" ");
-                            if(campos[0].equals("a")){
-                                System.out.println("Del "+campos[1]+"/"+campos[2]+"/"+campos[3]+" al "+campos[4]+"/"+campos[5]+"/"+campos[6]);
-                            }else if(campos[0].equals("b")){
-                                
-                            }else if(campos[0].equals("c")){
-                                
-                            }else if(campos[0].equals("d")){
-                                
-                            }else if(campos[0].equals("f")){
-                                
-                            }else if(campos[0].equals("g")){
-                                
-                            }else if(campos[0].equals("j")){
-                                
-                            }else if(campos[0].equals("l")){
-                                
-                            }else if(campos[0].equals("e")){
-                                
-                            }else if(campos[0].equals("h")){
-                                
-                            }else if(campos[0].equals("i")){
-                                
-                            }
-                        }
+                        
                         break;
 
                     default:
@@ -364,10 +353,12 @@ public class ArchivoSalida {
         return b;
     }
     
-    public void reservacionCancelada(String fechaInicio){
+    public Integer reservacionCancelada(String fechaInicio){
+     
         
+        return bandera;
     }
-    public void reservacionEdectiva(String fechaInicio){
+    public void reservacionEfectiva(String fechaInicio){
         
     }
     public void adultosAtendidos(String fechaInicio){
