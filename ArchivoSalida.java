@@ -83,8 +83,16 @@ public class ArchivoSalida {
             while ((cadena = BR.readLine()) != null) {
                 switch (cadena) {
 
-                    case "0":
+                 case "0":
                         fecha.add(Calendar.DAY_OF_WEEK, 1);
+
+                        diaActual = fecha.get(Calendar.DAY_OF_MONTH);
+
+                        if (diaActual == 16 || diaActual == 1) {
+
+                            contabilidadNomina();
+                        }
+
                         break;
 
                     case "1":
@@ -111,11 +119,11 @@ public class ArchivoSalida {
                             personaEnHabitacion = Integer.parseInt(cadena);
                             for (int i = 0; i < personaEnHabitacion; i++) {
                                 campoPersona = cadena.split(" ");
-                                cadena = BR.readLine();
+
                                 if (campoPersona[0].equals("A")) {
-                                    BanderaAdulto++;
                                     break;
                                 }
+                                cadena = BR.readLine();
                             }
                         }
                         campoPersona = cadena.split(" ");
@@ -123,14 +131,19 @@ public class ArchivoSalida {
                         fichero.append("RESERVACIÓN--(" + actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + ")\n");
                         fichero.write("    Titular: " + cadena.split(" ")[1] + "\n");
                         fichero.write("    Habitación " + tipoHabitacion + " del " + fechaLlegada + " " + fechaSalida + " (" + diasTotal + " dias)" + "\n");
-                        BanderaEfectivo++;
+                        String var_1 = cadena.split(" ")[1];
+                        a.add(var_1);
+                        float var_5 = tipoDeHabitacion(tipoHabitacion, diasTotal);
+                        a.add(var_5);
+
                         break;
 
                     case "2":
                         cadena = BR.readLine();
                         fichero.write("CANCELACIÓN--(" + actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + " " + cadena.split(" ")[1] + ")\n");
                         fichero.write("    Titular: " + cadena.split(" ")[0] + "\n");
-                        BanderaCancelacion++;
+                        String Can = (String) actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] ;
+                        
                         break;
 
                     case "3":
@@ -141,10 +154,30 @@ public class ArchivoSalida {
                         break;
 
                     case "4":
+                        bandera = 0;
                         cadena = BR.readLine();
                         fichero.write("CHECK-OUT----(" + actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + " " + cadena.split(" ")[1] + ")\n");
                         fichero.write("    Titular: " + cadena.split(" ")[0] + "\n");
-                        fichero.write("    Cancelo: " + cadena.split(" ")[1] + "\n");
+                        rut = cadena.split(" ")[0];
+                        float pago = 0;
+                        for (int i = 0; i < a.size(); i++) {
+
+                            if ((i % 2) == 0) {
+
+                                if (rut.equals(a.get(i))) {
+                                    i++;
+                                    pago = (float) a.get(i);
+
+                                } else {
+                                    bandera = 0;
+                                }
+                            }
+
+                        }
+
+                        fichero.write("    Cancelo: " + pago + "\n");
+                        contabilidadCheck_Out(pago);
+
                         break;
 
                     case "5":
@@ -164,15 +197,36 @@ public class ArchivoSalida {
                             }
 
                         }
+                        contabilidadRestaurant(debeComidaRestaurant);
                         break;
 
                     case "6":
+                        float servicioPor = 0;
+                        bandera = 0;
                         cadena = BR.readLine();
                         System.out.println("Rut " + cadena);
-                        ;
+                        rut = cadena;
                         cadena = BR.readLine();
                         servicioSolicitado = Integer.parseInt(cadena);
+
+                        debeServicioSolicitado = (float) 50.00 * servicioSolicitado + debeServicioSolicitado;//Arreglar
+
+                        servicioPor = (float) 50.00 * servicioSolicitado;
+                        for (int i = 0; i < a.size(); i++) {
+                            if ((i % 2) == 0) {
+                                if (rut.equals(a.get(i))) {
+                                    i++;
+                                    Float var_2 = (Float) a.get(i);
+                                    var_2 = var_2 + servicioPor;
+                                    a.set(i, var_2);
+                                } else {
+                                    bandera = 0;
+                                }
+                            }
+
+                        }
                         debeServicioSolicitado = (float) 50.00 * servicioSolicitado;
+                        contabilidadServicios(debeServicioSolicitado);
 
                         break;
                     case "7":
