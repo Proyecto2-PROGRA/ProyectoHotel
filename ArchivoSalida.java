@@ -18,7 +18,7 @@ public class ArchivoSalida {
     protected int annioActual;
     protected int servicioSolicitado;
     protected int comidaRestaurant;
-    protected float debeServicioSolicitado;
+    protected float debeServicioSolicitado=0;
     protected float debeComidaRestaurant;
     protected String tipoHabitacion;
     protected String rutPersona;
@@ -195,7 +195,7 @@ public class ArchivoSalida {
                         float servicioPor = 0;
                         bandera = 0;
                         cadena = BR.readLine();
-                        System.out.println("Rut " + cadena);
+                    
                         rut = cadena;
                         cadena = BR.readLine();
                         servicioSolicitado = Integer.parseInt(cadena);
@@ -224,7 +224,7 @@ public class ArchivoSalida {
                         FileWriter fichero2 = new FileWriter("reportes.out");
 
                         cadena = BR.readLine();
-                        System.out.println(cadena);
+                   
                 int reportes = Integer.parseInt(cadena);
                         for (int i = 0; i < reportes; i++) {
                             cadena = BR.readLine();
@@ -370,7 +370,6 @@ public class ArchivoSalida {
          fichero.append(actualizarFecha()[0]+"/"+actualizarFecha()[1]+"/"+actualizarFecha()[2]+"      |" +"      |"+Nomina + "      |" +SaldoActual + "      |" + "Nomina\n");
          
 
-         System.out.println("Hola");
      }
      
      
@@ -387,6 +386,7 @@ public class ArchivoSalida {
     public void contabilidadServicios(float debeServicioSolicitado) throws IOException {
         FileWriter fichero = new FileWriter("contabilidad.out", true);
         SaldoActual += debeServicioSolicitado;
+        System.out.println(debeServicioSolicitado);
         fichero.append(actualizarFecha()[0] + "/" + actualizarFecha()[1] + "/" + actualizarFecha()[2] + "      |" + debeServicioSolicitado + "      |" + "      |" + SaldoActual + "      |" + "Servicios\n");
         fichero.close();
     }
