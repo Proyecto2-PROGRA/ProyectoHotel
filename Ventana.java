@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,7 +33,14 @@ public class Ventana extends JFrame implements ActionListener {
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones;
     protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,CedulaCheckOut,HoraCheckOut;
-
+    
+    protected JComboBox comboTipoDeHabitacion = new JComboBox();
+    protected JComboBox comboCantidadDePersona = new JComboBox();
+    
+    
+		
+    
+    
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#F8B500");
     public Color myColorBoton = Color.decode("#571845");
@@ -269,11 +277,28 @@ public class Ventana extends JFrame implements ActionListener {
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoTipoHabitacion.setBounds(225, 60, 170, 40);
         textoTipoHabitacion.setForeground(Color.WHITE);
+        
+        comboTipoDeHabitacion = new JComboBox();    
+        comboTipoDeHabitacion.addItem("Seleccione");
+        comboTipoDeHabitacion.addItem("Individual");
+        comboTipoDeHabitacion.addItem("Matrimonial");
+        comboTipoDeHabitacion.addItem("Doble");
+        comboTipoDeHabitacion.addItem("Cuádruple");
+        comboTipoDeHabitacion.addItem("Suite");
+        comboTipoDeHabitacion.setBounds(450,60,175,40);
+        comboTipoDeHabitacion.addActionListener(this);
+        
+        
 
         textoCantPersona = new JLabel("NUMERO PERSONAS");
         textoCantPersona.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoCantPersona.setBounds(225, 110, 200, 40);
         textoCantPersona.setForeground(Color.WHITE);
+        
+        comboCantidadDePersona = new JComboBox();  
+        comboCantidadDePersona.addItem("Seleccione");
+        
+        comboCantidadDePersona.setBounds(450,110,175,40);
 
         //======================================
         botonCheckIn = new JButton("Check-in");
@@ -297,6 +322,11 @@ public class Ventana extends JFrame implements ActionListener {
 
         HoraCheckIn = new JTextField();
         HoraCheckIn.setBounds(390, 50, 120, 40);
+        
+        
+        
+        
+        
 
         ingresarCheckIn = new JButton("INGRESAR CHECK-IN");
         ingresarCheckIn.setBackground(myColorBotonHeader);
@@ -363,6 +393,9 @@ public class Ventana extends JFrame implements ActionListener {
         panelReservacion.add(textoFechaSalida);
         panelReservacion.add(textoTipoHabitacion);
         panelReservacion.add(textoCantPersona);
+        panelReservacion.add(comboTipoDeHabitacion);
+        panelReservacion.add(comboCantidadDePersona);
+         
 
         panelCheckIn.add(textoCedulaCheckIn);
         panelCheckIn.add(CedulaCheckIn);
@@ -385,7 +418,7 @@ public class Ventana extends JFrame implements ActionListener {
         textoArchivoDeSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoArchivoDeSalida.setBounds(400, 14, 221, 51);
         textoArchivoDeSalida.setForeground(Color.WHITE);
-
+        
         panelCuatro.add(textoArchivoDeSalida);
         add(panelTres);
     }
@@ -441,12 +474,85 @@ public class Ventana extends JFrame implements ActionListener {
             panelCancelacion.setVisible(true);
 
         } else if (e.getSource() == ingresarReserva) {
-            panelUno.setVisible(false);
-            panelDos.setVisible(false);
-            panelTres.setVisible(true);
-            panelCuatro.setVisible(false);
+            
+            try{
+                String diaLlegadaDatoEntrada = diaLlegada.getText();
+                int diaLlegadaDatoEntradaParseado = Integer.parseInt(diaLlegadaDatoEntrada);
+                
+                
+                String mesLlegadaDatoEntrada = mesLlegada.getText();
+                int mesLlegadaDatoEntradaParseado = Integer.parseInt(mesLlegadaDatoEntrada);
+                
+                String anoLlegadaDatoEntrada = anoLlegada.getText();
+                int anoLlegadaDatoEntradaParseado = Integer.parseInt(anoLlegadaDatoEntrada);
+            
+                String diaSalidaDatoEntrada = diaSalida.getText();
+                int diaSalidaDatoEntradaParseado = Integer.parseInt(diaSalidaDatoEntrada);
+            
+                String mesSalidaDatoEntrada = mesSalida.getText();
+                int mesSalidaDatoEntradaParseado = Integer.parseInt(mesSalidaDatoEntrada);
+                
+                String anoSalidaDatoEntrada = anoSalida.getText();
+                int anoSalidaDatoEntradaParseado = Integer.parseInt(anoSalidaDatoEntrada);
+                
+                if(diaLlegadaDatoEntradaParseado >=1 && diaLlegadaDatoEntradaParseado <=31 && diaSalidaDatoEntradaParseado>=0 &&diaSalidaDatoEntradaParseado<=31){
+                    JOptionPane.showMessageDialog(null,"Dia Ingresado Correcto");
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null,"Dia Ingresado erroneo");
+                }
+                
+                if(mesLlegadaDatoEntradaParseado<=12&&mesSalidaDatoEntradaParseado<=12&&mesLlegadaDatoEntradaParseado>=1&&mesSalidaDatoEntradaParseado>=1){
+                    JOptionPane.showMessageDialog(null,"Mes Ingresado correcto");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Mes Ingresado erroneo");
+                }
+  
+                
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null,"Ha ocurrido un error");
+            }
+            
 
-        } else if (e.getSource() == abrirArchivo) {
+        }else if (e.getSource()==comboTipoDeHabitacion){
+            if(comboTipoDeHabitacion.getSelectedIndex()==1){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("1");
+            }else if(comboTipoDeHabitacion.getSelectedIndex()==2){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("1");
+                comboCantidadDePersona.addItem("2");
+            }else if(comboTipoDeHabitacion.getSelectedIndex()==3){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("1");
+                comboCantidadDePersona.addItem("2");
+                comboCantidadDePersona.addItem("3");
+            }else if(comboTipoDeHabitacion.getSelectedIndex()==4){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("1");
+                comboCantidadDePersona.addItem("2");
+                comboCantidadDePersona.addItem("3");
+                comboCantidadDePersona.addItem("4");
+            }else if(comboTipoDeHabitacion.getSelectedIndex()==5){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("1");
+                comboCantidadDePersona.addItem("2");
+                comboCantidadDePersona.addItem("3");
+                comboCantidadDePersona.addItem("4");
+                comboCantidadDePersona.addItem("5");
+                comboCantidadDePersona.addItem("6");
+                comboCantidadDePersona.addItem("7");
+                comboCantidadDePersona.addItem("8");
+                comboCantidadDePersona.addItem("9");
+                comboCantidadDePersona.addItem("10");
+            }
+            comboCantidadDePersona.addActionListener(this);
+            
+        }else if(e.getSource()==comboCantidadDePersona){
+            
+            
+        }
+        else if (e.getSource() == abrirArchivo) {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Creamos el filtro
