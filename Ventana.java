@@ -26,7 +26,7 @@ public class Ventana extends JFrame implements ActionListener {
             textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida,
             textoTipoHabitacion, textoCantPersona, textoCedulaCheckIn, textoHoraCheckIn,textoCedulaCheckOut,textoHoraCheckOut;
 
-    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonCincoHeader, abrirArchivo, ingresarReserva, ingresarCheckIn,ingresarCheckOut;
+    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, abrirArchivo, ingresarReserva, ingresarCheckIn,ingresarCheckOut;
     protected JButton botonEnviarCargaInteractiva, botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion;
     protected JTextArea textArea;
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones;
@@ -94,34 +94,29 @@ public class Ventana extends JFrame implements ActionListener {
 
         //========================================
         botonUnoHeader = new JButton("Home");
-        botonUnoHeader.setBounds(475, 15, 100, 40);
+        botonUnoHeader.setBounds(380, 15, 150, 40);
         botonUnoHeader.setForeground(myColorBotonLetraHeader);
         botonUnoHeader.setBackground(myColorBotonHeader);
         botonUnoHeader.addActionListener(this);
 
         botonDosHeader = new JButton("Abrir Archivos");
-        botonDosHeader.setBounds(580, 15, 100, 40);
+        botonDosHeader.setBounds(535, 15, 150, 40);
         botonDosHeader.setForeground(myColorBotonLetraHeader);
         botonDosHeader.setBackground(myColorBotonHeader);
         botonDosHeader.addActionListener(this);
 
         botonTresHeader = new JButton("Operaciones");
-        botonTresHeader.setBounds(685, 15, 100, 40);
+        botonTresHeader.setBounds(690, 15, 150, 40);
         botonTresHeader.setForeground(myColorBotonLetraHeader);
         botonTresHeader.setBackground(myColorBotonHeader);
         botonTresHeader.addActionListener(this);
 
         botonCuatroHeader = new JButton("archivo salida");
-        botonCuatroHeader.setBounds(790, 15, 100, 40);
+        botonCuatroHeader.setBounds(845, 15, 150, 40);
         botonCuatroHeader.setForeground(myColorBotonLetraHeader);
         botonCuatroHeader.setBackground(myColorBotonHeader);
         botonCuatroHeader.addActionListener(this);
 
-        botonCincoHeader = new JButton("archivo salida");
-        botonCincoHeader.setBounds(895, 15, 100, 40);
-        botonCincoHeader.setForeground(myColorBotonLetraHeader);
-        botonCincoHeader.setBackground(myColorBotonHeader);
-        botonCincoHeader.addActionListener(this);
 
         PanelPrincipal();
         PanelPrincipalDos();
@@ -133,7 +128,7 @@ public class Ventana extends JFrame implements ActionListener {
         panelHeader.add(botonDosHeader);
         panelHeader.add(botonTresHeader);
         panelHeader.add(botonCuatroHeader);
-        panelHeader.add(botonCincoHeader);
+
         panelHeader.add(panelTitulo);
 
         add(panelHeader);
@@ -248,13 +243,13 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setForeground(Color.WHITE);
 
         diaLlegada = new JTextField();
-        diaLlegada.setBounds(360, 10, 30, 40);
+        diaLlegada.setBounds(380, 10, 30, 40);
 
         mesLlegada = new JTextField();
-        mesLlegada.setBounds(390, 10, 30, 40);
+        mesLlegada.setBounds(410, 10, 30, 40);
 
         anoLlegada = new JTextField();
-        anoLlegada.setBounds(420, 10, 50, 40);
+        anoLlegada.setBounds(440, 10, 50, 40);
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -262,17 +257,17 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaSalida.setForeground(Color.WHITE);
 
         diaSalida = new JTextField();
-        diaSalida.setBounds(620, 10, 30, 40);
+        diaSalida.setBounds(650, 10, 30, 40);
 
         mesSalida = new JTextField();
-        mesSalida.setBounds(650, 10, 30, 40);
+        mesSalida.setBounds(680, 10, 30, 40);
 
         anoSalida = new JTextField();
-        anoSalida.setBounds(680, 10, 50, 40);
+        anoSalida.setBounds(710, 10, 50, 40);
 
         textoTipoHabitacion = new JLabel("TIPO HABITACIÓN");
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
-        textoTipoHabitacion.setBounds(225, 60, 150, 40);
+        textoTipoHabitacion.setBounds(225, 60, 170, 40);
         textoTipoHabitacion.setForeground(Color.WHITE);
 
         textoCantPersona = new JLabel("NUMERO PERSONAS");
@@ -501,22 +496,25 @@ public class Ventana extends JFrame implements ActionListener {
         
         String comprobacion,comprobacion2;
 
-        if (fichero.exists())
+        if (fichero.exists()){
             
             comprobacion="El archivo " + sFichero + " si existe";
-
-        else
+            botonDosHeader.setEnabled(false);
+        }
+        else{
             comprobacion="\nEl archivo " + sFichero + " no existe";
-        
+        }
         String dFichero = "precios.in";
         File fichero2 = new File(dFichero);
         
-            if(fichero2.exists())
+            if(fichero2.exists()){
 
                 comprobacion2="\n\nEl archivo " + dFichero + " si existe";
-            else
+                botonTresHeader.setEnabled(false);
+            }
+                else{
                 comprobacion2="\n\nEl archivo " + dFichero +" no existe";
-        
+                        }
         return comprobacion + comprobacion2;
       
     
