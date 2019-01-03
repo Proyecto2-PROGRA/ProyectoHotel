@@ -5,11 +5,16 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -25,11 +30,12 @@ public class Ventana extends JFrame implements ActionListener {
 
     protected JLabel headerTitulo, textoAbrirArchivo, textoCargaInteractiva,
             textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida,
-            textoTipoHabitacion, textoCantPersona, textoCedulaCheckIn, textoHoraCheckIn,textoCedulaCheckOut,textoHoraCheckOut;
+            textoTipoHabitacion, textoCantPersona, textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut;
 
-    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, abrirArchivo, ingresarReserva, ingresarCheckIn,ingresarCheckOut;
-    protected JButton botonEnviarCargaInteractiva, botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion;
+    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, abrirArchivo, ingresarReserva, ingresarCheckIn, ingresarCheckOut;
+    protected JButton botonEnviarCargaInteractiva, botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones;
     protected JTextArea textArea;
+<<<<<<< HEAD
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones;
     protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,CedulaCheckOut,HoraCheckOut;
@@ -41,6 +47,12 @@ public class Ventana extends JFrame implements ActionListener {
 		
     
     
+=======
+    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo;
+    protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelMenuOperaciones, panelInicializar, panelOperaciones;
+    protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn, CedulaCheckOut, HoraCheckOut;
+
+>>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#F8B500");
     public Color myColorBoton = Color.decode("#571845");
@@ -125,7 +137,6 @@ public class Ventana extends JFrame implements ActionListener {
         botonCuatroHeader.setBackground(myColorBotonHeader);
         botonCuatroHeader.addActionListener(this);
 
-
         PanelPrincipal();
         PanelPrincipalDos();
         PanelPrincipalTres();
@@ -153,8 +164,7 @@ public class Ventana extends JFrame implements ActionListener {
         //=============================
         textArea = new JTextArea();
         textArea.setBounds(10, 30, 330, 90);
-        
-        
+
         String texto = comprobar();
 
         textArea.setText(texto);
@@ -340,7 +350,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonCheckOut.setForeground(myColorBotonLetraHeader);
         botonCheckOut.setBounds(0, 90, 220, 40);
         botonCheckOut.addActionListener(this);
-        
+
         textoCedulaCheckOut = new JLabel("INGRESE CEDULA");
         textoCedulaCheckOut.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoCedulaCheckOut.setBounds(225, 10, 200, 40);
@@ -402,18 +412,19 @@ public class Ventana extends JFrame implements ActionListener {
         panelCheckIn.add(textoHoraCheckIn);
         panelCheckIn.add(HoraCheckIn);
         panelCheckIn.add(ingresarCheckIn);
-        
+
         panelCheckOut.add(textoCedulaCheckOut);
         panelCheckOut.add(CedulaCheckOut);
         panelCheckOut.add(textoHoraCheckOut);
         panelCheckOut.add(HoraCheckOut);
         panelCheckOut.add(ingresarCheckOut);
-        
+
         add(panelTres);
 
     }
 
     public void PanelPrincipalCuatro() {
+<<<<<<< HEAD
         textoArchivoDeSalida = new JLabel("Archivos de salida");
         textoArchivoDeSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoArchivoDeSalida.setBounds(400, 14, 221, 51);
@@ -421,6 +432,55 @@ public class Ventana extends JFrame implements ActionListener {
         
         panelCuatro.add(textoArchivoDeSalida);
         add(panelTres);
+=======
+
+        panelMenuOperaciones = new JPanel();
+        panelMenuOperaciones.setBackground(myColorHeaderTitulo);
+        panelMenuOperaciones.setBounds(0, 0, 220, 400);
+        panelMenuOperaciones.setLayout(null);
+        panelCuatro.add(panelMenuOperaciones);
+        //========================================
+        panelInicializar = new JPanel();
+        panelInicializar.setBackground(myColorFondo);
+        panelInicializar.setBounds(0, 0, 1000, 400);
+        panelInicializar.setLayout(null);
+        panelInicializar.setVisible(false);
+
+        botonInicializar = new JButton("Inicializar");
+        botonInicializar.setBackground(myColorBotonHeader);
+        botonInicializar.setForeground(myColorBotonLetraHeader);
+        botonInicializar.setBounds(0, 0, 220, 40);
+        botonInicializar.addActionListener(this);
+
+        textArea = new JTextArea();
+        textArea.setBounds(250, 0, 500, 500);
+        String texto;
+        panelCuatro.add(textArea);
+
+        //=====================================
+        panelOperaciones = new JPanel();
+        panelOperaciones.setBackground(myColorFondo);
+        panelOperaciones.setBounds(0, 0, 1000, 400);
+        panelOperaciones.setLayout(null);
+        panelOperaciones.setVisible(false);
+
+        botonOperaciones = new JButton("Operaciones");
+        botonOperaciones.setBackground(myColorBotonHeader);
+        botonOperaciones.setForeground(myColorBotonLetraHeader);
+        botonOperaciones.setBounds(0, 45, 220, 40);
+        botonOperaciones.addActionListener(this);
+
+        panelMenuOperaciones.add(botonInicializar);
+        panelMenuOperaciones.add(botonOperaciones);
+        panelCuatro.add(panelMenuOperaciones);
+
+        panelCuatro.add(panelInicializar);
+        panelCuatro.add(panelOperaciones);
+        panelInicializar.add(ingresarReserva);
+
+        add(panelCuatro);
+
+>>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
     }
 
     @Override
@@ -474,6 +534,7 @@ public class Ventana extends JFrame implements ActionListener {
             panelCancelacion.setVisible(true);
 
         } else if (e.getSource() == ingresarReserva) {
+<<<<<<< HEAD
             
             try{
                 String diaLlegadaDatoEntrada = diaLlegada.getText();
@@ -513,6 +574,24 @@ public class Ventana extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Ha ocurrido un error");
             }
             
+=======
+            panelUno.setVisible(false);
+            panelDos.setVisible(false);
+            panelTres.setVisible(true);
+            panelCuatro.setVisible(false);
+        } else if (e.getSource() == botonInicializar) {
+            try {
+                inicializar();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (e.getSource() == botonOperaciones) {
+            try {
+                operaciones();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+>>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
 
         }else if (e.getSource()==comboTipoDeHabitacion){
             if(comboTipoDeHabitacion.getSelectedIndex()==1){
@@ -556,7 +635,7 @@ public class Ventana extends JFrame implements ActionListener {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Creamos el filtro
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt","in","out");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt", "in", "out");
             fc.setFileFilter(filtro);
             Component contentPane = null;
 
@@ -584,7 +663,6 @@ public class Ventana extends JFrame implements ActionListener {
                 }
             }
         }
-        
 
     }
 
@@ -594,36 +672,62 @@ public class Ventana extends JFrame implements ActionListener {
         return formatoFecha.format(fecha);
 
     }
-    
-    
-    public String comprobar(){
+
+    public String comprobar() {
         String sFichero = "inicializar.in";
         File fichero = new File(sFichero);
-        
-        String comprobacion,comprobacion2;
 
-        if (fichero.exists()){
-            
-            comprobacion="El archivo " + sFichero + " si existe";
+        String comprobacion, comprobacion2;
+
+        if (fichero.exists()) {
+
+            comprobacion = "El archivo " + sFichero + " si existe";
             botonDosHeader.setEnabled(false);
-        }
-        else{
-            comprobacion="\nEl archivo " + sFichero + " no existe";
+        } else {
+            comprobacion = "\nEl archivo " + sFichero + " no existe";
         }
         String dFichero = "precios.in";
         File fichero2 = new File(dFichero);
-        
-            if(fichero2.exists()){
 
-                comprobacion2="\n\nEl archivo " + dFichero + " si existe";
-                botonTresHeader.setEnabled(false);
-            }
-                else{
-                comprobacion2="\n\nEl archivo " + dFichero +" no existe";
-                        }
+        if (fichero2.exists()) {
+
+            comprobacion2 = "\n\nEl archivo " + dFichero + " si existe";
+            botonTresHeader.setEnabled(false);
+        } else {
+            comprobacion2 = "\n\nEl archivo " + dFichero + " no existe";
+        }
         return comprobacion + comprobacion2;
-      
-    
+
     }
 
+    public void inicializar() throws FileNotFoundException {
+        try {
+            FileReader lector = new FileReader("inicializar.in");
+            BufferedReader BR = new BufferedReader(lector);
+            String cadena;
+            textArea.setText(" ");
+            while ((cadena = BR.readLine()) != null) {
+                textArea.append(cadena + "\n");
+            }
+            BR.close();
+
+        } catch (IOException ex) {
+        }
+
+    }
+
+    public void operaciones() throws FileNotFoundException {
+        try {
+            FileReader lector = new FileReader("operaciones.in");
+            BufferedReader BR = new BufferedReader(lector);
+            String cadena;
+            textArea.setText(" ");
+            while ((cadena = BR.readLine()) != null) {
+                textArea.append(cadena + "\n");
+            }
+            BR.close();
+
+        } catch (IOException ex) {
+        }
+    }
 }
