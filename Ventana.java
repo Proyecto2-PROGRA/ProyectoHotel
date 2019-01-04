@@ -283,6 +283,7 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setForeground(Color.WHITE);
 
         comboDiaLlegada = new JComboBox(diasStrings);
+<<<<<<< HEAD
         comboDiaLlegada.setBounds(370, 10, 70, 40);
 
         comboMesLlegada = new JComboBox(mesStrings);
@@ -290,6 +291,15 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
+=======
+        comboDiaLlegada.setBounds(360, 10, 70, 40);
+
+        comboMesLlegada = new JComboBox(mesStrings);
+        comboMesLlegada.setBounds(420, 10, 70, 40);
+
+        comboAnoLlegada = new JComboBox(annioStrings);
+        comboAnoLlegada.setBounds(480, 10, 85, 40);
+>>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -552,14 +562,19 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.setBounds(0, 0, 220, 40);
         botonInicializar.addActionListener(this);
 
+<<<<<<< HEAD
         textArea = new JTextArea();
         
+=======
+        textArea = new JTextArea(5, 20);
+>>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
         textArea.setBounds(225, 5, 770, 390);
         String texto;
+        textArea.setEditable(false);
+        scroll = new JScrollPane(textArea);
+        scroll.setBounds(225, 5, 770, 390);
+        panelCuatro.add(scroll);
         
-        panelCuatro.add(textArea);
-        
-
         //=====================================
         panelOperaciones = new JPanel();
         panelOperaciones.setBackground(myColorFondo);
