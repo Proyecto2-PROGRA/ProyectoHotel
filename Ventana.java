@@ -77,7 +77,6 @@ public class Ventana extends JFrame implements ActionListener {
         public Imagen() {
             this.setBounds(0, 0, 1000, 410);
         }
-
         public void paint(Graphics grafico) {
             Dimension height = getSize();
 
@@ -115,18 +114,18 @@ public class Ventana extends JFrame implements ActionListener {
 
         panelDos = new JPanel();
         panelDos.setBackground(myColorFondo);
-        panelDos.setBounds(0, 75, 1000, 400);
+        panelDos.setBounds(0, 70, 1000, 420);
         panelDos.setLayout(null);
         panelDos.setVisible(false);
 
         panelTres = new JPanel();
-        panelTres.setBounds(0, 75, 1000, 400);
+        panelTres.setBounds(0, 70, 1000, 420);
         panelTres.setLayout(null);
         panelTres.setVisible(false);
 
         panelCuatro = new JPanel();
         panelCuatro.setBackground(myColorFondo);
-        panelCuatro.setBounds(0, 75, 1000, 400);
+        panelCuatro.setBounds(0, 70, 1000, 420);
         panelCuatro.setLayout(null);
         panelCuatro.setVisible(false);
 
@@ -258,7 +257,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         panelColorTres = new JPanel();
         panelColorTres.setBackground(myColorFondo);
-        panelColorTres.setBounds(0, 0, 1000, 400);
+        panelColorTres.setBounds(0, 0, 1000, 420);
         panelColorTres.setLayout(null);
         panelColorTres.setVisible(true);
 
@@ -560,11 +559,10 @@ public class Ventana extends JFrame implements ActionListener {
 
 
         textArea = new JTextArea();
-        textArea.setBounds(225, 5, 770, 390);
         String texto;
         textArea.setEditable(false);
         scroll = new JScrollPane(textArea);
-        scroll.setBounds(225, 5, 770, 390);
+        scroll.setBounds(225, 0, 770, 410);
         panelCuatro.add(scroll);
 
         //=====================================
