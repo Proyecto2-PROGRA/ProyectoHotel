@@ -58,9 +58,9 @@ public class Ventana extends JFrame implements ActionListener {
     
     protected String[] diasStrings ={"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"};
     
-    protected String[] mesStrings ={"01","02","03","04","05","06","07","08","09","10","11","12"};
+    protected String[] mesStrings ={"mm","01","02","03","04","05","06","07","08","09","10","11","12"};
     
-    protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
+    protected String[] annioStrings ={"aaaa","2019","2020","2021","2022","2023"};
 		
     
     
@@ -285,14 +285,18 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setBounds(225, 10, 150, 40);
         textoFechaLlegada.setForeground(Color.WHITE);
 
-        comboDiaLlegada = new JComboBox(diasStrings);
+        comboDiaLlegada = new JComboBox();
+        comboDiaLlegada.addItem("dd");
         comboDiaLlegada.setBounds(370, 10, 70, 40);
 
-        comboMesLlegada = new JComboBox(mesStrings);
+        comboMesLlegada = new JComboBox();
+        comboMesLlegada.addItem("mm");
         comboMesLlegada.setBounds(445, 10, 70, 40);
+        comboMesLlegada.addActionListener(this);
 
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
+        comboAnoLlegada.addActionListener(this);
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -737,6 +741,53 @@ public class Ventana extends JFrame implements ActionListener {
             
         }else if(e.getSource()==comboCantidadDePersona){
             
+            
+        }else if(e.getSource()==comboAnoLlegada){
+             if(comboAnoLlegada.getSelectedIndex()!=0){
+                comboMesLlegada.removeAllItems();
+                for(int i = 1; mesStrings.length >i ;i++ ){
+                    
+                    comboMesLlegada.addItem(mesStrings[i]);   
+                }
+            }
+             
+             else if(comboAnoLlegada.getSelectedIndex()==0){
+                 comboMesLlegada.removeAllItems();
+             }
+            
+  
+            
+            
+        }else if(e.getSource()==comboMesLlegada){
+            Integer varNum = Integer.parseInt(comboAnoLlegada.getSelectedItem().toString());
+            varNum=varNum%4;
+            System.out.println(varNum);
+            if(comboMesLlegada.getSelectedIndex()==0){
+                comboDiaLlegada.removeAllItems();
+                comboDiaLlegada.addItem("aa");
+            }else if(comboMesLlegada.getSelectedIndex()!=0){
+                comboDiaLlegada.removeAllItems();
+                for(int i = 0; diasStrings.length >i ;i++ ){
+                    comboDiaLlegada.addItem(diasStrings[i]);   
+                }
+                if(varNum==0&&comboMesLlegada.getSelectedIndex()==2){
+                    comboDiaLlegada.addItem("29");
+                }
+                 if(comboMesLlegada.getSelectedIndex()==4 ||comboMesLlegada.getSelectedIndex()==6||comboMesLlegada.getSelectedIndex()==9||
+                    comboMesLlegada.getSelectedIndex()==11){
+                    comboDiaLlegada.addItem("29");   
+                    comboDiaLlegada.addItem("30");   
+ 
+                }
+                if(comboMesLlegada.getSelectedIndex()==1 ||comboMesLlegada.getSelectedIndex()==3||comboMesLlegada.getSelectedIndex()==5||
+                    comboMesLlegada.getSelectedIndex()==7||comboMesLlegada.getSelectedIndex()==8||comboMesLlegada.getSelectedIndex()==10||
+                    comboMesLlegada.getSelectedIndex()==12){
+                    comboDiaLlegada.addItem("29");   
+                    comboDiaLlegada.addItem("30");  
+                    comboDiaLlegada.addItem("31");   
+                }
+            }
+
             
         }
         else if (e.getSource() == botonAbrirArchivoInicializar) {
