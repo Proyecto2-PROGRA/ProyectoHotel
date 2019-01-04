@@ -62,6 +62,7 @@ public class Ventana extends JFrame implements ActionListener {
 
     protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
 
+
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
     public Color myColorBoton = Color.decode("#FFF4FF");
@@ -319,6 +320,7 @@ public class Ventana extends JFrame implements ActionListener {
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
 
+
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -556,8 +558,8 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.setBounds(0, 0, 220, 40);
         botonInicializar.addActionListener(this);
 
-        textArea = new JTextArea();
 
+        textArea = new JTextArea();
         textArea.setBounds(225, 5, 770, 390);
         String texto;
         textArea.setEditable(false);
