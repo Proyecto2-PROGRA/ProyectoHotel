@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -29,26 +30,36 @@ public class Ventana extends JFrame implements ActionListener {
 
     protected JLabel headerTitulo, textoAbrirArchivoInicializar, textoAbrirArchivoPrecio, textoCargaInteractiva,
             textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida, textoTipoHabitacion, textoCantPersona, 
-            textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut, textoDosPuntos, textoDosPuntosOut;
+            textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut, textoDosPuntos, textoDosPuntosOut,
+             textoCedulaCancelacion,  textoHoraCancelacion, textoDosPuntosCancelacion ;
 
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar, 
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva, 
-            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones;
+            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones,ingresarCancelacion;
     protected JTextArea textArea;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
             panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
     
-    protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,CedulaCheckOut,HoraCheckOut;
+    protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
+            CedulaCheckOut,HoraCheckOut, CedulaCancelacion;
     
-    protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona;
+    protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona,
+            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada,comboDiaLlegada, comboMesLlegada,comboAnoSalida,comboDiaSalida,comboMesSalida;
+    
+    protected JScrollPane scroll;
+    
     
     protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
         "28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
     
     protected String[] horasStrings ={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
     
+    protected String[] diasStrings ={"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"};
     
+    protected String[] mesStrings ={"01","02","03","04","05","06","07","08","09","10","11","12"};
+    
+    protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
 		
     
     
@@ -68,6 +79,7 @@ public class Ventana extends JFrame implements ActionListener {
         setTitle("Mi Refugio");
         setLayout(null);
         setLocationRelativeTo(null);
+        setResizable(false);
         MenuHeader();
     }
 
@@ -261,7 +273,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonReservacion.setBounds(0, 0, 220, 40);
         botonReservacion.addActionListener(this);
 
-        ingresarReserva = new JButton("Ingresar reserva");
+        ingresarReserva = new JButton("INGRESAR RESERVA");
         ingresarReserva.setBackground(myColorBotonHeader);
         ingresarReserva.setForeground(myColorBotonLetraHeader);
         ingresarReserva.setBounds(500, 350, 200, 40);
@@ -272,28 +284,28 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setBounds(225, 10, 150, 40);
         textoFechaLlegada.setForeground(Color.WHITE);
 
-        diaLlegada = new JTextField();
-        diaLlegada.setBounds(380, 10, 30, 40);
+        comboDiaLlegada = new JComboBox(diasStrings);
+        comboDiaLlegada.setBounds(380, 10, 45, 40);
 
-        mesLlegada = new JTextField();
-        mesLlegada.setBounds(410, 10, 30, 40);
+        comboMesLlegada = new JComboBox(mesStrings);
+        comboMesLlegada.setBounds(430, 10, 45, 40);
 
-        anoLlegada = new JTextField();
-        anoLlegada.setBounds(440, 10, 50, 40);
+        comboAnoLlegada = new JComboBox(annioStrings);
+        comboAnoLlegada.setBounds(480, 10, 60, 40);
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
-        textoFechaSalida.setBounds(500, 10, 150, 40);
+        textoFechaSalida.setBounds(550, 10, 150, 40);
         textoFechaSalida.setForeground(Color.WHITE);
 
-        diaSalida = new JTextField();
-        diaSalida.setBounds(650, 10, 30, 40);
+        comboDiaSalida = new JComboBox(diasStrings);
+        comboDiaSalida.setBounds(690, 10, 45, 40);
 
-        mesSalida = new JTextField();
-        mesSalida.setBounds(680, 10, 30, 40);
+        comboMesSalida = new JComboBox(mesStrings);
+        comboMesSalida.setBounds(740, 10, 45, 40);
 
-        anoSalida = new JTextField();
-        anoSalida.setBounds(710, 10, 50, 40);
+        comboAnoSalida = new JComboBox(annioStrings);
+        comboAnoSalida.setBounds(790, 10, 60, 40);
 
         textoTipoHabitacion = new JLabel("TIPO HABITACIÓN");
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -344,7 +356,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         
         
-        comboHoraCheckIn = new JComboBox(horasStrings);    
+        comboHoraCheckIn = new JComboBox(horasStrings);
         comboHoraCheckIn.setBounds(450,60,45,40);
         comboHoraCheckIn.addActionListener(this);
         
@@ -421,6 +433,49 @@ public class Ventana extends JFrame implements ActionListener {
         botonCancelacion.setForeground(myColorBotonLetraHeader);
         botonCancelacion.setBounds(0, 135, 220, 40);
         botonCancelacion.addActionListener(this);
+        
+        textoCedulaCancelacion = new JLabel("INGRESE CEDULA");
+        textoCedulaCancelacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoCedulaCancelacion.setBounds(225, 10, 200, 40);
+        textoCedulaCancelacion.setForeground(Color.WHITE);
+
+        CedulaCancelacion = new JTextField();
+        CedulaCancelacion.setBounds(390, 10, 120, 40);
+
+        textoHoraCancelacion = new JLabel("INGRESE HORA");
+        textoHoraCancelacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoHoraCancelacion.setBounds(225, 50, 200, 40);
+        textoHoraCancelacion.setForeground(Color.WHITE);
+
+        comboHoraCancelacion= new JComboBox(horasStrings);    
+        comboHoraCancelacion.setBounds(450,60,45,40);
+        comboHoraCancelacion.addActionListener(this);
+        
+        
+        textoDosPuntosCancelacion = new JLabel(":");
+        textoDosPuntosCancelacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoDosPuntosCancelacion.setBounds(507, 60, 10, 40);
+        textoDosPuntosCancelacion.setForeground(Color.WHITE);
+        
+        
+        
+        comboMinutoCancelacion = new JComboBox(minutosStrings);    
+
+        comboMinutoCancelacion.setBounds(525,60,45,40);
+        comboMinutoCancelacion.addActionListener(this);
+
+        ingresarCancelacion = new JButton("INGRESAR CANCELACIÓN");
+        ingresarCancelacion.setBackground(myColorBotonHeader);
+        ingresarCancelacion.setForeground(myColorBotonLetraHeader);
+        ingresarCancelacion.setBounds(500, 350, 210, 40);
+        ingresarCancelacion.addActionListener(this);
+        
+        
+
+        
+        
+        
+        //=======================================
 
         panelMenuOperaciones.add(botonCheckOut);
         panelMenuOperaciones.add(botonCheckIn);
@@ -435,12 +490,12 @@ public class Ventana extends JFrame implements ActionListener {
         panelTres.add(panelCancelacion);
 
         panelReservacion.add(ingresarReserva);
-        panelReservacion.add(diaLlegada);
-        panelReservacion.add(anoLlegada);
-        panelReservacion.add(mesLlegada);
-        panelReservacion.add(diaSalida);
-        panelReservacion.add(anoSalida);
-        panelReservacion.add(mesSalida);
+        panelReservacion.add(comboDiaLlegada);
+        panelReservacion.add(comboAnoLlegada);
+        panelReservacion.add(comboMesLlegada);
+        panelReservacion.add(comboDiaSalida);
+        panelReservacion.add(comboAnoSalida);
+        panelReservacion.add(comboMesSalida);
         panelReservacion.add(textoFechaLlegada);
         panelReservacion.add(textoFechaSalida);
         panelReservacion.add(textoTipoHabitacion);
@@ -464,20 +519,22 @@ public class Ventana extends JFrame implements ActionListener {
         panelCheckOut.add(comboHoraCheckOut);
         panelCheckOut.add(comboMinutoCheckOut);
         panelCheckOut.add(textoDosPuntosOut);
+        
+        panelCancelacion.add(textoCedulaCancelacion);
+        panelCancelacion.add(CedulaCancelacion);
+        panelCancelacion.add(textoHoraCancelacion);
+        panelCancelacion.add(ingresarCancelacion);
+        panelCancelacion.add(comboHoraCancelacion);
+        panelCancelacion.add(comboMinutoCancelacion);
+        panelCancelacion.add(textoDosPuntosCancelacion);
 
         add(panelTres);
 
     }
 
     public void PanelPrincipalCuatro() {
-        textoArchivoDeSalida = new JLabel("Archivos de salida");
-        textoArchivoDeSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
-        textoArchivoDeSalida.setBounds(400, 14, 221, 51);
-        textoArchivoDeSalida.setForeground(Color.WHITE);
-        
-        panelCuatro.add(textoArchivoDeSalida);
-        add(panelTres);
 
+       
 
         panelMenuOperaciones = new JPanel();
         panelMenuOperaciones.setBackground(myColorHeaderTitulo);
@@ -498,9 +555,13 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.addActionListener(this);
 
         textArea = new JTextArea();
-        textArea.setBounds(250, 0, 500, 500);
+        scroll = new JScrollPane(textArea);
+        
+        textArea.setBounds(225, 5, 770, 390);
         String texto;
+        
         panelCuatro.add(textArea);
+        
 
         //=====================================
         panelOperaciones = new JPanel();
@@ -521,7 +582,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         panelCuatro.add(panelInicializar);
         panelCuatro.add(panelOperaciones);
-        panelInicializar.add(ingresarReserva);
+
 
         add(panelCuatro);
     }
@@ -637,7 +698,10 @@ public class Ventana extends JFrame implements ActionListener {
 
 
         }else if (e.getSource()==comboTipoDeHabitacion){
-            if(comboTipoDeHabitacion.getSelectedIndex()==1){
+            if(comboTipoDeHabitacion.getSelectedIndex()==0){
+                comboCantidadDePersona.removeAllItems();
+                comboCantidadDePersona.addItem("0");
+            }else if(comboTipoDeHabitacion.getSelectedIndex()==1){
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
             }else if(comboTipoDeHabitacion.getSelectedIndex()==2){
@@ -768,6 +832,7 @@ public class Ventana extends JFrame implements ActionListener {
                 textArea.append(cadena + "\n");
             }
             BR.close();
+
 
         } catch (IOException ex) {
         }
