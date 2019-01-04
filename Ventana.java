@@ -2,7 +2,9 @@ package ProyectoHotel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -14,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -29,52 +32,67 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Ventana extends JFrame implements ActionListener {
 
     protected JLabel headerTitulo, textoAbrirArchivoInicializar, textoAbrirArchivoPrecio, textoCargaInteractiva,
-            textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida, textoTipoHabitacion, textoCantPersona, 
+            textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida, textoTipoHabitacion, textoCantPersona,
             textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut, textoDosPuntos, textoDosPuntosOut,
-             textoCedulaCancelacion,  textoHoraCancelacion, textoDosPuntosCancelacion ;
+            textoCedulaCancelacion, textoHoraCancelacion, textoDosPuntosCancelacion;
 
-    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar, 
-            botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva, 
-            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones,ingresarCancelacion;
+    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
+            botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
+            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion;
     protected JTextArea textArea;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
-            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
-    
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres;
+
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
-            CedulaCheckOut,HoraCheckOut, CedulaCancelacion;
-    
-    protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona,
-            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada,comboDiaLlegada, comboMesLlegada,comboAnoSalida,comboDiaSalida,comboMesSalida;
-    
-    
-    protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
-        "28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
-    
-    protected String[] horasStrings ={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
-    
-    protected String[] diasStrings ={"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"};
-    
-    protected String[] mesStrings ={"01","02","03","04","05","06","07","08","09","10","11","12"};
-    
-    protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
-		
-    
-    
+            CedulaCheckOut, HoraCheckOut, CedulaCancelacion;
+
+    protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
+            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida;
+    protected JScrollPane scroll;
+
+    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
+
+    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+
+    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
+
+    protected String[] mesStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+
+    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
 
     public Color myColorLetra = Color.decode("#FFC300");
-    public Color myColorHeader = Color.decode("#F8B500");
-    public Color myColorBoton = Color.decode("#571845");
-    public Color myColorBotonHeader = Color.decode("#393E46");
-    public Color myColorBotonLetraHeader = Color.decode("#F8B500");
-    public Color myColorFondo = Color.decode("#00ADB5");
-    public Color myColorHeaderLetraTitulo = Color.decode("#F8B500");
-    public Color myColorHeaderTitulo = Color.decode("#FC3C3C");
+    public Color myColorHeader = Color.decode("#00010D");
+    public Color myColorBoton = Color.decode("#FFF4FF");
+    public Color myColorBotonHeader = Color.decode("#FFF4FF");
+    public Color myColorBotonLetraHeader = Color.decode("#1F2226");//letra
+    public Color myColorFondo = Color.decode("#383D45");//fondo
+    public Color myColorHeaderLetraTitulo = Color.decode("#FFF4FF");//letra header
+    public Color myColorHeaderTitulo = Color.decode("#383D45");//color mi refugio header
+
+    public class Imagen extends javax.swing.JPanel {
+
+        public Imagen() {
+            this.setBounds(0, 0, 1000, 410);
+        }
+
+        public void paint(Graphics grafico) {
+            Dimension height = getSize();
+
+            ImageIcon Img = new ImageIcon(getClass().getResource("portada.jpg"));
+
+            grafico.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+
+            setOpaque(false);
+            super.paintComponent(grafico);
+        }
+
+    }
 
     public Ventana() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 500);
-        setTitle("Mi Refugio");
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -89,8 +107,8 @@ public class Ventana extends JFrame implements ActionListener {
 
         //===============================
         panelUno = new JPanel();
-        panelUno.setBackground(myColorFondo);
-        panelUno.setBounds(0, 75, 1000, 400);
+        panelUno.setBounds(0, 70, 1000, 410);
+
         panelUno.setLayout(null);
         panelUno.setVisible(true);
 
@@ -123,7 +141,7 @@ public class Ventana extends JFrame implements ActionListener {
         headerTitulo.setForeground(myColorHeaderLetraTitulo);
 
         //========================================
-        botonUnoHeader = new JButton("Home");
+        botonUnoHeader = new JButton("Inicio");
         botonUnoHeader.setBounds(380, 15, 150, 40);
         botonUnoHeader.setForeground(myColorBotonLetraHeader);
         botonUnoHeader.setBackground(myColorBotonHeader);
@@ -141,7 +159,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonTresHeader.setBackground(myColorBotonHeader);
         botonTresHeader.addActionListener(this);
 
-        botonCuatroHeader = new JButton("archivo salida");
+        botonCuatroHeader = new JButton("Archivo salida");
         botonCuatroHeader.setBounds(845, 15, 150, 40);
         botonCuatroHeader.setForeground(myColorBotonLetraHeader);
         botonCuatroHeader.setBackground(myColorBotonHeader);
@@ -178,8 +196,12 @@ public class Ventana extends JFrame implements ActionListener {
         String texto = comprobar();
 
         textArea.setText(texto);
+        textArea.setEditable(false);
 
         panelUno.add(textArea);
+        Imagen Imagen = new Imagen();
+        panelUno.add(Imagen);
+        panelUno.repaint();
         add(panelUno);
     }
 
@@ -190,7 +212,7 @@ public class Ventana extends JFrame implements ActionListener {
         textoAbrirArchivoInicializar.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoAbrirArchivoInicializar.setBounds(10, 14, 281, 51);
         textoAbrirArchivoInicializar.setForeground(Color.WHITE);
-        
+
         textoAbrirArchivoPrecio = new JLabel("Abrir Archivos Precio");
         textoAbrirArchivoPrecio.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoAbrirArchivoPrecio.setBounds(10, 65, 221, 51);
@@ -201,7 +223,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonAbrirArchivoInicializar.setForeground(myColorBotonLetraHeader);
         botonAbrirArchivoInicializar.setBackground(myColorBotonHeader);
         botonAbrirArchivoInicializar.addActionListener(this);
-        
+
         botonAbrirArchivoPrecio = new JButton("Abrir Archivo");
         botonAbrirArchivoPrecio.setBounds(845, 65, 150, 40);
         botonAbrirArchivoPrecio.setForeground(myColorBotonLetraHeader);
@@ -232,6 +254,12 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void PanelPrincipalTres() {
+
+        panelColorTres = new JPanel();
+        panelColorTres.setBackground(myColorFondo);
+        panelColorTres.setBounds(0, 0, 1000, 400);
+        panelColorTres.setLayout(null);
+        panelColorTres.setVisible(true);
 
         panelReservacion = new JPanel();
         panelReservacion.setBackground(myColorFondo);
@@ -283,7 +311,6 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setForeground(Color.WHITE);
 
         comboDiaLlegada = new JComboBox(diasStrings);
-<<<<<<< HEAD
         comboDiaLlegada.setBounds(370, 10, 70, 40);
 
         comboMesLlegada = new JComboBox(mesStrings);
@@ -291,15 +318,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
-=======
-        comboDiaLlegada.setBounds(360, 10, 70, 40);
 
-        comboMesLlegada = new JComboBox(mesStrings);
-        comboMesLlegada.setBounds(420, 10, 70, 40);
-
-        comboAnoLlegada = new JComboBox(annioStrings);
-        comboAnoLlegada.setBounds(480, 10, 85, 40);
->>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -319,28 +338,26 @@ public class Ventana extends JFrame implements ActionListener {
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoTipoHabitacion.setBounds(225, 60, 170, 40);
         textoTipoHabitacion.setForeground(Color.WHITE);
-        
-        comboTipoDeHabitacion = new JComboBox();    
+
+        comboTipoDeHabitacion = new JComboBox();
         comboTipoDeHabitacion.addItem("Seleccione");
         comboTipoDeHabitacion.addItem("Individual");
         comboTipoDeHabitacion.addItem("Matrimonial");
         comboTipoDeHabitacion.addItem("Doble");
         comboTipoDeHabitacion.addItem("Cuádruple");
         comboTipoDeHabitacion.addItem("Suite");
-        comboTipoDeHabitacion.setBounds(450,60,175,40);
+        comboTipoDeHabitacion.setBounds(450, 60, 175, 40);
         comboTipoDeHabitacion.addActionListener(this);
-        
-        
 
         textoCantPersona = new JLabel("NUMERO PERSONAS");
         textoCantPersona.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoCantPersona.setBounds(225, 110, 200, 40);
         textoCantPersona.setForeground(Color.WHITE);
-        
-        comboCantidadDePersona = new JComboBox();  
+
+        comboCantidadDePersona = new JComboBox();
         comboCantidadDePersona.addItem("Seleccione");
-        
-        comboCantidadDePersona.setBounds(450,110,175,40);
+
+        comboCantidadDePersona.setBounds(450, 110, 175, 40);
 
         //======================================
         botonCheckIn = new JButton("Check-in");
@@ -362,29 +379,19 @@ public class Ventana extends JFrame implements ActionListener {
         textoHoraCheckIn.setBounds(225, 50, 200, 40);
         textoHoraCheckIn.setForeground(Color.WHITE);
 
-        
-        
         comboHoraCheckIn = new JComboBox(horasStrings);
-        comboHoraCheckIn.setBounds(450,60,45,40);
+        comboHoraCheckIn.setBounds(450, 60, 45, 40);
         comboHoraCheckIn.addActionListener(this);
-        
-        
+
         textoDosPuntos = new JLabel(":");
         textoDosPuntos.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoDosPuntos.setBounds(507, 60, 10, 40);
         textoDosPuntos.setForeground(Color.WHITE);
-        
-        
-        
-        comboMinutoCheckIn = new JComboBox(minutosStrings);    
 
-        comboMinutoCheckIn.setBounds(525,60,45,40);
+        comboMinutoCheckIn = new JComboBox(minutosStrings);
+
+        comboMinutoCheckIn.setBounds(525, 60, 45, 40);
         comboMinutoCheckIn.addActionListener(this);
-        
-        
-        
-        
-        
 
         ingresarCheckIn = new JButton("INGRESAR CHECK-IN");
         ingresarCheckIn.setBackground(myColorBotonHeader);
@@ -412,21 +419,18 @@ public class Ventana extends JFrame implements ActionListener {
         textoHoraCheckOut.setBounds(225, 50, 200, 40);
         textoHoraCheckOut.setForeground(Color.WHITE);
 
-        comboHoraCheckOut = new JComboBox(horasStrings);    
-        comboHoraCheckOut.setBounds(450,60,45,40);
+        comboHoraCheckOut = new JComboBox(horasStrings);
+        comboHoraCheckOut.setBounds(450, 60, 45, 40);
         comboHoraCheckOut.addActionListener(this);
-        
-        
+
         textoDosPuntosOut = new JLabel(":");
         textoDosPuntosOut.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoDosPuntosOut.setBounds(507, 60, 10, 40);
         textoDosPuntosOut.setForeground(Color.WHITE);
-        
-        
-        
-        comboMinutoCheckOut = new JComboBox(minutosStrings);    
 
-        comboMinutoCheckOut.setBounds(525,60,45,40);
+        comboMinutoCheckOut = new JComboBox(minutosStrings);
+
+        comboMinutoCheckOut.setBounds(525, 60, 45, 40);
         comboMinutoCheckOut.addActionListener(this);
 
         ingresarCheckOut = new JButton("INGRESAR CHECK-OUT");
@@ -441,7 +445,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonCancelacion.setForeground(myColorBotonLetraHeader);
         botonCancelacion.setBounds(0, 135, 220, 40);
         botonCancelacion.addActionListener(this);
-        
+
         textoCedulaCancelacion = new JLabel("INGRESE CEDULA");
         textoCedulaCancelacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoCedulaCancelacion.setBounds(225, 10, 200, 40);
@@ -455,21 +459,18 @@ public class Ventana extends JFrame implements ActionListener {
         textoHoraCancelacion.setBounds(225, 50, 200, 40);
         textoHoraCancelacion.setForeground(Color.WHITE);
 
-        comboHoraCancelacion= new JComboBox(horasStrings);    
-        comboHoraCancelacion.setBounds(450,60,45,40);
+        comboHoraCancelacion = new JComboBox(horasStrings);
+        comboHoraCancelacion.setBounds(450, 60, 45, 40);
         comboHoraCancelacion.addActionListener(this);
-        
-        
+
         textoDosPuntosCancelacion = new JLabel(":");
         textoDosPuntosCancelacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoDosPuntosCancelacion.setBounds(507, 60, 10, 40);
         textoDosPuntosCancelacion.setForeground(Color.WHITE);
-        
-        
-        
-        comboMinutoCancelacion = new JComboBox(minutosStrings);    
 
-        comboMinutoCancelacion.setBounds(525,60,45,40);
+        comboMinutoCancelacion = new JComboBox(minutosStrings);
+
+        comboMinutoCancelacion.setBounds(525, 60, 45, 40);
         comboMinutoCancelacion.addActionListener(this);
 
         ingresarCancelacion = new JButton("INGRESAR CANCELACIÓN");
@@ -477,20 +478,16 @@ public class Ventana extends JFrame implements ActionListener {
         ingresarCancelacion.setForeground(myColorBotonLetraHeader);
         ingresarCancelacion.setBounds(500, 350, 210, 40);
         ingresarCancelacion.addActionListener(this);
-        
-        
 
-        
-        
-        
         //=======================================
-
         panelMenuOperaciones.add(botonCheckOut);
         panelMenuOperaciones.add(botonCheckIn);
         panelMenuOperaciones.add(botonReservacion);
         panelMenuOperaciones.add(botonCancelacion);
 
         panelTres.add(panelMenuOperaciones);
+        
+        panelTres.add(panelColorTres);
 
         panelTres.add(panelReservacion);
         panelTres.add(panelCheckIn);
@@ -510,7 +507,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelReservacion.add(textoCantPersona);
         panelReservacion.add(comboTipoDeHabitacion);
         panelReservacion.add(comboCantidadDePersona);
-         
 
         panelCheckIn.add(textoCedulaCheckIn);
         panelCheckIn.add(CedulaCheckIn);
@@ -527,7 +523,7 @@ public class Ventana extends JFrame implements ActionListener {
         panelCheckOut.add(comboHoraCheckOut);
         panelCheckOut.add(comboMinutoCheckOut);
         panelCheckOut.add(textoDosPuntosOut);
-        
+
         panelCancelacion.add(textoCedulaCancelacion);
         panelCancelacion.add(CedulaCancelacion);
         panelCancelacion.add(textoHoraCancelacion);
@@ -541,8 +537,6 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void PanelPrincipalCuatro() {
-
-       
 
         panelMenuOperaciones = new JPanel();
         panelMenuOperaciones.setBackground(myColorHeaderTitulo);
@@ -562,19 +556,15 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.setBounds(0, 0, 220, 40);
         botonInicializar.addActionListener(this);
 
-<<<<<<< HEAD
         textArea = new JTextArea();
-        
-=======
-        textArea = new JTextArea(5, 20);
->>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
+
         textArea.setBounds(225, 5, 770, 390);
         String texto;
         textArea.setEditable(false);
         scroll = new JScrollPane(textArea);
         scroll.setBounds(225, 5, 770, 390);
         panelCuatro.add(scroll);
-        
+
         //=====================================
         panelOperaciones = new JPanel();
         panelOperaciones.setBackground(myColorFondo);
@@ -594,7 +584,6 @@ public class Ventana extends JFrame implements ActionListener {
 
         panelCuatro.add(panelInicializar);
         panelCuatro.add(panelOperaciones);
-
 
         add(panelCuatro);
     }
@@ -620,76 +609,78 @@ public class Ventana extends JFrame implements ActionListener {
             panelDos.setVisible(false);
             panelTres.setVisible(true);
             panelCuatro.setVisible(false);
+            panelColorTres.setVisible(true);
+         
         } else if (e.getSource() == botonCuatroHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(false);
             panelTres.setVisible(false);
             panelCuatro.setVisible(true);
+            panelColorTres.setVisible(false);
         } else if (e.getSource() == botonReservacion) {
             panelReservacion.setVisible(true);
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(false);
-
+            panelColorTres.setVisible(false);
         } else if (e.getSource() == botonCheckIn) {
             panelReservacion.setVisible(false);
             panelCheckIn.setVisible(true);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(false);
+            panelColorTres.setVisible(false);
 
         } else if (e.getSource() == botonCheckOut) {
             panelReservacion.setVisible(false);
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(true);
             panelCancelacion.setVisible(false);
+            panelColorTres.setVisible(false);
 
         } else if (e.getSource() == botonCancelacion) {
             panelReservacion.setVisible(false);
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(true);
+            panelColorTres.setVisible(false);
 
         } else if (e.getSource() == ingresarReserva) {
 
-            
-            try{
+            try {
                 String diaLlegadaDatoEntrada = diaLlegada.getText();
                 int diaLlegadaDatoEntradaParseado = Integer.parseInt(diaLlegadaDatoEntrada);
-                
-                
+
                 String mesLlegadaDatoEntrada = mesLlegada.getText();
                 int mesLlegadaDatoEntradaParseado = Integer.parseInt(mesLlegadaDatoEntrada);
-                
+
                 String anoLlegadaDatoEntrada = anoLlegada.getText();
                 int anoLlegadaDatoEntradaParseado = Integer.parseInt(anoLlegadaDatoEntrada);
-            
+
                 String diaSalidaDatoEntrada = diaSalida.getText();
                 int diaSalidaDatoEntradaParseado = Integer.parseInt(diaSalidaDatoEntrada);
-            
+
                 String mesSalidaDatoEntrada = mesSalida.getText();
                 int mesSalidaDatoEntradaParseado = Integer.parseInt(mesSalidaDatoEntrada);
-                
+
                 String anoSalidaDatoEntrada = anoSalida.getText();
                 int anoSalidaDatoEntradaParseado = Integer.parseInt(anoSalidaDatoEntrada);
-                
-                if(diaLlegadaDatoEntradaParseado >=1 && diaLlegadaDatoEntradaParseado <=31 && diaSalidaDatoEntradaParseado>=0 &&diaSalidaDatoEntradaParseado<=31){
-                    JOptionPane.showMessageDialog(null,"Dia Ingresado Correcto");
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null,"Dia Ingresado erroneo");
+
+                if (diaLlegadaDatoEntradaParseado >= 1 && diaLlegadaDatoEntradaParseado <= 31 && diaSalidaDatoEntradaParseado >= 0 && diaSalidaDatoEntradaParseado <= 31) {
+                    JOptionPane.showMessageDialog(null, "Dia Ingresado Correcto");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dia Ingresado erroneo");
                 }
-                
-                if(mesLlegadaDatoEntradaParseado<=12&&mesSalidaDatoEntradaParseado<=12&&mesLlegadaDatoEntradaParseado>=1&&mesSalidaDatoEntradaParseado>=1){
-                    JOptionPane.showMessageDialog(null,"Mes Ingresado correcto");
-                }else{
-                    JOptionPane.showMessageDialog(null,"Mes Ingresado erroneo");
+
+                if (mesLlegadaDatoEntradaParseado <= 12 && mesSalidaDatoEntradaParseado <= 12 && mesLlegadaDatoEntradaParseado >= 1 && mesSalidaDatoEntradaParseado >= 1) {
+                    JOptionPane.showMessageDialog(null, "Mes Ingresado correcto");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Mes Ingresado erroneo");
                 }
-  
-                
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Ha ocurrido un error");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
             }
-            
 
             panelUno.setVisible(false);
             panelDos.setVisible(false);
@@ -708,30 +699,29 @@ public class Ventana extends JFrame implements ActionListener {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-
-        }else if (e.getSource()==comboTipoDeHabitacion){
-            if(comboTipoDeHabitacion.getSelectedIndex()==0){
+        } else if (e.getSource() == comboTipoDeHabitacion) {
+            if (comboTipoDeHabitacion.getSelectedIndex() == 0) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("0");
-            }else if(comboTipoDeHabitacion.getSelectedIndex()==1){
+            } else if (comboTipoDeHabitacion.getSelectedIndex() == 1) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
-            }else if(comboTipoDeHabitacion.getSelectedIndex()==2){
+            } else if (comboTipoDeHabitacion.getSelectedIndex() == 2) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
-            }else if(comboTipoDeHabitacion.getSelectedIndex()==3){
+            } else if (comboTipoDeHabitacion.getSelectedIndex() == 3) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
-            }else if(comboTipoDeHabitacion.getSelectedIndex()==4){
+            } else if (comboTipoDeHabitacion.getSelectedIndex() == 4) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
                 comboCantidadDePersona.addItem("4");
-            }else if(comboTipoDeHabitacion.getSelectedIndex()==5){
+            } else if (comboTipoDeHabitacion.getSelectedIndex() == 5) {
                 comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
@@ -745,12 +735,10 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("10");
             }
             comboCantidadDePersona.addActionListener(this);
-            
-        }else if(e.getSource()==comboCantidadDePersona){
-            
-            
-        }
-        else if (e.getSource() == botonAbrirArchivoInicializar) {
+
+        } else if (e.getSource() == comboCantidadDePersona) {
+
+        } else if (e.getSource() == botonAbrirArchivoInicializar) {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Creamos el filtro
@@ -844,7 +832,6 @@ public class Ventana extends JFrame implements ActionListener {
                 textArea.append(cadena + "\n");
             }
             BR.close();
-
 
         } catch (IOException ex) {
         }
