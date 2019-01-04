@@ -28,20 +28,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Ventana extends JFrame implements ActionListener {
 
     protected JLabel headerTitulo, textoAbrirArchivoInicializar, textoAbrirArchivoPrecio, textoCargaInteractiva,
-            textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida,
-            textoTipoHabitacion, textoCantPersona, textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut;
+            textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida, textoTipoHabitacion, textoCantPersona, 
+            textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut, textoDosPuntos, textoDosPuntosOut;
 
-    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar, botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut;
-    protected JButton botonEnviarCargaInteractiva, botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones;
+    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar, 
+            botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva, 
+            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones;
     protected JTextArea textArea;
 
-    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones;
-    protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
+    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
+    
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,CedulaCheckOut,HoraCheckOut;
     
-    protected JComboBox comboTipoDeHabitacion = new JComboBox();
-    protected JComboBox comboCantidadDePersona = new JComboBox();
+    protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona;
     
+    protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
+        "28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
+    
+    protected String[] horasStrings ={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"};
     
     
 		
@@ -337,8 +342,24 @@ public class Ventana extends JFrame implements ActionListener {
         textoHoraCheckIn.setBounds(225, 50, 200, 40);
         textoHoraCheckIn.setForeground(Color.WHITE);
 
-        HoraCheckIn = new JTextField();
-        HoraCheckIn.setBounds(390, 50, 120, 40);
+        
+        
+        comboHoraCheckIn = new JComboBox(horasStrings);    
+        comboHoraCheckIn.setBounds(450,60,45,40);
+        comboHoraCheckIn.addActionListener(this);
+        
+        
+        textoDosPuntos = new JLabel(":");
+        textoDosPuntos.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoDosPuntos.setBounds(507, 60, 10, 40);
+        textoDosPuntos.setForeground(Color.WHITE);
+        
+        
+        
+        comboMinutoCheckIn = new JComboBox(minutosStrings);    
+
+        comboMinutoCheckIn.setBounds(525,60,45,40);
+        comboMinutoCheckIn.addActionListener(this);
         
         
         
@@ -371,8 +392,22 @@ public class Ventana extends JFrame implements ActionListener {
         textoHoraCheckOut.setBounds(225, 50, 200, 40);
         textoHoraCheckOut.setForeground(Color.WHITE);
 
-        HoraCheckOut = new JTextField();
-        HoraCheckOut.setBounds(390, 50, 120, 40);
+        comboHoraCheckOut = new JComboBox(horasStrings);    
+        comboHoraCheckOut.setBounds(450,60,45,40);
+        comboHoraCheckOut.addActionListener(this);
+        
+        
+        textoDosPuntosOut = new JLabel(":");
+        textoDosPuntosOut.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoDosPuntosOut.setBounds(507, 60, 10, 40);
+        textoDosPuntosOut.setForeground(Color.WHITE);
+        
+        
+        
+        comboMinutoCheckOut = new JComboBox(minutosStrings);    
+
+        comboMinutoCheckOut.setBounds(525,60,45,40);
+        comboMinutoCheckOut.addActionListener(this);
 
         ingresarCheckOut = new JButton("INGRESAR CHECK-OUT");
         ingresarCheckOut.setBackground(myColorBotonHeader);
@@ -417,14 +452,18 @@ public class Ventana extends JFrame implements ActionListener {
         panelCheckIn.add(textoCedulaCheckIn);
         panelCheckIn.add(CedulaCheckIn);
         panelCheckIn.add(textoHoraCheckIn);
-        panelCheckIn.add(HoraCheckIn);
         panelCheckIn.add(ingresarCheckIn);
+        panelCheckIn.add(comboHoraCheckIn);
+        panelCheckIn.add(comboMinutoCheckIn);
+        panelCheckIn.add(textoDosPuntos);
 
         panelCheckOut.add(textoCedulaCheckOut);
         panelCheckOut.add(CedulaCheckOut);
         panelCheckOut.add(textoHoraCheckOut);
-        panelCheckOut.add(HoraCheckOut);
         panelCheckOut.add(ingresarCheckOut);
+        panelCheckOut.add(comboHoraCheckOut);
+        panelCheckOut.add(comboMinutoCheckOut);
+        panelCheckOut.add(textoDosPuntosOut);
 
         add(panelTres);
 
