@@ -12,7 +12,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -28,15 +27,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Ventana extends JFrame implements ActionListener {
 
-    protected JLabel headerTitulo, textoAbrirArchivo, textoCargaInteractiva,
+    protected JLabel headerTitulo, textoAbrirArchivoInicializar, textoAbrirArchivoPrecio, textoCargaInteractiva,
             textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida,
             textoTipoHabitacion, textoCantPersona, textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut;
 
-    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, abrirArchivo, ingresarReserva, ingresarCheckIn, ingresarCheckOut;
+    protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar, botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut;
     protected JButton botonEnviarCargaInteractiva, botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones;
     protected JTextArea textArea;
-<<<<<<< HEAD
-    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones;
+
+    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones;
     protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion;
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,CedulaCheckOut,HoraCheckOut;
     
@@ -44,15 +43,11 @@ public class Ventana extends JFrame implements ActionListener {
     protected JComboBox comboCantidadDePersona = new JComboBox();
     
     
+    
 		
     
     
-=======
-    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo;
-    protected JPanel panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelMenuOperaciones, panelInicializar, panelOperaciones;
-    protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn, CedulaCheckOut, HoraCheckOut;
 
->>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#F8B500");
     public Color myColorBoton = Color.decode("#571845");
@@ -176,35 +171,47 @@ public class Ventana extends JFrame implements ActionListener {
     public void PanelPrincipalDos() {
 
         //===============================
-        textoAbrirArchivo = new JLabel("Abrir Archivos");
-        textoAbrirArchivo.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
-        textoAbrirArchivo.setBounds(10, 14, 221, 51);
-        textoAbrirArchivo.setForeground(Color.WHITE);
+        textoAbrirArchivoInicializar = new JLabel("Abrir Archivos Inicializar");
+        textoAbrirArchivoInicializar.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
+        textoAbrirArchivoInicializar.setBounds(10, 14, 281, 51);
+        textoAbrirArchivoInicializar.setForeground(Color.WHITE);
+        
+        textoAbrirArchivoPrecio = new JLabel("Abrir Archivos Precio");
+        textoAbrirArchivoPrecio.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
+        textoAbrirArchivoPrecio.setBounds(10, 65, 221, 51);
+        textoAbrirArchivoPrecio.setForeground(Color.WHITE);
         //===============================
-        abrirArchivo = new JButton("Abrir Archivo");
-        abrirArchivo.setBounds(845, 15, 150, 40);
-        abrirArchivo.setForeground(myColorBotonLetraHeader);
-        abrirArchivo.setBackground(myColorBotonHeader);
-        abrirArchivo.addActionListener(this);
+        botonAbrirArchivoInicializar = new JButton("Abrir Archivo");
+        botonAbrirArchivoInicializar.setBounds(845, 15, 150, 40);
+        botonAbrirArchivoInicializar.setForeground(myColorBotonLetraHeader);
+        botonAbrirArchivoInicializar.setBackground(myColorBotonHeader);
+        botonAbrirArchivoInicializar.addActionListener(this);
+        
+        botonAbrirArchivoPrecio = new JButton("Abrir Archivo");
+        botonAbrirArchivoPrecio.setBounds(845, 65, 150, 40);
+        botonAbrirArchivoPrecio.setForeground(myColorBotonLetraHeader);
+        botonAbrirArchivoPrecio.setBackground(myColorBotonHeader);
         //===============================
         textoCargaInteractiva = new JLabel("Carga Interactiva");
         textoCargaInteractiva.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
-        textoCargaInteractiva.setBounds(10, 100, 221, 51);
+        textoCargaInteractiva.setBounds(10, 115, 221, 51);
         textoCargaInteractiva.setForeground(Color.WHITE);
         //===============================
         botonEnviarCargaInteractiva = new JButton("Enviar");
-        botonEnviarCargaInteractiva.setBounds(855, 100, 150, 40);
+        botonEnviarCargaInteractiva.setBounds(845, 115, 150, 40);
         botonEnviarCargaInteractiva.setForeground(myColorBotonLetraHeader);
         botonEnviarCargaInteractiva.setBackground(myColorBotonHeader);
 
         //===============================
         cajaDeTextoCargaInteractivo = new JTextField("Pisos del hotel");
-        cajaDeTextoCargaInteractivo.setBounds(635, 100, 220, 40);
+        cajaDeTextoCargaInteractivo.setBounds(625, 115, 220, 40);
         panelDos.add(cajaDeTextoCargaInteractivo);
 
         panelDos.add(botonEnviarCargaInteractiva);
-        panelDos.add(abrirArchivo);
-        panelDos.add(textoAbrirArchivo);
+        panelDos.add(botonAbrirArchivoInicializar);
+        panelDos.add(botonAbrirArchivoPrecio);
+        panelDos.add(textoAbrirArchivoInicializar);
+        panelDos.add(textoAbrirArchivoPrecio);
         panelDos.add(textoCargaInteractiva);
         add(panelDos);
     }
@@ -424,7 +431,6 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void PanelPrincipalCuatro() {
-<<<<<<< HEAD
         textoArchivoDeSalida = new JLabel("Archivos de salida");
         textoArchivoDeSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoArchivoDeSalida.setBounds(400, 14, 221, 51);
@@ -432,7 +438,7 @@ public class Ventana extends JFrame implements ActionListener {
         
         panelCuatro.add(textoArchivoDeSalida);
         add(panelTres);
-=======
+
 
         panelMenuOperaciones = new JPanel();
         panelMenuOperaciones.setBackground(myColorHeaderTitulo);
@@ -479,8 +485,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelInicializar.add(ingresarReserva);
 
         add(panelCuatro);
-
->>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
     }
 
     @Override
@@ -534,7 +538,7 @@ public class Ventana extends JFrame implements ActionListener {
             panelCancelacion.setVisible(true);
 
         } else if (e.getSource() == ingresarReserva) {
-<<<<<<< HEAD
+
             
             try{
                 String diaLlegadaDatoEntrada = diaLlegada.getText();
@@ -574,7 +578,7 @@ public class Ventana extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Ha ocurrido un error");
             }
             
-=======
+
             panelUno.setVisible(false);
             panelDos.setVisible(false);
             panelTres.setVisible(true);
@@ -591,7 +595,7 @@ public class Ventana extends JFrame implements ActionListener {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
->>>>>>> b9008b4abc4653a7001acff14825d938e0ecd6cd
+
 
         }else if (e.getSource()==comboTipoDeHabitacion){
             if(comboTipoDeHabitacion.getSelectedIndex()==1){
@@ -631,7 +635,7 @@ public class Ventana extends JFrame implements ActionListener {
             
             
         }
-        else if (e.getSource() == abrirArchivo) {
+        else if (e.getSource() == botonAbrirArchivoInicializar) {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Creamos el filtro
@@ -692,7 +696,6 @@ public class Ventana extends JFrame implements ActionListener {
         if (fichero2.exists()) {
 
             comprobacion2 = "\n\nEl archivo " + dFichero + " si existe";
-            botonTresHeader.setEnabled(false);
         } else {
             comprobacion2 = "\n\nEl archivo " + dFichero + " no existe";
         }
