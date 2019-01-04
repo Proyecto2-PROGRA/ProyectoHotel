@@ -50,8 +50,7 @@ public class Ventana extends JFrame implements ActionListener {
     protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida;
     protected JScrollPane scroll;
-<<<<<<< HEAD
-    
+
     
     
     protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
@@ -66,21 +65,6 @@ public class Ventana extends JFrame implements ActionListener {
     protected String[] annioStrings ={"aaaa","2019","2020","2021","2022","2023"};
 		
     
-    
-=======
-
-    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
-        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-
-    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-
-    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
-
-    protected String[] mesStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-
-    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
-
->>>>>>> 215241e17ffa50c9b5ee1d6efc09377d653ee44a
 
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
@@ -340,12 +324,8 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
-<<<<<<< HEAD
         comboAnoLlegada.addActionListener(this);
-=======
 
-
->>>>>>> 215241e17ffa50c9b5ee1d6efc09377d653ee44a
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -761,8 +741,7 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("10");
             }
             comboCantidadDePersona.addActionListener(this);
-<<<<<<< HEAD
-            
+
         }else if(e.getSource()==comboCantidadDePersona){
             
             
@@ -815,12 +794,7 @@ public class Ventana extends JFrame implements ActionListener {
             
         }
         else if (e.getSource() == botonAbrirArchivoInicializar) {
-=======
 
-        } else if (e.getSource() == comboCantidadDePersona) {
-
-        } else if (e.getSource() == botonAbrirArchivoInicializar) {
->>>>>>> 215241e17ffa50c9b5ee1d6efc09377d653ee44a
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
             //Creamos el filtro
