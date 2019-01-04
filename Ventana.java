@@ -47,8 +47,6 @@ public class Ventana extends JFrame implements ActionListener {
     protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada,comboDiaLlegada, comboMesLlegada,comboAnoSalida,comboDiaSalida,comboMesSalida;
     
-    protected JScrollPane scroll;
-    
     
     protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
         "28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
@@ -285,27 +283,27 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setForeground(Color.WHITE);
 
         comboDiaLlegada = new JComboBox(diasStrings);
-        comboDiaLlegada.setBounds(380, 10, 45, 40);
+        comboDiaLlegada.setBounds(370, 10, 70, 40);
 
         comboMesLlegada = new JComboBox(mesStrings);
-        comboMesLlegada.setBounds(430, 10, 45, 40);
+        comboMesLlegada.setBounds(445, 10, 70, 40);
 
         comboAnoLlegada = new JComboBox(annioStrings);
-        comboAnoLlegada.setBounds(480, 10, 60, 40);
+        comboAnoLlegada.setBounds(520, 10, 85, 40);
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
-        textoFechaSalida.setBounds(550, 10, 150, 40);
+        textoFechaSalida.setBounds(630, 10, 150, 40);
         textoFechaSalida.setForeground(Color.WHITE);
 
         comboDiaSalida = new JComboBox(diasStrings);
-        comboDiaSalida.setBounds(690, 10, 45, 40);
+        comboDiaSalida.setBounds(760, 10, 70, 40);
 
         comboMesSalida = new JComboBox(mesStrings);
-        comboMesSalida.setBounds(740, 10, 45, 40);
+        comboMesSalida.setBounds(835, 10, 70, 40);
 
         comboAnoSalida = new JComboBox(annioStrings);
-        comboAnoSalida.setBounds(790, 10, 60, 40);
+        comboAnoSalida.setBounds(910, 10, 85, 40);
 
         textoTipoHabitacion = new JLabel("TIPO HABITACIÓN");
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -555,7 +553,6 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.addActionListener(this);
 
         textArea = new JTextArea();
-        scroll = new JScrollPane(textArea);
         
         textArea.setBounds(225, 5, 770, 390);
         String texto;
