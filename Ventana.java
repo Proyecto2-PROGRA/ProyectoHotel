@@ -47,6 +47,9 @@ public class Ventana extends JFrame implements ActionListener {
     protected JComboBox comboTipoDeHabitacion ,comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut,comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada,comboDiaLlegada, comboMesLlegada,comboAnoSalida,comboDiaSalida,comboMesSalida;
     
+    protected JScrollPane scroll;
+    
+    
     
     protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
         "28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"};
@@ -283,7 +286,6 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaLlegada.setForeground(Color.WHITE);
 
         comboDiaLlegada = new JComboBox(diasStrings);
-<<<<<<< HEAD
         comboDiaLlegada.setBounds(370, 10, 70, 40);
 
         comboMesLlegada = new JComboBox(mesStrings);
@@ -291,15 +293,6 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
-=======
-        comboDiaLlegada.setBounds(360, 10, 70, 40);
-
-        comboMesLlegada = new JComboBox(mesStrings);
-        comboMesLlegada.setBounds(420, 10, 70, 40);
-
-        comboAnoLlegada = new JComboBox(annioStrings);
-        comboAnoLlegada.setBounds(480, 10, 85, 40);
->>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -562,12 +555,8 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.setBounds(0, 0, 220, 40);
         botonInicializar.addActionListener(this);
 
-<<<<<<< HEAD
+
         textArea = new JTextArea();
-        
-=======
-        textArea = new JTextArea(5, 20);
->>>>>>> 4ab053d4ab036f987888d136229bd5b42676c337
         textArea.setBounds(225, 5, 770, 390);
         String texto;
         textArea.setEditable(false);
