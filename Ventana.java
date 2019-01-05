@@ -1423,7 +1423,7 @@ public class Ventana extends JFrame implements ActionListener {
         if (fichero.exists()) {
 
             comprobacion = "El archivo " + sFichero + " se cargo con el programa";
-            botonAbrirArchivoInicializar.setEnabled(false);
+            
             
         } else {
             comprobacion = "\nEl archivo " + sFichero + " no se cargo con el programa";
