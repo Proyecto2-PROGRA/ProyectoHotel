@@ -27,11 +27,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends JFrame implements ActionListener {
 
@@ -43,24 +41,25 @@ public class Ventana extends JFrame implements ActionListener {
             textoEsp_C, textoLom_M, textoJug_L, textoMalta, TextoHabitaciones3, textoMostrarInicial2;
 
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
-
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
             botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
-            botonReservaCarga, botonIniciaizarDos, botonPreciosDos,botonIngresarInicializar,botonIngresarPrecios;
+            botonReservaCarga, botonIniciaizarDos, botonPreciosDos, botonIngresarInicializar, botonIngresarPrecios;
     ;
     protected JTextArea textArea, textArea2, textArea3;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
-            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelAgregarUsuario,panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;;
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelAgregarUsuario, panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;
+    ;
 
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
-            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva,nombreReserva,apellidoReserva, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
+            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva, nombreReserva, apellidoReserva, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
             CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta, TextoSaldoInicial;
 
     protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
             comboTipoEdad, comboCam_A, comboCaj_F;
     protected JScrollPane scroll, scroll2, scroll3;
+<<<<<<< HEAD
     
     protected int bandera=0, banderaRevision=0;
     protected String varA,varB,varC,varD,varE,varF,varG,varH;
@@ -78,10 +77,23 @@ public class Ventana extends JFrame implements ActionListener {
     
     protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
 		
+=======
+>>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
 
+    protected int bandera = 0;
+
+    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
+
+    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+
+    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
+
+    protected String[] mesStrings = {"mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+
+    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
 
     protected String[] SeleccionSiNo = {"0", "1"};
-
 
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
@@ -108,9 +120,7 @@ public class Ventana extends JFrame implements ActionListener {
             setOpaque(false);
             super.paintComponent(grafico);
         }
-
     }
-
     public Ventana() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 500);
@@ -119,7 +129,6 @@ public class Ventana extends JFrame implements ActionListener {
         setResizable(false);
         MenuHeader();
     }
-
     public void MenuHeader() {
         panelHeader = new JPanel();
         panelHeader.setBackground(myColorHeader);
@@ -196,7 +205,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelHeader.add(botonDosHeader);
         panelHeader.add(botonTresHeader);
         panelHeader.add(botonCuatroHeader);
-
         panelHeader.add(panelTitulo);
 
         add(panelHeader);
@@ -204,9 +212,8 @@ public class Ventana extends JFrame implements ActionListener {
         add(panelDos);
         add(panelTres);
         add(panelCuatro);
-
     }
-
+    
     public void PanelPrincipal() {
 
         //=============================
@@ -552,7 +559,7 @@ public class Ventana extends JFrame implements ActionListener {
         panelAgregarUsuario.setBackground(Color.red);
         panelAgregarUsuario.setBounds(225, 170, 770, 180);
         panelAgregarUsuario.setVisible(true);
-        panelAgregarUsuario .setLayout(null);
+        panelAgregarUsuario.setLayout(null);
 
         //=========================================
         panelMenuOperaciones = new JPanel();
@@ -560,8 +567,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelMenuOperaciones.setBounds(0, 0, 220, 400);
         panelMenuOperaciones.setLayout(null);
         panelTres.add(panelMenuOperaciones);
-        
-        
 
         //=====================================
         botonReservacion = new JButton("Reservaciones");
@@ -596,7 +601,6 @@ public class Ventana extends JFrame implements ActionListener {
         comboAnoLlegada.setBounds(520, 10, 85, 40);
         comboAnoLlegada.addActionListener(this);
 
-
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
         textoFechaSalida.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -621,7 +625,6 @@ public class Ventana extends JFrame implements ActionListener {
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoTipoHabitacion.setBounds(225, 60, 170, 40);
         textoTipoHabitacion.setForeground(Color.WHITE);
-        
 
         comboTipoDeHabitacion = new JComboBox();
         comboTipoDeHabitacion.addItem("Seleccione");
@@ -642,30 +645,30 @@ public class Ventana extends JFrame implements ActionListener {
         comboCantidadDePersona.addItem("Seleccione");
         comboCantidadDePersona.setBounds(450, 110, 175, 40);
         comboCantidadDePersona.addActionListener(this);
-        
+
         comboTipoEdad = new JComboBox();
         comboTipoEdad.addItem("A");
         comboTipoEdad.addItem("N");
         comboTipoEdad.setBounds(230, 170, 60, 40);
         comboTipoEdad.addActionListener(this);
-        
-        CedulaReserva= new JTextField("Cedula");
+
+        CedulaReserva = new JTextField("Cedula");
         CedulaReserva.setBounds(300, 170, 120, 40);
         CedulaReserva.addActionListener(this);
-        
-        nombreReserva= new JTextField("Nombre");
+
+        nombreReserva = new JTextField("Nombre");
         nombreReserva.setBounds(430, 170, 120, 40);
         nombreReserva.addActionListener(this);
-        
-        apellidoReserva= new JTextField("Apellido");
+
+        apellidoReserva = new JTextField("Apellido");
         apellidoReserva.setBounds(560, 170, 120, 40);
         apellidoReserva.addActionListener(this);
-        
+
         botonReservaCarga = new JButton("Agregar");
         botonReservaCarga.setBounds(690, 170, 100, 40);
         botonReservaCarga.setForeground(myColorBotonLetraHeader);
         botonReservaCarga.setBackground(myColorBotonHeader);
-        botonReservaCarga.setEnabled(false); 
+        botonReservaCarga.setEnabled(false);
         botonReservaCarga.addActionListener(this);
 
         //======================================
@@ -795,14 +798,12 @@ public class Ventana extends JFrame implements ActionListener {
         panelMenuOperaciones.add(botonCancelacion);
 
         panelTres.add(panelMenuOperaciones);
-
         panelTres.add(panelColorTres);
-
         panelTres.add(panelReservacion);
         panelTres.add(panelCheckIn);
         panelTres.add(panelCheckOut);
         panelTres.add(panelCancelacion);
-        
+
         panelReservacion.add(ingresarReserva);
         panelReservacion.add(comboDiaLlegada);
         panelReservacion.add(comboAnoLlegada);
@@ -821,9 +822,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelReservacion.add(nombreReserva);
         panelReservacion.add(apellidoReserva);
         panelReservacion.add(botonReservaCarga);
-        
-        
-        
 
         panelCheckIn.add(textoCedulaCheckIn);
         panelCheckIn.add(CedulaCheckIn);
@@ -850,7 +848,6 @@ public class Ventana extends JFrame implements ActionListener {
         panelCancelacion.add(textoDosPuntosCancelacion);
 
         add(panelTres);
-
     }
 
     public void PanelPrincipalCuatro() {
@@ -942,7 +939,6 @@ public class Ventana extends JFrame implements ActionListener {
             panelPreciosDos.setVisible(false);
             panelDosExtra.setVisible(true);
 
-
         } else if (e.getSource() == botonTresHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(false);
@@ -954,7 +950,7 @@ public class Ventana extends JFrame implements ActionListener {
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(false);
-         
+
         } else if (e.getSource() == botonCuatroHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(false);
@@ -987,10 +983,9 @@ public class Ventana extends JFrame implements ActionListener {
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(true);
             panelColorTres.setVisible(false);
-
         } else if (e.getSource() == ingresarReserva) {
-
             try {
+<<<<<<< HEAD
         
 
                 if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboAnoSalida.getSelectedItem().toString())) ){
@@ -1015,13 +1010,31 @@ public class Ventana extends JFrame implements ActionListener {
                             JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
            
                             banderaRevision=0;
+=======
+
+                if ((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))) {
+                    if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
+                        if ((Integer.parseInt(comboDiaLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboDiaSalida.getSelectedItem().toString()))) {
+                            JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(dia)");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Dia Ingresado Erroneo o menor a la esperado");
+>>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
                         }
-                }else if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))){
+                    } else if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
+                        JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(mes)");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
+                    }
+                } else if ((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))) {
                     JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(año)");
+<<<<<<< HEAD
   
                     banderaRevision=1;
                 }
                 else{
+=======
+                } else {
+>>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
                     JOptionPane.showMessageDialog(null, "Año Ingresado Erroneo o menor a lo esperado");
           
                     banderaRevision=0;
@@ -1031,13 +1044,13 @@ public class Ventana extends JFrame implements ActionListener {
            
                     banderaRevision=0;
                 }
-                
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
    
                 banderaRevision=0;
             }
+<<<<<<< HEAD
 
             if(bandera==789 &&banderaRevision==1){
                 try{
@@ -1067,6 +1080,12 @@ public class Ventana extends JFrame implements ActionListener {
                 }catch(Exception ex){}
                 
             }
+=======
+            panelUno.setVisible(false);
+            panelDos.setVisible(false);
+            panelTres.setVisible(true);
+            panelCuatro.setVisible(false);
+>>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
         } else if (e.getSource() == botonInicializar) {
             try {
                 inicializar();
@@ -1079,13 +1098,12 @@ public class Ventana extends JFrame implements ActionListener {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         } else if (e.getSource() == comboTipoDeHabitacion) {
-             comboCantidadDePersona.removeAllItems();
-             bandera=0;
-             System.out.println("Entre");
-             botonReservaCarga.setEnabled(true); 
-             ingresarReserva.setEnabled(false);
+            comboCantidadDePersona.removeAllItems();
+            bandera = 0;
+            System.out.println("Entre");
+            botonReservaCarga.setEnabled(true);
+            ingresarReserva.setEnabled(false);
             if (comboTipoDeHabitacion.getSelectedIndex() == 0) {
                 botonReservaCarga.setEnabled(false);
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 1) {
@@ -1102,7 +1120,7 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
                 comboCantidadDePersona.addItem("4");
-                
+
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 5) {
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
@@ -1115,6 +1133,7 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("9");
                 comboCantidadDePersona.addItem("10");
             }
+<<<<<<< HEAD
             
 
         }else if(e.getSource()==botonReservaCarga){
@@ -1185,6 +1204,58 @@ public class Ventana extends JFrame implements ActionListener {
                             
                     
                 
+=======
+
+        } else if (e.getSource() == botonReservaCarga) {
+
+            int a = 0, b = 0, c = 0, d = 0;
+            if (((CedulaReserva.getText()).length()) == 8 && comboTipoEdad.getSelectedIndex() == 0) {
+                try {
+                    int var = Integer.parseInt((CedulaReserva.getText()));
+                    a = 1;
+
+                } catch (Exception ex) {
+
+                    JOptionPane.showMessageDialog(null, "Cedula erronea");
+                    a = 0;
+                }
+            } else if (comboTipoEdad.getSelectedIndex() == 1) {
+                a = 2;
+            } else if (((CedulaReserva.getText()).length()) != 8) {
+                JOptionPane.showMessageDialog(null, "La cedula tiene que tener 8 digitos");
+                a = 0;
+            }
+            if (((nombreReserva.getText()).length()) > 2) {
+                String varA = nombreReserva.getText();
+                b = 1;
+            } else {
+                JOptionPane.showMessageDialog(null, "Nombre muy corto");
+                b = 0;
+            }
+
+            if ((apellidoReserva.getText().length()) > 2) {
+                String varB = apellidoReserva.getText();
+                d = 1;
+            } else {
+                JOptionPane.showMessageDialog(null, "Apellido muy corto");
+                d = 0;
+            }
+            System.out.println("Hola" + a + "Hola2" + b + "Hola3" + c + "Hola4" + d + "Hola5");
+            if (a == 1 && b == 1 && d == 1) {
+                bandera++;
+                System.out.println("Entre");
+            } else if (a == 2 && b == 1 && d == 1) {
+                bandera++;
+                System.out.println("Entre 2");
+            }
+            System.out.println("Bandera= " + bandera);
+            System.out.println("Cantidad Persona = " + comboCantidadDePersona.getSelectedIndex());
+            if ((bandera - 1) == comboCantidadDePersona.getSelectedIndex()) {
+                botonReservaCarga.setEnabled(false);
+                ingresarReserva.setEnabled(true);
+            }
+
+>>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
             /*else if(comboCantidadDePersona.getSelectedIndex() == 1){
                 botonReservaCarga.setEnabled(true); 
             }else if(comboCantidadDePersona.getSelectedIndex() == 2){
@@ -1205,88 +1276,75 @@ public class Ventana extends JFrame implements ActionListener {
                 botonReservaCarga.setEnabled(true); 
             }
           
-            */
-        }else if(e.getSource()==comboAnoLlegada){
+             */
+        } else if (e.getSource() == comboAnoLlegada) {
             comboMesLlegada.removeAllItems();
-            for(int i = 1; mesStrings.length >i ;i++ ){
-                comboMesLlegada.addItem(mesStrings[i]);   
-                comboDiaLlegada.addItem("29");   
-                comboDiaLlegada.addItem("30");  
-                comboDiaLlegada.addItem("31");   
+            for (int i = 1; mesStrings.length > i; i++) {
+                comboMesLlegada.addItem(mesStrings[i]);
+                comboDiaLlegada.addItem("29");
+                comboDiaLlegada.addItem("30");
+                comboDiaLlegada.addItem("31");
             }
-
-        }else if(e.getSource()==comboMesLlegada){
+        } else if (e.getSource() == comboMesLlegada) {
             Integer varNum = Integer.parseInt(comboAnoLlegada.getSelectedItem().toString());
-            varNum=varNum%4;
-            
-            if(comboMesLlegada.getSelectedIndex()!=0){
+            varNum = varNum % 4;
+
+            if (comboMesLlegada.getSelectedIndex() != 0) {
                 comboDiaLlegada.removeAllItems();
-                for(int i = 0; diasStrings.length >i ;i++ ){
-                    comboDiaLlegada.addItem(diasStrings[i]);   
+                for (int i = 0; diasStrings.length > i; i++) {
+                    comboDiaLlegada.addItem(diasStrings[i]);
                 }
-                if(varNum==0&&comboMesLlegada.getSelectedIndex()==1){
+                if (varNum == 0 && comboMesLlegada.getSelectedIndex() == 1) {
                     comboDiaLlegada.addItem("29");
                 }
-                 if(comboMesLlegada.getSelectedIndex()==3 ||comboMesLlegada.getSelectedIndex()==5||comboMesLlegada.getSelectedIndex()==8||
-                    comboMesLlegada.getSelectedIndex()==10){
-                    comboDiaLlegada.addItem("29");   
-                    comboDiaLlegada.addItem("30");   
- 
+                if (comboMesLlegada.getSelectedIndex() == 3 || comboMesLlegada.getSelectedIndex() == 5 || comboMesLlegada.getSelectedIndex() == 8
+                        || comboMesLlegada.getSelectedIndex() == 10) {
+                    comboDiaLlegada.addItem("29");
+                    comboDiaLlegada.addItem("30");
                 }
-                if(comboMesLlegada.getSelectedIndex()==0 ||comboMesLlegada.getSelectedIndex()==2||comboMesLlegada.getSelectedIndex()==4||
-                    comboMesLlegada.getSelectedIndex()==6||comboMesLlegada.getSelectedIndex()==7||comboMesLlegada.getSelectedIndex()==9||
-                    comboMesLlegada.getSelectedIndex()==11){
-                    comboDiaLlegada.addItem("29");   
-                    comboDiaLlegada.addItem("30");  
-                    comboDiaLlegada.addItem("31");   
+                if (comboMesLlegada.getSelectedIndex() == 0 || comboMesLlegada.getSelectedIndex() == 2 || comboMesLlegada.getSelectedIndex() == 4
+                        || comboMesLlegada.getSelectedIndex() == 6 || comboMesLlegada.getSelectedIndex() == 7 || comboMesLlegada.getSelectedIndex() == 9
+                        || comboMesLlegada.getSelectedIndex() == 11) {
+                    comboDiaLlegada.addItem("29");
+                    comboDiaLlegada.addItem("30");
+                    comboDiaLlegada.addItem("31");
                 }
             }
-
-            
-        }else if(e.getSource()==comboAnoSalida){
+        } else if (e.getSource() == comboAnoSalida) {
             comboMesSalida.removeAllItems();
-            for(int i = 1; mesStrings.length >i ;i++ ){
-                comboMesSalida.addItem(mesStrings[i]);   
-                comboDiaSalida.addItem("29");   
-                comboDiaSalida.addItem("30");  
-                comboDiaSalida.addItem("31");   
+            for (int i = 1; mesStrings.length > i; i++) {
+                comboMesSalida.addItem(mesStrings[i]);
+                comboDiaSalida.addItem("29");
+                comboDiaSalida.addItem("30");
+                comboDiaSalida.addItem("31");
             }
-
-        }
-        else if(e.getSource()==comboMesSalida){
+        } else if (e.getSource() == comboMesSalida) {
             Integer varNum = Integer.parseInt(comboAnoSalida.getSelectedItem().toString());
-            varNum=varNum%4;
-            
-            if(comboMesSalida.getSelectedIndex()!=0){
+            varNum = varNum % 4;
+
+            if (comboMesSalida.getSelectedIndex() != 0) {
                 comboDiaSalida.removeAllItems();
-                for(int i = 0; diasStrings.length >i ;i++ ){
-                    comboDiaSalida.addItem(diasStrings[i]);   
+                for (int i = 0; diasStrings.length > i; i++) {
+                    comboDiaSalida.addItem(diasStrings[i]);
                 }
-                if(varNum==0&&comboMesSalida.getSelectedIndex()==1){
+                if (varNum == 0 && comboMesSalida.getSelectedIndex() == 1) {
                     comboDiaSalida.addItem("29");
                 }
-                 if(comboMesSalida.getSelectedIndex()==3 ||comboMesSalida.getSelectedIndex()==5||comboMesSalida.getSelectedIndex()==8||
-                    comboMesSalida.getSelectedIndex()==10){
-                    comboDiaSalida.addItem("29");   
-                    comboDiaSalida.addItem("30");   
- 
+                if (comboMesSalida.getSelectedIndex() == 3 || comboMesSalida.getSelectedIndex() == 5 || comboMesSalida.getSelectedIndex() == 8
+                        || comboMesSalida.getSelectedIndex() == 10) {
+                    comboDiaSalida.addItem("29");
+                    comboDiaSalida.addItem("30");
+
                 }
-                if(comboMesSalida.getSelectedIndex()==0 ||comboMesSalida.getSelectedIndex()==2||comboMesSalida.getSelectedIndex()==4||
-                    comboMesSalida.getSelectedIndex()==6||comboMesSalida.getSelectedIndex()==7||comboMesSalida.getSelectedIndex()==9||
-                    comboMesSalida.getSelectedIndex()==11){
-                    comboDiaSalida.addItem("29");   
-                    comboDiaSalida.addItem("30");  
-                    comboDiaSalida.addItem("31");   
+                if (comboMesSalida.getSelectedIndex() == 0 || comboMesSalida.getSelectedIndex() == 2 || comboMesSalida.getSelectedIndex() == 4
+                        || comboMesSalida.getSelectedIndex() == 6 || comboMesSalida.getSelectedIndex() == 7 || comboMesSalida.getSelectedIndex() == 9
+                        || comboMesSalida.getSelectedIndex() == 11) {
+                    comboDiaSalida.addItem("29");
+                    comboDiaSalida.addItem("30");
+                    comboDiaSalida.addItem("31");
                 }
             }
-
-            
-        }
-        else if (e.getSource() == botonAbrirArchivoInicializar) {
-
-
         } else if (e.getSource() == botonAbrirArchivoInicializar) {
-
 
             BuscarArchivo();
 
@@ -1296,14 +1354,12 @@ public class Ventana extends JFrame implements ActionListener {
 
         }
     }
-
     public static String fechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
-
     }
-
+    
     public void BuscarArchivo() {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -1335,9 +1391,7 @@ public class Ventana extends JFrame implements ActionListener {
 
             }
         }
-
     }
-
     public String comprobar() {
         String sFichero = "inicializar.in";
         File fichero = new File(sFichero);
@@ -1361,9 +1415,7 @@ public class Ventana extends JFrame implements ActionListener {
             comprobacion2 = "\n\nEl archivo " + dFichero + " no existe";
         }
         return comprobacion + comprobacion2;
-
     }
-
     public void inicializar() throws FileNotFoundException {
         try {
             FileReader lector = new FileReader("inicializar.in");
@@ -1374,12 +1426,9 @@ public class Ventana extends JFrame implements ActionListener {
                 textArea.append(cadena + "\n");
             }
             BR.close();
-
         } catch (IOException ex) {
         }
-
     }
-
     public void operaciones() throws FileNotFoundException {
         try {
             FileReader lector = new FileReader("operaciones.in");
