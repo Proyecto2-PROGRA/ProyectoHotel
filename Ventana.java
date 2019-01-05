@@ -8,9 +8,11 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,7 +62,8 @@ public class Ventana extends JFrame implements ActionListener {
             comboTipoEdad, comboCam_A, comboCaj_F;
     protected JScrollPane scroll, scroll2, scroll3;
     
-    protected int bandera=0;
+    protected int bandera=0, banderaRevision=0;
+    protected String varA,varB,varC,varD,varE,varF,varG,varH;
     
     
     
@@ -622,11 +625,11 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboTipoDeHabitacion = new JComboBox();
         comboTipoDeHabitacion.addItem("Seleccione");
-        comboTipoDeHabitacion.addItem("Individual");
-        comboTipoDeHabitacion.addItem("Matrimonial");
-        comboTipoDeHabitacion.addItem("Doble");
-        comboTipoDeHabitacion.addItem("Cuádruple");
-        comboTipoDeHabitacion.addItem("Suite");
+        comboTipoDeHabitacion.addItem("INDIV");
+        comboTipoDeHabitacion.addItem("DOBLE");
+        comboTipoDeHabitacion.addItem("MATRI");
+        comboTipoDeHabitacion.addItem("CUADR");
+        comboTipoDeHabitacion.addItem("SUITE");
         comboTipoDeHabitacion.setBounds(450, 60, 175, 40);
         comboTipoDeHabitacion.addActionListener(this);
 
@@ -994,34 +997,76 @@ public class Ventana extends JFrame implements ActionListener {
                         if((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboMesSalida.getSelectedItem().toString())) ){
                                 if((Integer.parseInt(comboDiaLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboDiaSalida.getSelectedItem().toString())) ){
                                      JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(dia)");
+                
+                                     
+                                     banderaRevision=1;
                                 }else{
                                     JOptionPane.showMessageDialog(null, "Dia Ingresado Erroneo o menor a la esperado");
+      
+                                    banderaRevision=0;
                                 }
                         }else if((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) <(Integer.parseInt(comboMesSalida.getSelectedItem().toString())) ){
                              JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(mes)");
+              
+                             
+                             banderaRevision=1;
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
+           
+                            banderaRevision=0;
                         }
                 }else if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))){
                     JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(año)");
+  
+                    banderaRevision=1;
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Año Ingresado Erroneo o menor a lo esperado");
+          
+                    banderaRevision=0;
                 }
                 if (comboTipoDeHabitacion.getSelectedIndex() == 0) {
                     JOptionPane.showMessageDialog(null, "Ingrese una Opcion en tipo habitación");
+           
+                    banderaRevision=0;
                 }
                 
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+   
+                banderaRevision=0;
             }
 
-            panelUno.setVisible(false);
-            panelDos.setVisible(false);
-            panelTres.setVisible(true);
-            panelCuatro.setVisible(false);
+            if(bandera==789 &&banderaRevision==1){
+                try{
+                    
+                    varF = (comboDiaLlegada.getSelectedItem().toString())+" "+(comboMesLlegada.getSelectedItem().toString())+" "+(comboAnoLlegada.getSelectedItem().toString());
+                    varG =(comboDiaSalida.getSelectedItem().toString())+" "+(comboMesSalida.getSelectedItem().toString())+" "+(comboAnoSalida.getSelectedItem().toString());
+                    
+                    FileWriter file = new FileWriter("gdfgoperaciones.txt",true);
+                    BufferedWriter BR = new BufferedWriter(file);
+                    BR.write("1\n");
+                    BR.append("6rftyvghhvvghvg");
+                    BR.write(varF + " "+ varG+"\n");
+                    BR.write(varH+"\n");
+                    BR.write(varE+"\n");
+                    
+                    FileReader fr = new FileReader("operaciones.txt");
+                    BufferedReader br =new BufferedReader(fr);
+                    String cadena;
+                    while((cadena=br.readLine())!=null){
+                        BR.write(cadena);
+                    }
+                    fr.close();
+                    br.close();
+                    file.close();
+                    BR.close();
+                    
+                }catch(Exception ex){}
+                
+            }
         } else if (e.getSource() == botonInicializar) {
             try {
                 inicializar();
@@ -1073,13 +1118,16 @@ public class Ventana extends JFrame implements ActionListener {
             
 
         }else if(e.getSource()==botonReservaCarga){
-            
+            varH= (comboTipoDeHabitacion.getSelectedItem().toString());
+            varE= (comboCantidadDePersona.getSelectedItem().toString());
                 int a = 0,b=0,c=0,d=0;
                 if(((CedulaReserva.getText()).length())==8&&comboTipoEdad.getSelectedIndex()==0){
                             try{
                                 int var = Integer.parseInt((CedulaReserva.getText()));
+                                
                                 a=1;
-                                    
+                                 varA=CedulaReserva.getText().toString();
+                                 varB="A";
                             }catch (Exception ex){
                                     
                                     JOptionPane.showMessageDialog(null, "Cedula erronea");
@@ -1088,13 +1136,17 @@ public class Ventana extends JFrame implements ActionListener {
                                 
                 }else if(comboTipoEdad.getSelectedIndex()==1){
                     a=2;
+                    varA=" ";
+                    varB="N";
                 }else if(((CedulaReserva.getText()).length())!=8){
+                    
+                    
                                 JOptionPane.showMessageDialog(null, "La cedula tiene que tener 8 digitos");
                                 a=0;
                             }
                             
                             if(((nombreReserva.getText()).length())>2){
-                                String varA = nombreReserva.getText();
+                                varC = nombreReserva.getText().toString();
                                b=1;
                             }else{
                                 JOptionPane.showMessageDialog(null, "Nombre muy corto");
@@ -1102,27 +1154,35 @@ public class Ventana extends JFrame implements ActionListener {
                             }
                             
                             if((apellidoReserva.getText().length())>2){
-                                String varB = apellidoReserva.getText();
+                                varD = apellidoReserva.getText().toString();
                                 d=1;
                             }else{
                                 JOptionPane.showMessageDialog(null, "Apellido muy corto");
                                 d=0;
                             }
-                            System.out.println("Hola"+a+"Hola2"+b+"Hola3"+c+"Hola4"+d+"Hola5");
-                            if(a==1&&b==1&&d==1){
-                                bandera++;
-                                System.out.println("Entre");
+                            try{
+                                FileWriter file = new FileWriter("operaciones.txt",true);
+                                 BufferedWriter Br= new BufferedWriter(file);
+                                 
+                                 if(a==1&&b==1&&d==1){
+                                    bandera++;
+                                     Br.append(varB+" "+varA+" "+varC+" "+varD+"\n");
+                                
                             }else if(a==2&&b==1&&d==1){
                                 bandera++;
-                                System.out.println("Entre 2");
+                                Br.append(varB+" "+varA+" "+varC+" "+varD+"\n");
                             }
-                            System.out.println("Bandera= "+bandera);
-                            System.out.println("Cantidad Persona = "+ comboCantidadDePersona.getSelectedIndex());
+                                 file.close();
+                                 Br.close();
+                            }catch(Exception ex){}
+                            
+                            
                             if((bandera-1)==comboCantidadDePersona.getSelectedIndex()){
                                 botonReservaCarga.setEnabled(false);
                                 ingresarReserva.setEnabled(true);
+                                bandera =789;
                             }
-                        
+                            
                     
                 
             /*else if(comboCantidadDePersona.getSelectedIndex() == 1){
