@@ -36,9 +36,12 @@ public class Ventana extends JFrame implements ActionListener {
     protected JLabel headerTitulo, textoAbrirArchivoInicializar, textoAbrirArchivoPrecio, textoCargaInteractiva,
             textoArchivoDeSalida, textoFechaLlegada, textoFechaSalida, textoTipoHabitacion, textoCantPersona,
             textoCedulaCheckIn, textoHoraCheckIn, textoCedulaCheckOut, textoHoraCheckOut, textoDosPuntos, textoDosPuntosOut,
-            textoCedulaCancelacion, textoHoraCancelacion, textoDosPuntosCancelacion;
+            textoCedulaCancelacion, textoHoraCancelacion, textoDosPuntosCancelacion, textoSaldoInicial, textoFechaInicial, textoPisos,
+            textoMostrarInicial, TextoHabitaciones, textoIndv, textoDoble, textoMatri, textoCuadruple, textoSuite, textoCam_A, textoCaj_F, TextoHabitaciones2,
+            textoEsp_C, textoLom_M, textoJug_L, textoMalta, TextoHabitaciones3, textoMostrarInicial2;
 
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
+<<<<<<< HEAD
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
             botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
             botonReservaCarga;
@@ -71,6 +74,38 @@ public class Ventana extends JFrame implements ActionListener {
     protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
 		
     
+=======
+            botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonIngresarInicializar, botonIngresarPrecios,
+            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion, botonIniciaizarDos, botonPreciosDos;
+    protected JTextArea textArea, textArea2, textArea3;
+
+    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;
+
+    protected JTextField diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
+            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, TextoSaldoInicial, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
+            CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta;
+
+    protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
+            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
+            comboCam_A, comboCaj_F;
+    protected JScrollPane scroll, scroll2, scroll3;
+
+
+    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
+        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
+
+    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
+
+    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
+
+    protected String[] mesStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+
+    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
+
+    protected String[] SeleccionSiNo = {"0", "1"};
+
+>>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
 
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
@@ -86,6 +121,7 @@ public class Ventana extends JFrame implements ActionListener {
         public Imagen() {
             this.setBounds(0, 0, 1000, 410);
         }
+
         public void paint(Graphics grafico) {
             Dimension height = getSize();
 
@@ -196,7 +232,6 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void PanelPrincipal() {
-        //=============================
 
         //=============================
         textArea = new JTextArea();
@@ -215,50 +250,292 @@ public class Ventana extends JFrame implements ActionListener {
     }
 
     public void PanelPrincipalDos() {
+        //todo contenido panel iniciar
+        panelInicializarDos = new JPanel();
+        panelInicializarDos.setBackground(myColorHeaderTitulo);
+        panelInicializarDos.setBounds(0, 0, 1000, 400);
+        panelInicializarDos.setLayout(null);
+        panelInicializarDos.setVisible(false);
+
+        botonIniciaizarDos = new JButton("Inicializar");
+        botonIniciaizarDos.setBackground(myColorBotonHeader);
+        botonIniciaizarDos.setForeground(myColorBotonLetraHeader);
+        botonIniciaizarDos.setBounds(200, 160, 220, 60);
+        botonIniciaizarDos.addActionListener(this);
+
+        textoSaldoInicial = new JLabel("Saldo Inicial:");
+        textoSaldoInicial.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoSaldoInicial.setBounds(20, 60, 200, 40);
+        textoSaldoInicial.setForeground(Color.WHITE);
+
+        TextoSaldoInicial = new JTextField();
+        TextoSaldoInicial.setBounds(130, 60, 130, 40);
+
+        textoFechaInicial = new JLabel("Fecha Actual Agregada Automaticamente");
+        textoFechaInicial.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoFechaInicial.setBounds(20, 10, 450, 40);
+        textoFechaInicial.setForeground(Color.WHITE);
+
+        textoMostrarInicial = new JLabel("Inicializar.in  Generado:");
+        textoMostrarInicial.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoMostrarInicial.setBounds(500, 5, 450, 40);
+        textoMostrarInicial.setForeground(Color.WHITE);
+
+        textoPisos = new JLabel("Número Pisos:");
+        textoPisos.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoPisos.setBounds(20, 110, 200, 40);
+        textoPisos.setForeground(Color.WHITE);
+
+        CampoTextoPisos = new JTextField();
+        CampoTextoPisos.setBounds(140, 110, 120, 40);
+
+        botonIngresarInicializar = new JButton("Ingresar");
+        botonIngresarInicializar.setBackground(myColorBotonHeader);
+        botonIngresarInicializar.setForeground(myColorBotonLetraHeader);
+        botonIngresarInicializar.setBounds(50, 180, 100, 40);
+        botonIngresarInicializar.addActionListener(this);
+
+        textArea2 = new JTextArea();
+        String texto;
+        textArea2.setEditable(false);
+        scroll2 = new JScrollPane(textArea2);
+        scroll2.setBounds(450, 40, 300, 400);
+        panelInicializarDos.add(scroll2);
 
         //===============================
-        textoAbrirArchivoInicializar = new JLabel("Abrir Archivos Inicializar");
+        //todo contenido panel precio
+        panelPreciosDos = new JPanel();
+        panelPreciosDos.setBackground(myColorHeaderTitulo);
+        panelPreciosDos.setBounds(0, 0, 1000, 400);
+        panelPreciosDos.setLayout(null);
+        panelPreciosDos.setVisible(false);
+
+        botonPreciosDos = new JButton("Precios");
+        botonPreciosDos.setBackground(myColorBotonHeader);
+        botonPreciosDos.setForeground(myColorBotonLetraHeader);
+        botonPreciosDos.setBounds(530, 160, 220, 60);
+        botonPreciosDos.addActionListener(this);
+
+        //inicializar precios habitaciones
+        TextoHabitaciones = new JLabel("-> Precios Habitaciones <-");
+        TextoHabitaciones.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        TextoHabitaciones.setBounds(20, 5, 230, 40);
+        TextoHabitaciones.setForeground(Color.WHITE);
+
+        textoIndv = new JLabel("Individual: ");
+        textoIndv.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoIndv.setBounds(20, 40, 200, 30);
+        textoIndv.setForeground(Color.WHITE);
+
+        CampoTextoIndv = new JTextField();
+        CampoTextoIndv.setBounds(110, 40, 120, 30);
+
+        textoDoble = new JLabel("Doble: ");
+        textoDoble.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoDoble.setBounds(20, 70, 200, 30);
+        textoDoble.setForeground(Color.WHITE);
+
+        CampoTextoDoble = new JTextField();
+        CampoTextoDoble.setBounds(110, 70, 120, 30);
+
+        textoMatri = new JLabel("Matri: ");
+        textoMatri.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoMatri.setBounds(20, 100, 200, 30);
+        textoMatri.setForeground(Color.WHITE);
+
+        CampoTextoMatri = new JTextField();
+        CampoTextoMatri.setBounds(110, 100, 120, 30);
+
+        textoCuadruple = new JLabel("Cuadruple: ");
+        textoCuadruple.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoCuadruple.setBounds(20, 130, 200, 30);
+        textoCuadruple.setForeground(Color.WHITE);
+
+        CampoTextoCuadruple = new JTextField();
+        CampoTextoCuadruple.setBounds(110, 130, 120, 30);
+
+        textoSuite = new JLabel("Suite: ");
+        textoSuite.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoSuite.setBounds(20, 160, 200, 30);
+        textoSuite.setForeground(Color.WHITE);
+
+        CampoTextoSuite = new JTextField();
+        CampoTextoSuite.setBounds(110, 160, 120, 30);
+
+        //inicializar precio servicios
+        TextoHabitaciones2 = new JLabel("-> Precios Servicios <-");
+        TextoHabitaciones2.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        TextoHabitaciones2.setBounds(20, 210, 200, 40);
+        TextoHabitaciones2.setForeground(Color.WHITE);
+
+        textoCam_A = new JLabel("Cama Adicional: ");//CAM_A
+        textoCam_A.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoCam_A.setBounds(20, 260, 200, 30);
+        textoCam_A.setForeground(Color.WHITE);
+
+        comboCam_A = new JComboBox(SeleccionSiNo);
+        comboCam_A.setBounds(160, 260, 70, 40);
+
+        textoCaj_F = new JLabel("Caja fuerte: ");//CAJ_F
+        textoCaj_F.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoCaj_F.setBounds(20, 290, 200, 30);
+        textoCaj_F.setForeground(Color.WHITE);
+
+        comboCaj_F = new JComboBox(SeleccionSiNo);
+        comboCaj_F.setBounds(160, 290, 70, 40);
+
+        //inicializar precios restaurant
+        TextoHabitaciones3 = new JLabel("-> Precios Restaurant <-");
+        TextoHabitaciones3.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        TextoHabitaciones3.setBounds(280, 5, 230, 40);
+        TextoHabitaciones3.setForeground(Color.WHITE);
+
+        textoEsp_C = new JLabel("Esp_C: ");//ESP_C
+        textoEsp_C.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoEsp_C.setBounds(260, 40, 200, 30);
+        textoEsp_C.setForeground(Color.WHITE);
+
+        CampoTextoEsp_C = new JTextField();
+        CampoTextoEsp_C.setBounds(360, 40, 120, 30);
+
+        textoLom_M = new JLabel("Doble: ");//LOM_M
+        textoLom_M.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoLom_M.setBounds(260, 70, 200, 30);
+        textoLom_M.setForeground(Color.WHITE);
+
+        CampoTextoLom_M = new JTextField();
+        CampoTextoLom_M.setBounds(360, 70, 120, 30);
+
+        textoJug_L = new JLabel("Matri: ");//JUG_L
+        textoJug_L.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoJug_L.setBounds(260, 100, 200, 30);
+        textoJug_L.setForeground(Color.WHITE);
+
+        CampoTextoJug_L = new JTextField();
+        CampoTextoJug_L.setBounds(360, 100, 120, 30);
+
+        textoMalta = new JLabel("Cuadruple: ");//MALTA
+        textoMalta.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoMalta.setBounds(260, 130, 200, 30);
+        textoMalta.setForeground(Color.WHITE);
+
+        CampoTextoMalta = new JTextField();
+        CampoTextoMalta.setBounds(360, 130, 120, 30);
+
+        botonIngresarPrecios = new JButton("Ingresar");   //boton ingresar precios
+        botonIngresarPrecios.setBackground(myColorBotonHeader);
+        botonIngresarPrecios.setForeground(myColorBotonLetraHeader);
+        botonIngresarPrecios.setBounds(330, 250, 150, 70);
+        botonIngresarPrecios.addActionListener(this);
+
+        textoMostrarInicial2 = new JLabel("Precios.in  Generado:");
+        textoMostrarInicial2.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
+        textoMostrarInicial2.setBounds(680, 5, 450, 40);
+        textoMostrarInicial2.setForeground(Color.WHITE);
+
+        textArea3 = new JTextArea();   // mostrar precios.in
+        textArea3.setEditable(false);
+        scroll3 = new JScrollPane(textArea3);
+        scroll3.setBounds(560, 40, 400, 400);
+        panelPreciosDos.add(scroll3);
+
+        //panel extra 
+        panelDosExtra = new JPanel();
+        panelDosExtra.setBackground(myColorHeaderTitulo);
+        panelDosExtra.setBounds(0, 0, 1000, 400);
+        panelDosExtra.setLayout(null);
+        panelDosExtra.setVisible(false);
+
+        //===============================
+        //texto menu principal 2
+        textoAbrirArchivoInicializar = new JLabel("Abrir Archivos Inicializar.in");
         textoAbrirArchivoInicializar.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
         textoAbrirArchivoInicializar.setBounds(10, 14, 281, 51);
         textoAbrirArchivoInicializar.setForeground(Color.WHITE);
 
-        textoAbrirArchivoPrecio = new JLabel("Abrir Archivos Precio");
+        textoAbrirArchivoPrecio = new JLabel("Abrir Archivos Precio.in");
         textoAbrirArchivoPrecio.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
-        textoAbrirArchivoPrecio.setBounds(10, 65, 221, 51);
+        textoAbrirArchivoPrecio.setBounds(10, 65, 281, 51);
         textoAbrirArchivoPrecio.setForeground(Color.WHITE);
-        //===============================
+
+        //- - - - - //botones menu principal 2
         botonAbrirArchivoInicializar = new JButton("Abrir Archivo");
-        botonAbrirArchivoInicializar.setBounds(845, 15, 150, 40);
+        botonAbrirArchivoInicializar.setBounds(300, 25, 150, 40);
         botonAbrirArchivoInicializar.setForeground(myColorBotonLetraHeader);
         botonAbrirArchivoInicializar.setBackground(myColorBotonHeader);
         botonAbrirArchivoInicializar.addActionListener(this);
 
         botonAbrirArchivoPrecio = new JButton("Abrir Archivo");
-        botonAbrirArchivoPrecio.setBounds(845, 65, 150, 40);
+        botonAbrirArchivoPrecio.setBounds(300, 75, 150, 40);
         botonAbrirArchivoPrecio.setForeground(myColorBotonLetraHeader);
         botonAbrirArchivoPrecio.setBackground(myColorBotonHeader);
-        //===============================
+        botonAbrirArchivoPrecio.addActionListener(this);
+
+        //- - - - -
         textoCargaInteractiva = new JLabel("Carga Interactiva");
         textoCargaInteractiva.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 20));
-        textoCargaInteractiva.setBounds(10, 115, 221, 51);
+        textoCargaInteractiva.setBounds(10, 150, 221, 51);
         textoCargaInteractiva.setForeground(Color.WHITE);
         //===============================
-        botonEnviarCargaInteractiva = new JButton("Enviar");
-        botonEnviarCargaInteractiva.setBounds(845, 115, 150, 40);
-        botonEnviarCargaInteractiva.setForeground(myColorBotonLetraHeader);
-        botonEnviarCargaInteractiva.setBackground(myColorBotonHeader);
+        //panel extra
+        panelDosExtra.add(botonAbrirArchivoInicializar);
+        panelDosExtra.add(botonAbrirArchivoPrecio);
+        panelDosExtra.add(textoAbrirArchivoInicializar);
+        panelDosExtra.add(textoAbrirArchivoPrecio);
+        panelDosExtra.add(textoCargaInteractiva);
+
+        panelDosExtra.add(botonIniciaizarDos);
+        panelDosExtra.add(botonPreciosDos);
+        panelDos.add(panelDosExtra);
 
         //===============================
-        cajaDeTextoCargaInteractivo = new JTextField("Pisos del hotel");
-        cajaDeTextoCargaInteractivo.setBounds(625, 115, 220, 40);
-        panelDos.add(cajaDeTextoCargaInteractivo);
+        //action listener botones
+        botonIniciaizarDos.addActionListener(this);
+        botonPreciosDos.addActionListener(this);
 
-        panelDos.add(botonEnviarCargaInteractiva);
-        panelDos.add(botonAbrirArchivoInicializar);
-        panelDos.add(botonAbrirArchivoPrecio);
-        panelDos.add(textoAbrirArchivoInicializar);
-        panelDos.add(textoAbrirArchivoPrecio);
-        panelDos.add(textoCargaInteractiva);
+        //===============================
+        //agregar a panel inicializar
+        panelInicializarDos.add(textoSaldoInicial);
+        panelInicializarDos.add(TextoSaldoInicial);
+        panelInicializarDos.add(textoFechaInicial);
+        panelInicializarDos.add(textoPisos);
+        panelInicializarDos.add(CampoTextoPisos);
+        panelInicializarDos.add(botonIngresarInicializar);
+        panelInicializarDos.add(textoMostrarInicial);
+        //=============================== 
+        //agregar a panel precios    
+
+        panelPreciosDos.add(TextoHabitaciones);
+        panelPreciosDos.add(textoIndv);
+        panelPreciosDos.add(CampoTextoIndv);
+        panelPreciosDos.add(textoDoble);
+        panelPreciosDos.add(CampoTextoDoble);
+        panelPreciosDos.add(textoMatri);
+        panelPreciosDos.add(CampoTextoMatri);
+        panelPreciosDos.add(textoCuadruple);
+        panelPreciosDos.add(CampoTextoCuadruple);
+        panelPreciosDos.add(textoSuite);
+        panelPreciosDos.add(CampoTextoSuite);
+        panelPreciosDos.add(TextoHabitaciones2);
+        panelPreciosDos.add(TextoHabitaciones3);
+        panelPreciosDos.add(textoEsp_C);
+        panelPreciosDos.add(CampoTextoEsp_C);
+        panelPreciosDos.add(textoLom_M);
+        panelPreciosDos.add(CampoTextoLom_M);
+        panelPreciosDos.add(textoJug_L);
+        panelPreciosDos.add(CampoTextoJug_L);
+        panelPreciosDos.add(textoMalta);
+        panelPreciosDos.add(CampoTextoMalta);
+        panelPreciosDos.add(textoCam_A);
+        panelPreciosDos.add(comboCam_A);
+        panelPreciosDos.add(textoCaj_F);
+        panelPreciosDos.add(comboCaj_F);
+        panelPreciosDos.add(botonIngresarPrecios);
+        panelPreciosDos.add(botonIngresarPrecios);
+        panelPreciosDos.add(textoMostrarInicial2);
+
+        panelDos.add(panelInicializarDos);
+        panelDos.add(panelPreciosDos);
         add(panelDos);
     }
 
@@ -272,25 +549,25 @@ public class Ventana extends JFrame implements ActionListener {
 
         panelReservacion = new JPanel();
         panelReservacion.setBackground(myColorFondo);
-        panelReservacion.setBounds(0, 0, 1000, 400);
+        panelReservacion.setBounds(0, 0, 1000, 420);
         panelReservacion.setLayout(null);
         panelReservacion.setVisible(false);
 
         panelCheckIn = new JPanel();
         panelCheckIn.setBackground(myColorFondo);
-        panelCheckIn.setBounds(0, 0, 1000, 400);
+        panelCheckIn.setBounds(0, 0, 1000, 420);
         panelCheckIn.setLayout(null);
         panelCheckIn.setVisible(false);
 
         panelCheckOut = new JPanel();
         panelCheckOut.setBackground(myColorFondo);
-        panelCheckOut.setBounds(0, 0, 1000, 400);
+        panelCheckOut.setBounds(0, 0, 1000, 420);
         panelCheckOut.setLayout(null);
         panelCheckOut.setVisible(false);
 
         panelCancelacion = new JPanel();
         panelCancelacion.setBackground(myColorFondo);
-        panelCancelacion.setBounds(0, 0, 1000, 400);
+        panelCancelacion.setBounds(0, 0, 1000, 420);
         panelCancelacion.setLayout(null);
         panelCancelacion.setVisible(false);
 
@@ -342,6 +619,7 @@ public class Ventana extends JFrame implements ActionListener {
         comboAnoLlegada = new JComboBox(annioStrings);
         comboAnoLlegada.setBounds(520, 10, 85, 40);
         comboAnoLlegada.addActionListener(this);
+
 
         //======================================
         textoFechaSalida = new JLabel("FECHA SALIDA");
@@ -541,7 +819,7 @@ public class Ventana extends JFrame implements ActionListener {
         panelMenuOperaciones.add(botonCancelacion);
 
         panelTres.add(panelMenuOperaciones);
-        
+
         panelTres.add(panelColorTres);
 
         panelTres.add(panelReservacion);
@@ -619,7 +897,6 @@ public class Ventana extends JFrame implements ActionListener {
         botonInicializar.setBounds(0, 0, 220, 40);
         botonInicializar.addActionListener(this);
 
-
         textArea = new JTextArea();
         String texto;
         textArea.setEditable(false);
@@ -661,12 +938,34 @@ public class Ventana extends JFrame implements ActionListener {
             panelCuatro.setVisible(false);
             panelColorTres.setVisible(false);
 
+        } else if (e.getSource() == botonIniciaizarDos) {
+            panelUno.setVisible(false);
+            panelDos.setVisible(true);
+            panelTres.setVisible(false);
+            panelCuatro.setVisible(false);
+            panelInicializarDos.setVisible(true);
+            panelDosExtra.setVisible(false);
+
+        } else if (e.getSource() == botonPreciosDos) {
+            panelUno.setVisible(false);
+            panelDos.setVisible(true);
+            panelTres.setVisible(false);
+            panelCuatro.setVisible(false);
+            panelPreciosDos.setVisible(true);
+            panelDosExtra.setVisible(false);
+
         } else if (e.getSource() == botonDosHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(true);
             panelTres.setVisible(false);
             panelCuatro.setVisible(false);
+<<<<<<< HEAD
             panelColorTres.setVisible(false);
+=======
+            panelInicializarDos.setVisible(false);
+            panelPreciosDos.setVisible(false);
+            panelDosExtra.setVisible(true);
+>>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
 
         } else if (e.getSource() == botonTresHeader) {
             panelUno.setVisible(false);
@@ -674,11 +973,15 @@ public class Ventana extends JFrame implements ActionListener {
             panelTres.setVisible(true);
             panelCuatro.setVisible(false);
             panelColorTres.setVisible(true);
+<<<<<<< HEAD
             panelReservacion.setVisible(false);
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(false);
          
+=======
+
+>>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
         } else if (e.getSource() == botonCuatroHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(false);
@@ -951,44 +1254,57 @@ public class Ventana extends JFrame implements ActionListener {
         }
         else if (e.getSource() == botonAbrirArchivoInicializar) {
 
-            JFileChooser fc = new JFileChooser();
-            fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            //Creamos el filtro
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt", "in", "out");
-            fc.setFileFilter(filtro);
-            Component contentPane = null;
 
-            //Abrimos la ventana, guardamos la opcion seleccionada por el usuario
-            int seleccion = fc.showOpenDialog(contentPane);
+        } else if (e.getSource() == botonAbrirArchivoInicializar) {
 
-            //Si el usuario, pincha en aceptar
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
 
-                //Seleccionamos el fichero
-                File fichero = fc.getSelectedFile();
-                //Ecribe la ruta del fichero seleccionado en el campoTexto1 de texto
-                //campoMostrar2.setText(fichero.getAbsolutePath());
+            BuscarArchivo();
 
-                try (FileReader fr = new FileReader(fichero)) {
-                    String cadena = "";
-                    int valor = fr.read();
-                    while (valor != -1) {
-                        cadena = cadena + (char) valor;
-                        valor = fr.read();
-                    }
-                    //campoMostrar2.setText(cadena);
-                } catch (IOException e1) {
+        } else if (e.getSource() == botonAbrirArchivoPrecio) {
 
-                }
-            }
+            BuscarArchivo();
+
         }
-
     }
 
     public static String fechaActual() {
         Date fecha = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
         return formatoFecha.format(fecha);
+
+    }
+
+    public void BuscarArchivo() {
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        //Creamos el filtro
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.TXT", "txt", "in", "out");
+        fc.setFileFilter(filtro);
+        Component contentPane = null;
+
+        //Abrimos la ventana, guardamos la opcion seleccionada por el usuario
+        int seleccion = fc.showOpenDialog(contentPane);
+
+        //Si el usuario, pincha en aceptar
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+            //Seleccionamos el fichero
+            File fichero = fc.getSelectedFile();
+            //Ecribe la ruta del fichero seleccionado en el campoTexto1 de texto
+            //campoMostrar2.setText(fichero.getAbsolutePath());
+
+            try (FileReader fr = new FileReader(fichero)) {
+                String cadena = "";
+                int valor = fr.read();
+                while (valor != -1) {
+                    cadena = cadena + (char) valor;
+                    valor = fr.read();
+                }
+                //campoMostrar2.setText(cadena);
+            } catch (IOException e1) {
+
+            }
+        }
 
     }
 
