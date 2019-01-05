@@ -53,13 +53,14 @@ public class Ventana extends JFrame implements ActionListener {
 
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
             CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva, nombreReserva, apellidoReserva, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
-            CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta, TextoSaldoInicial;
+            CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta, TextoSaldoInicial,
+            comboCam_A,comboCaj_F;
 
     protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
-            comboTipoEdad, comboCam_A, comboCaj_F;
+            comboTipoEdad;
     protected JScrollPane scroll, scroll2, scroll3;
-<<<<<<< HEAD
+
     
     protected int bandera=0, banderaRevision=0;
     protected String varA,varB,varC,varD,varE,varF,varG,varH;
@@ -76,24 +77,8 @@ public class Ventana extends JFrame implements ActionListener {
     protected String[] mesStrings ={"mm","01","02","03","04","05","06","07","08","09","10","11","12"};
     
     protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
-		
-=======
->>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
 
-    protected int bandera = 0;
-
-    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
-        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-
-    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-
-    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
-
-    protected String[] mesStrings = {"mm", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-
-    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
-
-    protected String[] SeleccionSiNo = {"0", "1"};
+    protected String[] SeleccionSiNo = {"No", "Si"};
 
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
@@ -312,6 +297,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoIndv = new JTextField();
         CampoTextoIndv.setBounds(110, 40, 120, 30);
+        CampoTextoIndv.addActionListener(this);
 
         textoDoble = new JLabel("Doble: ");
         textoDoble.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -320,7 +306,8 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoDoble = new JTextField();
         CampoTextoDoble.setBounds(110, 70, 120, 30);
-
+        CampoTextoDoble.addActionListener(this);
+        
         textoMatri = new JLabel("Matri: ");
         textoMatri.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoMatri.setBounds(20, 100, 200, 30);
@@ -328,6 +315,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoMatri = new JTextField();
         CampoTextoMatri.setBounds(110, 100, 120, 30);
+        CampoTextoMatri.addActionListener(this);
 
         textoCuadruple = new JLabel("Cuadruple: ");
         textoCuadruple.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -336,6 +324,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoCuadruple = new JTextField();
         CampoTextoCuadruple.setBounds(110, 130, 120, 30);
+        CampoTextoCuadruple.addActionListener(this);
 
         textoSuite = new JLabel("Suite: ");
         textoSuite.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -344,6 +333,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoSuite = new JTextField();
         CampoTextoSuite.setBounds(110, 160, 120, 30);
+        CampoTextoSuite.addActionListener(this);
 
         //inicializar precio servicios
         TextoHabitaciones2 = new JLabel("-> Precios Servicios <-");
@@ -356,16 +346,18 @@ public class Ventana extends JFrame implements ActionListener {
         textoCam_A.setBounds(20, 260, 200, 30);
         textoCam_A.setForeground(Color.WHITE);
 
-        comboCam_A = new JComboBox(SeleccionSiNo);
-        comboCam_A.setBounds(160, 260, 70, 40);
+        comboCam_A = new JTextField();
+        comboCam_A.setBounds(160, 260, 100, 40);
+        comboCam_A.addActionListener(this);
 
         textoCaj_F = new JLabel("Caja fuerte: ");//CAJ_F
         textoCaj_F.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoCaj_F.setBounds(20, 290, 200, 30);
         textoCaj_F.setForeground(Color.WHITE);
 
-        comboCaj_F = new JComboBox(SeleccionSiNo);
-        comboCaj_F.setBounds(160, 290, 70, 40);
+        comboCaj_F = new JTextField();
+        comboCaj_F.setBounds(160, 290, 100, 40);
+        comboCaj_F.addActionListener(this);
 
         //inicializar precios restaurant
         TextoHabitaciones3 = new JLabel("-> Precios Restaurant <-");
@@ -380,31 +372,35 @@ public class Ventana extends JFrame implements ActionListener {
 
         CampoTextoEsp_C = new JTextField();
         CampoTextoEsp_C.setBounds(360, 40, 120, 30);
+        CampoTextoEsp_C.addActionListener(this);
 
-        textoLom_M = new JLabel("Doble: ");//LOM_M
+        textoLom_M = new JLabel("LOM_M: ");//
         textoLom_M.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoLom_M.setBounds(260, 70, 200, 30);
         textoLom_M.setForeground(Color.WHITE);
 
         CampoTextoLom_M = new JTextField();
         CampoTextoLom_M.setBounds(360, 70, 120, 30);
+        CampoTextoLom_M.addActionListener(this);
 
-        textoJug_L = new JLabel("Matri: ");//JUG_L
+        textoJug_L = new JLabel("JUG_L: ");//JUG_L
         textoJug_L.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoJug_L.setBounds(260, 100, 200, 30);
         textoJug_L.setForeground(Color.WHITE);
 
         CampoTextoJug_L = new JTextField();
         CampoTextoJug_L.setBounds(360, 100, 120, 30);
-
-        textoMalta = new JLabel("Cuadruple: ");//MALTA
+         CampoTextoJug_L.addActionListener(this);
+        
+        textoMalta = new JLabel("MALTA: ");//MALTA
         textoMalta.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoMalta.setBounds(260, 130, 200, 30);
         textoMalta.setForeground(Color.WHITE);
 
         CampoTextoMalta = new JTextField();
         CampoTextoMalta.setBounds(360, 130, 120, 30);
-
+        CampoTextoMalta.addActionListener(this);
+        
         botonIngresarPrecios = new JButton("Ingresar");   //boton ingresar precios
         botonIngresarPrecios.setBackground(myColorBotonHeader);
         botonIngresarPrecios.setForeground(myColorBotonLetraHeader);
@@ -685,6 +681,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         CedulaCheckIn = new JTextField();
         CedulaCheckIn.setBounds(390, 10, 120, 40);
+        CedulaCheckIn.addActionListener(this);
 
         textoHoraCheckIn = new JLabel("INGRESE HORA");
         textoHoraCheckIn.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
@@ -983,10 +980,70 @@ public class Ventana extends JFrame implements ActionListener {
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(true);
             panelColorTres.setVisible(false);
-        } else if (e.getSource() == ingresarReserva) {
-            try {
-<<<<<<< HEAD
+        }else if(e.getSource()==ingresarCheckIn){
+            if(CedulaCheckIn.getText().length()>0){
+   
+                         try{
+                            BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in",true));
+                            BR.write("\n3\n");
+                            String varCheck=(CedulaCheckIn.getText());
+                            BR.write(varCheck+" ");
+                            String varMinCheck=(comboMinutoCheckIn.getSelectedItem().toString());
+                            String varHoraCheck=(comboHoraCheckIn.getSelectedItem().toString());
+                            BR.write(varMinCheck+":"+varHoraCheck+"\n");
+                            BR.close();
+                         }catch(Exception ex){
+                             
+                         }                                                             
+            }
+        }else if(e.getSource()==ingresarCheckOut){
+            if(CedulaCheckOut.getText().length()>0){
+   
+                         try{
+                            BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in",true));
+                            BR.write("\n4\n");
+                            String varCheck=(CedulaCheckOut.getText());
+                            BR.write(varCheck+" ");
+                            String varMinCheck=(comboMinutoCheckOut.getSelectedItem().toString());
+                            String varHoraCheck=(comboHoraCheckOut.getSelectedItem().toString());
+                            BR.write(varMinCheck+":"+varHoraCheck+"\n");
+                            BR.close();
+                         }catch(Exception ex){
+                             
+                         }                               
+                                                        
+                                                        
+                
+            }
+                                                    
+            
+        }else if(e.getSource()==ingresarCancelacion){
+            if(CedulaCheckIn.getText().length()>0){
+   
+                         try{
+                            BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in",true));
+                            BR.write("\n2\n");
+                            String varCheck=(CedulaCancelacion.getText());
+                            BR.write(varCheck+" ");
+                            String varMinCheck=(comboMinutoCancelacion.getSelectedItem().toString());
+                            String varHoraCheck=(comboHoraCancelacion.getSelectedItem().toString());
+                            BR.write(varMinCheck+":"+varHoraCheck+"\n");
+                            BR.close();
+                         }catch(Exception ex){
+                             
+                         }                               
+                                                        
+                                                        
+                
+            }
+                                                    
+            
+        }   
         
+        
+        else if (e.getSource() == ingresarReserva) {
+            try {
+
 
                 if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboAnoSalida.getSelectedItem().toString())) ){
                         if((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboMesSalida.getSelectedItem().toString())) ){
@@ -1010,31 +1067,20 @@ public class Ventana extends JFrame implements ActionListener {
                             JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
            
                             banderaRevision=0;
-=======
-
-                if ((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))) {
-                    if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
-                        if ((Integer.parseInt(comboDiaLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboDiaSalida.getSelectedItem().toString()))) {
-                            JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(dia)");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Dia Ingresado Erroneo o menor a la esperado");
->>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
                         }
                     } else if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
                         JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(mes)");
                     } else {
                         JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
                     }
-                } else if ((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))) {
+                  if ((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))) {
                     JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(año)");
-<<<<<<< HEAD
+
   
                     banderaRevision=1;
                 }
                 else{
-=======
-                } else {
->>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
+
                     JOptionPane.showMessageDialog(null, "Año Ingresado Erroneo o menor a lo esperado");
           
                     banderaRevision=0;
@@ -1050,7 +1096,7 @@ public class Ventana extends JFrame implements ActionListener {
    
                 banderaRevision=0;
             }
-<<<<<<< HEAD
+
 
             if(bandera==789 &&banderaRevision==1){
                 try{
@@ -1058,34 +1104,27 @@ public class Ventana extends JFrame implements ActionListener {
                     varF = (comboDiaLlegada.getSelectedItem().toString())+" "+(comboMesLlegada.getSelectedItem().toString())+" "+(comboAnoLlegada.getSelectedItem().toString());
                     varG =(comboDiaSalida.getSelectedItem().toString())+" "+(comboMesSalida.getSelectedItem().toString())+" "+(comboAnoSalida.getSelectedItem().toString());
                     
-                    FileWriter file = new FileWriter("gdfgoperaciones.txt",true);
-                    BufferedWriter BR = new BufferedWriter(file);
+
+                    BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in",true));
                     BR.write("1\n");
-                    BR.append("6rftyvghhvvghvg");
                     BR.write(varF + " "+ varG+"\n");
                     BR.write(varH+"\n");
                     BR.write(varE+"\n");
                     
-                    FileReader fr = new FileReader("operaciones.txt");
-                    BufferedReader br =new BufferedReader(fr);
+                    BufferedReader br =new BufferedReader(new FileReader("operaciones.txt"));
                     String cadena;
                     while((cadena=br.readLine())!=null){
-                        BR.write(cadena);
+                        BR.write(cadena+"\n");
                     }
-                    fr.close();
+ 
                     br.close();
-                    file.close();
+     
                     BR.close();
                     
                 }catch(Exception ex){}
                 
             }
-=======
-            panelUno.setVisible(false);
-            panelDos.setVisible(false);
-            panelTres.setVisible(true);
-            panelCuatro.setVisible(false);
->>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
+
         } else if (e.getSource() == botonInicializar) {
             try {
                 inicializar();
@@ -1133,8 +1172,6 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("9");
                 comboCantidadDePersona.addItem("10");
             }
-<<<<<<< HEAD
-            
 
         }else if(e.getSource()==botonReservaCarga){
             varH= (comboTipoDeHabitacion.getSelectedItem().toString());
@@ -1180,19 +1217,18 @@ public class Ventana extends JFrame implements ActionListener {
                                 d=0;
                             }
                             try{
-                                FileWriter file = new FileWriter("operaciones.txt",true);
-                                 BufferedWriter Br= new BufferedWriter(file);
+                                 BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.txt",true));
                                  
                                  if(a==1&&b==1&&d==1){
                                     bandera++;
-                                     Br.append(varB+" "+varA+" "+varC+" "+varD+"\n");
+                                     BR.write(varB+" "+varA+" "+varC+" "+varD+"\n");
                                 
                             }else if(a==2&&b==1&&d==1){
                                 bandera++;
-                                Br.append(varB+" "+varA+" "+varC+" "+varD+"\n");
+                                BR.write(varB+" "+varA+" "+varC+" "+varD+"\n");
                             }
-                                 file.close();
-                                 Br.close();
+                    
+                                 BR.close();
                             }catch(Exception ex){}
                             
                             
@@ -1202,81 +1238,6 @@ public class Ventana extends JFrame implements ActionListener {
                                 bandera =789;
                             }
                             
-                    
-                
-=======
-
-        } else if (e.getSource() == botonReservaCarga) {
-
-            int a = 0, b = 0, c = 0, d = 0;
-            if (((CedulaReserva.getText()).length()) == 8 && comboTipoEdad.getSelectedIndex() == 0) {
-                try {
-                    int var = Integer.parseInt((CedulaReserva.getText()));
-                    a = 1;
-
-                } catch (Exception ex) {
-
-                    JOptionPane.showMessageDialog(null, "Cedula erronea");
-                    a = 0;
-                }
-            } else if (comboTipoEdad.getSelectedIndex() == 1) {
-                a = 2;
-            } else if (((CedulaReserva.getText()).length()) != 8) {
-                JOptionPane.showMessageDialog(null, "La cedula tiene que tener 8 digitos");
-                a = 0;
-            }
-            if (((nombreReserva.getText()).length()) > 2) {
-                String varA = nombreReserva.getText();
-                b = 1;
-            } else {
-                JOptionPane.showMessageDialog(null, "Nombre muy corto");
-                b = 0;
-            }
-
-            if ((apellidoReserva.getText().length()) > 2) {
-                String varB = apellidoReserva.getText();
-                d = 1;
-            } else {
-                JOptionPane.showMessageDialog(null, "Apellido muy corto");
-                d = 0;
-            }
-            System.out.println("Hola" + a + "Hola2" + b + "Hola3" + c + "Hola4" + d + "Hola5");
-            if (a == 1 && b == 1 && d == 1) {
-                bandera++;
-                System.out.println("Entre");
-            } else if (a == 2 && b == 1 && d == 1) {
-                bandera++;
-                System.out.println("Entre 2");
-            }
-            System.out.println("Bandera= " + bandera);
-            System.out.println("Cantidad Persona = " + comboCantidadDePersona.getSelectedIndex());
-            if ((bandera - 1) == comboCantidadDePersona.getSelectedIndex()) {
-                botonReservaCarga.setEnabled(false);
-                ingresarReserva.setEnabled(true);
-            }
-
->>>>>>> 48eeb2786ee4d5058976a626bb2aa9a2797f6d10
-            /*else if(comboCantidadDePersona.getSelectedIndex() == 1){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 2){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 3){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 4){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 5){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 6){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 7){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 8){
-                botonReservaCarga.setEnabled(true); 
-            }else if(comboCantidadDePersona.getSelectedIndex() == 9){
-                botonReservaCarga.setEnabled(true); 
-            }
-          
-             */
         } else if (e.getSource() == comboAnoLlegada) {
             comboMesLlegada.removeAllItems();
             for (int i = 1; mesStrings.length > i; i++) {
@@ -1285,7 +1246,63 @@ public class Ventana extends JFrame implements ActionListener {
                 comboDiaLlegada.addItem("30");
                 comboDiaLlegada.addItem("31");
             }
-        } else if (e.getSource() == comboMesLlegada) {
+        }else if(e.getSource() == botonIngresarPrecios){
+            
+                
+  
+                  if(CampoTextoIndv.getText().length()>0){
+                      if(CampoTextoDoble.getText().length()>0){
+                           if(CampoTextoMatri.getText().length()>0){
+                               if(CampoTextoSuite.getText().length()>0){
+                               if(CampoTextoCuadruple.getText().length()>0){
+                                   if(CampoTextoEsp_C.getText().length()>0){
+                                        if(CampoTextoLom_M.getText().length()>0){
+                                            if(CampoTextoJug_L.getText().length()>0){
+                                                if(CampoTextoMalta.getText().length()>0){
+                                                    if(comboCam_A.getText().length()>0){
+                                                        if(comboCaj_F.getText().length()>0){
+                                                            try{
+                                                                BufferedWriter BR = new BufferedWriter(new FileWriter("precios.in"));
+                                                                BR.write("INDIV "+CampoTextoIndv.getText());
+                                                                BR.write("\nDOBLE "+CampoTextoDoble.getText());
+                                                                BR.write("\nMATRI  "+CampoTextoMatri.getText());
+                                                                BR.write("\nCUADR "+CampoTextoCuadruple.getText());
+                                                                BR.write("\nSUITE "+CampoTextoSuite.getText());
+                                                                BR.write("\nCAM_A "+comboCam_A.getText()+" Cama Adicional");
+                                                                BR.write("\nCAM_F "+comboCaj_F.getText()+" CajaFuerte");
+                                                                BR.write("\nESP_C "+CampoTextoEsp_C.getText()+" Espaguetis a la Carbonara");
+                                                                BR.write("\nLOM_M "+CampoTextoLom_M.getText()+" Lomito a la Mostaza");
+                                                                BR.write("\nJUG_L "+CampoTextoJug_L.getText()+" Jugo light");
+                                                                BR.write("\nMALTA "+CampoTextoMalta.getText()+" Malta");
+                                                                BR.close();
+                                                                JOptionPane.showMessageDialog(null, "Archivo creado exitosamente");
+                                                            }catch(Exception ex){}
+                                                            JOptionPane.showMessageDialog(null, "Hubo un error");
+                                                            
+                                                            
+                                                            
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        }
+                                   }
+                               }
+                               }
+                           }
+                  }}
+                  
+                    
+                    
+                    
+                                 
+                                    
+                                         
+                                             
+        } 
+        
+        else if (e.getSource() == comboMesLlegada) {
             Integer varNum = Integer.parseInt(comboAnoLlegada.getSelectedItem().toString());
             varNum = varNum % 4;
 
@@ -1401,9 +1418,11 @@ public class Ventana extends JFrame implements ActionListener {
         if (fichero.exists()) {
 
             comprobacion = "El archivo " + sFichero + " si existe";
-            botonDosHeader.setEnabled(false);
+            botonAbrirArchivoInicializar.setEnabled(false);
+            
         } else {
             comprobacion = "\nEl archivo " + sFichero + " no existe";
+       
         }
         String dFichero = "precios.in";
         File fichero2 = new File(dFichero);
@@ -1411,6 +1430,7 @@ public class Ventana extends JFrame implements ActionListener {
         if (fichero2.exists()) {
 
             comprobacion2 = "\n\nEl archivo " + dFichero + " si existe";
+         
         } else {
             comprobacion2 = "\n\nEl archivo " + dFichero + " no existe";
         }
