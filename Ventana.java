@@ -25,9 +25,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends JFrame implements ActionListener {
 
@@ -38,19 +40,23 @@ public class Ventana extends JFrame implements ActionListener {
 
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
-            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion;
+            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
+            botonReservaCarga;
     protected JTextArea textArea;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
-            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres;
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres, panelAgregarUsuario;
 
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
-            CedulaCheckOut, HoraCheckOut, CedulaCancelacion;
+            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva,nombreReserva,apellidoReserva;
 
     protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
-            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida;
+            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
+            comboTipoEdad;
     protected JScrollPane scroll;
-
+    
+    protected int bandera=0;
+    
     
     
     protected String[] minutosStrings={"00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27",
@@ -62,7 +68,7 @@ public class Ventana extends JFrame implements ActionListener {
     
     protected String[] mesStrings ={"mm","01","02","03","04","05","06","07","08","09","10","11","12"};
     
-    protected String[] annioStrings ={"aaaa","2019","2020","2021","2022","2023"};
+    protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
 		
     
 
@@ -289,11 +295,20 @@ public class Ventana extends JFrame implements ActionListener {
         panelCancelacion.setVisible(false);
 
         //========================================
+        panelAgregarUsuario = new JPanel();
+        panelAgregarUsuario.setBackground(Color.red);
+        panelAgregarUsuario.setBounds(225, 170, 770, 180);
+        panelAgregarUsuario.setVisible(true);
+        panelAgregarUsuario .setLayout(null);
+
+        //=========================================
         panelMenuOperaciones = new JPanel();
         panelMenuOperaciones.setBackground(myColorHeaderTitulo);
         panelMenuOperaciones.setBounds(0, 0, 220, 400);
         panelMenuOperaciones.setLayout(null);
         panelTres.add(panelMenuOperaciones);
+        
+        
 
         //=====================================
         botonReservacion = new JButton("Reservaciones");
@@ -306,6 +321,7 @@ public class Ventana extends JFrame implements ActionListener {
         ingresarReserva.setBackground(myColorBotonHeader);
         ingresarReserva.setForeground(myColorBotonLetraHeader);
         ingresarReserva.setBounds(500, 350, 200, 40);
+        ingresarReserva.setEnabled(false);
         ingresarReserva.addActionListener(this);
 
         textoFechaLlegada = new JLabel("FECHA LLEGADA");
@@ -316,6 +332,7 @@ public class Ventana extends JFrame implements ActionListener {
         comboDiaLlegada = new JComboBox();
         comboDiaLlegada.addItem("dd");
         comboDiaLlegada.setBounds(370, 10, 70, 40);
+        comboDiaLlegada.addActionListener(this);
 
         comboMesLlegada = new JComboBox();
         comboMesLlegada.addItem("mm");
@@ -332,19 +349,25 @@ public class Ventana extends JFrame implements ActionListener {
         textoFechaSalida.setBounds(630, 10, 150, 40);
         textoFechaSalida.setForeground(Color.WHITE);
 
-        comboDiaSalida = new JComboBox(diasStrings);
+        comboDiaSalida = new JComboBox();
+        comboDiaSalida.addItem("dd");
         comboDiaSalida.setBounds(760, 10, 70, 40);
+        comboDiaSalida.addActionListener(this);
 
-        comboMesSalida = new JComboBox(mesStrings);
+        comboMesSalida = new JComboBox();
+        comboMesSalida.addItem("mm");
         comboMesSalida.setBounds(835, 10, 70, 40);
+        comboMesSalida.addActionListener(this);
 
         comboAnoSalida = new JComboBox(annioStrings);
         comboAnoSalida.setBounds(910, 10, 85, 40);
+        comboAnoSalida.addActionListener(this);
 
         textoTipoHabitacion = new JLabel("TIPO HABITACIÓN");
         textoTipoHabitacion.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoTipoHabitacion.setBounds(225, 60, 170, 40);
         textoTipoHabitacion.setForeground(Color.WHITE);
+        
 
         comboTipoDeHabitacion = new JComboBox();
         comboTipoDeHabitacion.addItem("Seleccione");
@@ -363,8 +386,33 @@ public class Ventana extends JFrame implements ActionListener {
 
         comboCantidadDePersona = new JComboBox();
         comboCantidadDePersona.addItem("Seleccione");
-
         comboCantidadDePersona.setBounds(450, 110, 175, 40);
+        comboCantidadDePersona.addActionListener(this);
+        
+        comboTipoEdad = new JComboBox();
+        comboTipoEdad.addItem("A");
+        comboTipoEdad.addItem("N");
+        comboTipoEdad.setBounds(230, 170, 60, 40);
+        comboTipoEdad.addActionListener(this);
+        
+        CedulaReserva= new JTextField("Cedula");
+        CedulaReserva.setBounds(300, 170, 120, 40);
+        CedulaReserva.addActionListener(this);
+        
+        nombreReserva= new JTextField("Nombre");
+        nombreReserva.setBounds(430, 170, 120, 40);
+        nombreReserva.addActionListener(this);
+        
+        apellidoReserva= new JTextField("Apellido");
+        apellidoReserva.setBounds(560, 170, 120, 40);
+        apellidoReserva.addActionListener(this);
+        
+        botonReservaCarga = new JButton("Agregar");
+        botonReservaCarga.setBounds(690, 170, 100, 40);
+        botonReservaCarga.setForeground(myColorBotonLetraHeader);
+        botonReservaCarga.setBackground(myColorBotonHeader);
+        botonReservaCarga.setEnabled(false); 
+        botonReservaCarga.addActionListener(this);
 
         //======================================
         botonCheckIn = new JButton("Check-in");
@@ -500,7 +548,7 @@ public class Ventana extends JFrame implements ActionListener {
         panelTres.add(panelCheckIn);
         panelTres.add(panelCheckOut);
         panelTres.add(panelCancelacion);
-
+        
         panelReservacion.add(ingresarReserva);
         panelReservacion.add(comboDiaLlegada);
         panelReservacion.add(comboAnoLlegada);
@@ -514,6 +562,14 @@ public class Ventana extends JFrame implements ActionListener {
         panelReservacion.add(textoCantPersona);
         panelReservacion.add(comboTipoDeHabitacion);
         panelReservacion.add(comboCantidadDePersona);
+        panelReservacion.add(comboTipoEdad);
+        panelReservacion.add(CedulaReserva);
+        panelReservacion.add(nombreReserva);
+        panelReservacion.add(apellidoReserva);
+        panelReservacion.add(botonReservaCarga);
+        
+        
+        
 
         panelCheckIn.add(textoCedulaCheckIn);
         panelCheckIn.add(CedulaCheckIn);
@@ -603,12 +659,14 @@ public class Ventana extends JFrame implements ActionListener {
             panelDos.setVisible(false);
             panelTres.setVisible(false);
             panelCuatro.setVisible(false);
+            panelColorTres.setVisible(false);
 
         } else if (e.getSource() == botonDosHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(true);
             panelTres.setVisible(false);
             panelCuatro.setVisible(false);
+            panelColorTres.setVisible(false);
 
         } else if (e.getSource() == botonTresHeader) {
             panelUno.setVisible(false);
@@ -616,6 +674,10 @@ public class Ventana extends JFrame implements ActionListener {
             panelTres.setVisible(true);
             panelCuatro.setVisible(false);
             panelColorTres.setVisible(true);
+            panelReservacion.setVisible(false);
+            panelCheckIn.setVisible(false);
+            panelCheckOut.setVisible(false);
+            panelCancelacion.setVisible(false);
          
         } else if (e.getSource() == botonCuatroHeader) {
             panelUno.setVisible(false);
@@ -653,36 +715,31 @@ public class Ventana extends JFrame implements ActionListener {
         } else if (e.getSource() == ingresarReserva) {
 
             try {
-                String diaLlegadaDatoEntrada = diaLlegada.getText();
-                int diaLlegadaDatoEntradaParseado = Integer.parseInt(diaLlegadaDatoEntrada);
+        
 
-                String mesLlegadaDatoEntrada = mesLlegada.getText();
-                int mesLlegadaDatoEntradaParseado = Integer.parseInt(mesLlegadaDatoEntrada);
-
-                String anoLlegadaDatoEntrada = anoLlegada.getText();
-                int anoLlegadaDatoEntradaParseado = Integer.parseInt(anoLlegadaDatoEntrada);
-
-                String diaSalidaDatoEntrada = diaSalida.getText();
-                int diaSalidaDatoEntradaParseado = Integer.parseInt(diaSalidaDatoEntrada);
-
-                String mesSalidaDatoEntrada = mesSalida.getText();
-                int mesSalidaDatoEntradaParseado = Integer.parseInt(mesSalidaDatoEntrada);
-
-                String anoSalidaDatoEntrada = anoSalida.getText();
-                int anoSalidaDatoEntradaParseado = Integer.parseInt(anoSalidaDatoEntrada);
-
-                if (diaLlegadaDatoEntradaParseado >= 1 && diaLlegadaDatoEntradaParseado <= 31 && diaSalidaDatoEntradaParseado >= 0 && diaSalidaDatoEntradaParseado <= 31) {
-                    JOptionPane.showMessageDialog(null, "Dia Ingresado Correcto");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Dia Ingresado erroneo");
+                if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboAnoSalida.getSelectedItem().toString())) ){
+                        if((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) == (Integer.parseInt(comboMesSalida.getSelectedItem().toString())) ){
+                                if((Integer.parseInt(comboDiaLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboDiaSalida.getSelectedItem().toString())) ){
+                                     JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(dia)");
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "Dia Ingresado Erroneo o menor a la esperado");
+                                }
+                        }else if((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) <(Integer.parseInt(comboMesSalida.getSelectedItem().toString())) ){
+                             JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(mes)");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
+                        }
+                }else if((Integer.parseInt(comboAnoLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboAnoSalida.getSelectedItem().toString()))){
+                    JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(año)");
                 }
-
-                if (mesLlegadaDatoEntradaParseado <= 12 && mesSalidaDatoEntradaParseado <= 12 && mesLlegadaDatoEntradaParseado >= 1 && mesSalidaDatoEntradaParseado >= 1) {
-                    JOptionPane.showMessageDialog(null, "Mes Ingresado correcto");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Mes Ingresado erroneo");
+                else{
+                    JOptionPane.showMessageDialog(null, "Año Ingresado Erroneo o menor a lo esperado");
                 }
+                if (comboTipoDeHabitacion.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(null, "Ingrese una Opcion en tipo habitación");
+                }
+                
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
@@ -706,29 +763,29 @@ public class Ventana extends JFrame implements ActionListener {
             }
 
         } else if (e.getSource() == comboTipoDeHabitacion) {
+             comboCantidadDePersona.removeAllItems();
+             bandera=0;
+             System.out.println("Entre");
+             botonReservaCarga.setEnabled(true); 
+             ingresarReserva.setEnabled(false);
             if (comboTipoDeHabitacion.getSelectedIndex() == 0) {
-                comboCantidadDePersona.removeAllItems();
-                comboCantidadDePersona.addItem("0");
+                botonReservaCarga.setEnabled(false);
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 1) {
-                comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 2) {
-                comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 3) {
-                comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 4) {
-                comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
                 comboCantidadDePersona.addItem("4");
+                
             } else if (comboTipoDeHabitacion.getSelectedIndex() == 5) {
-                comboCantidadDePersona.removeAllItems();
                 comboCantidadDePersona.addItem("1");
                 comboCantidadDePersona.addItem("2");
                 comboCantidadDePersona.addItem("3");
@@ -740,54 +797,153 @@ public class Ventana extends JFrame implements ActionListener {
                 comboCantidadDePersona.addItem("9");
                 comboCantidadDePersona.addItem("10");
             }
-            comboCantidadDePersona.addActionListener(this);
+            
 
-        }else if(e.getSource()==comboCantidadDePersona){
+        }else if(e.getSource()==botonReservaCarga){
             
-            
-        }else if(e.getSource()==comboAnoLlegada){
-             if(comboAnoLlegada.getSelectedIndex()!=0){
-                comboMesLlegada.removeAllItems();
-                for(int i = 1; mesStrings.length >i ;i++ ){
+                int a = 0,b=0,c=0,d=0;
+                if(((CedulaReserva.getText()).length())==8&&comboTipoEdad.getSelectedIndex()==0){
+                            try{
+                                int var = Integer.parseInt((CedulaReserva.getText()));
+                                a=1;
+                                    
+                            }catch (Exception ex){
+                                    
+                                    JOptionPane.showMessageDialog(null, "Cedula erronea");
+                                    a=0;
+                                }
+                                
+                }else if(comboTipoEdad.getSelectedIndex()==1){
+                    a=2;
+                }else if(((CedulaReserva.getText()).length())!=8){
+                                JOptionPane.showMessageDialog(null, "La cedula tiene que tener 8 digitos");
+                                a=0;
+                            }
+                            
+                            if(((nombreReserva.getText()).length())>2){
+                                String varA = nombreReserva.getText();
+                               b=1;
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Nombre muy corto");
+                                b=0;
+                            }
+                            
+                            if((apellidoReserva.getText().length())>2){
+                                String varB = apellidoReserva.getText();
+                                d=1;
+                            }else{
+                                JOptionPane.showMessageDialog(null, "Apellido muy corto");
+                                d=0;
+                            }
+                            System.out.println("Hola"+a+"Hola2"+b+"Hola3"+c+"Hola4"+d+"Hola5");
+                            if(a==1&&b==1&&d==1){
+                                bandera++;
+                                System.out.println("Entre");
+                            }else if(a==2&&b==1&&d==1){
+                                bandera++;
+                                System.out.println("Entre 2");
+                            }
+                            System.out.println("Bandera= "+bandera);
+                            System.out.println("Cantidad Persona = "+ comboCantidadDePersona.getSelectedIndex());
+                            if((bandera-1)==comboCantidadDePersona.getSelectedIndex()){
+                                botonReservaCarga.setEnabled(false);
+                                ingresarReserva.setEnabled(true);
+                            }
+                        
                     
-                    comboMesLlegada.addItem(mesStrings[i]);   
-                }
+                
+            /*else if(comboCantidadDePersona.getSelectedIndex() == 1){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 2){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 3){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 4){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 5){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 6){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 7){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 8){
+                botonReservaCarga.setEnabled(true); 
+            }else if(comboCantidadDePersona.getSelectedIndex() == 9){
+                botonReservaCarga.setEnabled(true); 
             }
-             
-             else if(comboAnoLlegada.getSelectedIndex()==0){
-                 comboMesLlegada.removeAllItems();
-             }
-            
-  
-            
-            
+          
+            */
+        }else if(e.getSource()==comboAnoLlegada){
+            comboMesLlegada.removeAllItems();
+            for(int i = 1; mesStrings.length >i ;i++ ){
+                comboMesLlegada.addItem(mesStrings[i]);   
+                comboDiaLlegada.addItem("29");   
+                comboDiaLlegada.addItem("30");  
+                comboDiaLlegada.addItem("31");   
+            }
+
         }else if(e.getSource()==comboMesLlegada){
             Integer varNum = Integer.parseInt(comboAnoLlegada.getSelectedItem().toString());
             varNum=varNum%4;
-            System.out.println(varNum);
-            if(comboMesLlegada.getSelectedIndex()==0){
-                comboDiaLlegada.removeAllItems();
-                comboDiaLlegada.addItem("aa");
-            }else if(comboMesLlegada.getSelectedIndex()!=0){
+            
+            if(comboMesLlegada.getSelectedIndex()!=0){
                 comboDiaLlegada.removeAllItems();
                 for(int i = 0; diasStrings.length >i ;i++ ){
                     comboDiaLlegada.addItem(diasStrings[i]);   
                 }
-                if(varNum==0&&comboMesLlegada.getSelectedIndex()==2){
+                if(varNum==0&&comboMesLlegada.getSelectedIndex()==1){
                     comboDiaLlegada.addItem("29");
                 }
-                 if(comboMesLlegada.getSelectedIndex()==4 ||comboMesLlegada.getSelectedIndex()==6||comboMesLlegada.getSelectedIndex()==9||
-                    comboMesLlegada.getSelectedIndex()==11){
+                 if(comboMesLlegada.getSelectedIndex()==3 ||comboMesLlegada.getSelectedIndex()==5||comboMesLlegada.getSelectedIndex()==8||
+                    comboMesLlegada.getSelectedIndex()==10){
                     comboDiaLlegada.addItem("29");   
                     comboDiaLlegada.addItem("30");   
  
                 }
-                if(comboMesLlegada.getSelectedIndex()==1 ||comboMesLlegada.getSelectedIndex()==3||comboMesLlegada.getSelectedIndex()==5||
-                    comboMesLlegada.getSelectedIndex()==7||comboMesLlegada.getSelectedIndex()==8||comboMesLlegada.getSelectedIndex()==10||
-                    comboMesLlegada.getSelectedIndex()==12){
+                if(comboMesLlegada.getSelectedIndex()==0 ||comboMesLlegada.getSelectedIndex()==2||comboMesLlegada.getSelectedIndex()==4||
+                    comboMesLlegada.getSelectedIndex()==6||comboMesLlegada.getSelectedIndex()==7||comboMesLlegada.getSelectedIndex()==9||
+                    comboMesLlegada.getSelectedIndex()==11){
                     comboDiaLlegada.addItem("29");   
                     comboDiaLlegada.addItem("30");  
                     comboDiaLlegada.addItem("31");   
+                }
+            }
+
+            
+        }else if(e.getSource()==comboAnoSalida){
+            comboMesSalida.removeAllItems();
+            for(int i = 1; mesStrings.length >i ;i++ ){
+                comboMesSalida.addItem(mesStrings[i]);   
+                comboDiaSalida.addItem("29");   
+                comboDiaSalida.addItem("30");  
+                comboDiaSalida.addItem("31");   
+            }
+
+        }
+        else if(e.getSource()==comboMesSalida){
+            Integer varNum = Integer.parseInt(comboAnoSalida.getSelectedItem().toString());
+            varNum=varNum%4;
+            
+            if(comboMesSalida.getSelectedIndex()!=0){
+                comboDiaSalida.removeAllItems();
+                for(int i = 0; diasStrings.length >i ;i++ ){
+                    comboDiaSalida.addItem(diasStrings[i]);   
+                }
+                if(varNum==0&&comboMesSalida.getSelectedIndex()==1){
+                    comboDiaSalida.addItem("29");
+                }
+                 if(comboMesSalida.getSelectedIndex()==3 ||comboMesSalida.getSelectedIndex()==5||comboMesSalida.getSelectedIndex()==8||
+                    comboMesSalida.getSelectedIndex()==10){
+                    comboDiaSalida.addItem("29");   
+                    comboDiaSalida.addItem("30");   
+ 
+                }
+                if(comboMesSalida.getSelectedIndex()==0 ||comboMesSalida.getSelectedIndex()==2||comboMesSalida.getSelectedIndex()==4||
+                    comboMesSalida.getSelectedIndex()==6||comboMesSalida.getSelectedIndex()==7||comboMesSalida.getSelectedIndex()==9||
+                    comboMesSalida.getSelectedIndex()==11){
+                    comboDiaSalida.addItem("29");   
+                    comboDiaSalida.addItem("30");  
+                    comboDiaSalida.addItem("31");   
                 }
             }
 
