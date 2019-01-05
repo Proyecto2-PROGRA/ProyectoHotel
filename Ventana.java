@@ -1422,11 +1422,11 @@ public class Ventana extends JFrame implements ActionListener {
 
         if (fichero.exists()) {
 
-            comprobacion = "El archivo " + sFichero + " si existe";
+            comprobacion = "El archivo " + sFichero + " se cargo con el programa";
             botonAbrirArchivoInicializar.setEnabled(false);
             
         } else {
-            comprobacion = "\nEl archivo " + sFichero + " no existe";
+            comprobacion = "\nEl archivo " + sFichero + " no se cargo con el programa";
        
         }
         String dFichero = "precios.in";
@@ -1434,10 +1434,10 @@ public class Ventana extends JFrame implements ActionListener {
 
         if (fichero2.exists()) {
 
-            comprobacion2 = "\n\nEl archivo " + dFichero + " si existe";
+            comprobacion2 = "\n\nEl archivo " + dFichero + " se cargo con el programa";
          
         } else {
-            comprobacion2 = "\n\nEl archivo " + dFichero + " no existe";
+            comprobacion2 = "\n\nEl archivo " + dFichero + " no se cargo con el programa";
         }
         return comprobacion + comprobacion2;
     }
@@ -1554,7 +1554,7 @@ public class Ventana extends JFrame implements ActionListener {
 
         }
         try {
-            FileReader lector = new FileReader("inicializar.in.txt");
+            FileReader lector = new FileReader("inicializar.in");
             BufferedReader BR = new BufferedReader(lector);
             String cadena;
 
