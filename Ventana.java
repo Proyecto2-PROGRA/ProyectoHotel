@@ -41,22 +41,24 @@ public class Ventana extends JFrame implements ActionListener {
             textoEsp_C, textoLom_M, textoJug_L, textoMalta, TextoHabitaciones3, textoMostrarInicial2;
 
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
-<<<<<<< HEAD
+
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
             botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
-            botonReservaCarga;
-    protected JTextArea textArea;
+            botonReservaCarga, botonIniciaizarDos, botonPreciosDos,botonIngresarInicializar,botonIngresarPrecios;
+    ;
+    protected JTextArea textArea, textArea2, textArea3;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
-            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres, panelAgregarUsuario;
+            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelAgregarUsuario,panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;;
 
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
-            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva,nombreReserva,apellidoReserva;
+            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva,nombreReserva,apellidoReserva, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
+            CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta, TextoSaldoInicial;
 
     protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
             comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
-            comboTipoEdad;
-    protected JScrollPane scroll;
+            comboTipoEdad, comboCam_A, comboCaj_F;
+    protected JScrollPane scroll, scroll2, scroll3;
     
     protected int bandera=0;
     
@@ -73,39 +75,10 @@ public class Ventana extends JFrame implements ActionListener {
     
     protected String[] annioStrings ={"2019","2020","2021","2022","2023"};
 		
-    
-=======
-            botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonIngresarInicializar, botonIngresarPrecios,
-            botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion, botonIniciaizarDos, botonPreciosDos;
-    protected JTextArea textArea, textArea2, textArea3;
 
-    protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
-            panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;
-
-    protected JTextField diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
-            CedulaCheckOut, HoraCheckOut, CedulaCancelacion, TextoSaldoInicial, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
-            CampoTextoCuadruple, CampoTextoSuite, CampoTextoEsp_C, CampoTextoLom_M, CampoTextoJug_L, CampoTextoMalta;
-
-    protected JComboBox comboTipoDeHabitacion, comboHoraCheckIn, comboMinutoCheckIn, comboHoraCheckOut, comboMinutoCheckOut, comboCantidadDePersona,
-            comboHoraCancelacion, comboMinutoCancelacion, comboAnoLlegada, comboDiaLlegada, comboMesLlegada, comboAnoSalida, comboDiaSalida, comboMesSalida,
-            comboCam_A, comboCaj_F;
-    protected JScrollPane scroll, scroll2, scroll3;
-
-
-    protected String[] minutosStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27",
-        "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
-
-    protected String[] horasStrings = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-
-    protected String[] diasStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"};
-
-    protected String[] mesStrings = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-
-    protected String[] annioStrings = {"2019", "2020", "2021", "2022", "2023"};
 
     protected String[] SeleccionSiNo = {"0", "1"};
 
->>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
 
     public Color myColorLetra = Color.decode("#FFC300");
     public Color myColorHeader = Color.decode("#00010D");
@@ -959,13 +932,13 @@ public class Ventana extends JFrame implements ActionListener {
             panelDos.setVisible(true);
             panelTres.setVisible(false);
             panelCuatro.setVisible(false);
-<<<<<<< HEAD
+
             panelColorTres.setVisible(false);
-=======
+
             panelInicializarDos.setVisible(false);
             panelPreciosDos.setVisible(false);
             panelDosExtra.setVisible(true);
->>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
+
 
         } else if (e.getSource() == botonTresHeader) {
             panelUno.setVisible(false);
@@ -973,15 +946,12 @@ public class Ventana extends JFrame implements ActionListener {
             panelTres.setVisible(true);
             panelCuatro.setVisible(false);
             panelColorTres.setVisible(true);
-<<<<<<< HEAD
+
             panelReservacion.setVisible(false);
             panelCheckIn.setVisible(false);
             panelCheckOut.setVisible(false);
             panelCancelacion.setVisible(false);
          
-=======
-
->>>>>>> b574b0a1d332b8454b42b2a4705621a26fabff60
         } else if (e.getSource() == botonCuatroHeader) {
             panelUno.setVisible(false);
             panelDos.setVisible(false);
