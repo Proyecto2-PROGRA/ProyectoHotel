@@ -15,7 +15,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -109,10 +111,12 @@ public class Ventana extends JFrame implements ActionListener {
     public Ventana() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1000, 500);
+        
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(false);
         MenuHeader();
+        
     }
     public void MenuHeader() {
         panelHeader = new JPanel();
@@ -229,6 +233,7 @@ public class Ventana extends JFrame implements ActionListener {
         botonIniciaizarDos.setBackground(myColorBotonHeader);
         botonIniciaizarDos.setForeground(myColorBotonLetraHeader);
         botonIniciaizarDos.setBounds(200, 160, 220, 60);
+       
         botonIniciaizarDos.addActionListener(this);
 
         textoSaldoInicial = new JLabel("Saldo Inicial:");
@@ -407,16 +412,12 @@ public class Ventana extends JFrame implements ActionListener {
         botonIngresarPrecios.setBounds(330, 250, 150, 70);
         botonIngresarPrecios.addActionListener(this);
 
-        textoMostrarInicial2 = new JLabel("Precios.in  Generado:");
+        textoMostrarInicial2 = new JLabel("");
         textoMostrarInicial2.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 17));
         textoMostrarInicial2.setBounds(680, 5, 450, 40);
         textoMostrarInicial2.setForeground(Color.WHITE);
 
-        textArea3 = new JTextArea();   // mostrar precios.in
-        textArea3.setEditable(false);
-        scroll3 = new JScrollPane(textArea3);
-        scroll3.setBounds(560, 40, 400, 400);
-        panelPreciosDos.add(scroll3);
+
 
         //panel extra 
         panelDosExtra = new JPanel();
@@ -913,8 +914,10 @@ public class Ventana extends JFrame implements ActionListener {
             panelDos.setVisible(true);
             panelTres.setVisible(false);
             panelCuatro.setVisible(false);
-            panelInicializarDos.setVisible(true);
+            Inicializar_in();
+             JOptionPane.showMessageDialog(null, "El archivo inicializar se genero automaticamente");
             panelDosExtra.setVisible(false);
+            
 
         } else if (e.getSource() == botonPreciosDos) {
             panelUno.setVisible(false);
@@ -1068,7 +1071,7 @@ public class Ventana extends JFrame implements ActionListener {
            
                             banderaRevision=0;
                         }
-                    } else if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) < (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
+                    } else if ((Integer.parseInt(comboMesLlegada.getSelectedItem().toString())) <= (Integer.parseInt(comboMesSalida.getSelectedItem().toString()))) {
                         JOptionPane.showMessageDialog(null, "Fecha Ingresada Corecta(mes)");
                     } else {
                         JOptionPane.showMessageDialog(null, "Mes Ingresado Erroneo o menor a lo esperado");
@@ -1276,8 +1279,10 @@ public class Ventana extends JFrame implements ActionListener {
                                                                 BR.write("\nMALTA "+CampoTextoMalta.getText()+" Malta");
                                                                 BR.close();
                                                                 JOptionPane.showMessageDialog(null, "Archivo creado exitosamente");
-                                                            }catch(Exception ex){}
+                                                            }catch(Exception ex){
                                                             JOptionPane.showMessageDialog(null, "Hubo un error");
+                                                            }
+                                                            
                                                             
                                                             
                                                             
@@ -1462,5 +1467,105 @@ public class Ventana extends JFrame implements ActionListener {
 
         } catch (IOException ex) {
         }
+    }
+    public void Inicializar_in() {
+        try {
+            FileWriter fichero = new FileWriter("Reservar.csv", true);
+            fichero.write("NombreTitular;ApellidoTitular;RutTitular;NombreAcompanante;ApellidoAcompanante;RutAcompanante;Grupo;FechaEntrada;FechaSalida;Hora\n");
+            fichero.close();
+        } catch (IOException ex) {
+        }
+
+        String ValorHotel = "100250.00";
+        try {
+            FileWriter fichero = new FileWriter("inicializar.in");
+            fichero.append(ValorHotel);
+            fichero.write("\r\n");
+            String anio = null;
+            String mes;
+            String dia;
+
+            fichero.write("01" + " " + "01" + " " + "2019");
+            fichero.append("\r\n");
+
+            int NumeroPiso = (int) (Math.random() * 10) + 1;
+            List<String>[] ListaTipoHabitacion = new List[NumeroPiso];
+
+            String n_1 = Integer.toString(NumeroPiso);
+            int cont = 0;
+
+            for (int x = 0; x < NumeroPiso; x++) {
+                int NumeroHabitaciones = (int) (Math.random() * 5) + 1;
+
+                List<String> ListaHabitacion = new ArrayList<>();
+
+                for (int i = 0; i < NumeroHabitaciones; i++) {
+                    int TipoDeHabitacion = (int) (Math.random() * 5) + 1;
+                    String Habitacion = Integer.toString(TipoDeHabitacion);
+
+                    ListaHabitacion.add(Habitacion);
+                    cont++;
+
+                }
+                ListaTipoHabitacion[x] = ListaHabitacion;
+
+            }
+            String contador = Integer.toString(cont);
+            fichero.write(contador + " ");
+            fichero.write(n_1);
+            fichero.append("\r\n");
+
+            for (int x = 0; x < NumeroPiso; x++) {
+                List<String> LH = new ArrayList<>();
+
+                fichero.write(ListaTipoHabitacion[x].size() + " ");
+
+                LH.addAll(ListaTipoHabitacion[x]);
+
+                for (int y = 0; y < ListaTipoHabitacion[x].size(); y++) {
+
+                    String var = LH.get(y);
+
+                    if (var.equals("1")) {
+                        fichero.write("INDIV" + " ");
+
+                    } else if (var.equals("2")) {
+                        fichero.write("MATRI" + " ");
+
+                    } else if (var.equals("3")) {
+                        fichero.write("DOBLE" + " ");
+
+                    } else if (var.equals("4")) {
+                        fichero.write("CUADR" + " ");
+
+                    } else if (var.equals("5")) {
+                        fichero.write("SUITE" + " ");
+
+                    }
+                }
+                fichero.append("\r\n");
+
+            }
+
+            fichero.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        try {
+            FileReader lector = new FileReader("inicializar.in.txt");
+            BufferedReader BR = new BufferedReader(lector);
+            String cadena;
+
+            while ((cadena = BR.readLine()) != null) {
+
+            }
+
+            BR.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }
