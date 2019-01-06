@@ -71,12 +71,6 @@ public class Modelo extends Vista {
     }
 
     public void Inicializar_in() {
-        try {
-            FileWriter fichero = new FileWriter("Reservar.csv", true);
-            fichero.write("NombreTitular;ApellidoTitular;RutTitular;NombreAcompanante;ApellidoAcompanante;RutAcompanante;Grupo;FechaEntrada;FechaSalida;Hora\n");
-            fichero.close();
-        } catch (IOException ex) {
-        }
         String ValorHotel = "100250.00";
         try {
             FileWriter fichero = new FileWriter("inicializar.in");

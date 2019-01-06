@@ -72,6 +72,7 @@ public class Controlador implements ActionListener {
         this.vista.ingresarCancelacion.addActionListener(this);
         this.vista.botonInicializar.addActionListener(this);
         this.vista.botonOperaciones.addActionListener(this);
+        this.vista.botonReservaciones.addActionListener(this);
 
     }
 
@@ -174,13 +175,21 @@ public class Controlador implements ActionListener {
             if (vista.CedulaCheckIn.getText().length() > 0) {
 
                 try {
+                    BufferedWriter BrReservaciones = new BufferedWriter(new FileWriter("reservaciones.out", true));
                     BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in", true));
-                    BR.write("\n3\n");
+                    BR.write("3\n");
                     String varCheck = (vista.CedulaCheckIn.getText());
+                    
                     BR.write(varCheck + " ");
+                    
                     String varMinCheck = (vista.comboMinutoCheckIn.getSelectedItem().toString());
                     String varHoraCheck = (vista.comboHoraCheckIn.getSelectedItem().toString());
                     BR.write(varMinCheck + ":" + varHoraCheck + "\n");
+                    
+                    BrReservaciones.write("CHECK-IN-----(DD/MM/AAAA "+ varMinCheck + ":" + varHoraCheck +")\n");
+                    BrReservaciones.write("  Titular: "+varCheck+"\n");
+                    BrReservaciones.write("  Habitación: 001003\n");
+                    BrReservaciones.close();
                     BR.close();
                 } catch (Exception ex) {
 
@@ -190,13 +199,19 @@ public class Controlador implements ActionListener {
             if (vista.CedulaCheckOut.getText().length() > 0) {
 
                 try {
+                    BufferedWriter BrReservaciones = new BufferedWriter(new FileWriter("reservaciones.out", true));
                     BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in", true));
-                    BR.write("\n4\n");
+                    BR.write("4\n");
                     String varCheck = (vista.CedulaCheckOut.getText());
                     BR.write(varCheck + " ");
                     String varMinCheck = (vista.comboMinutoCheckOut.getSelectedItem().toString());
                     String varHoraCheck = (vista.comboHoraCheckOut.getSelectedItem().toString());
                     BR.write(varMinCheck + ":" + varHoraCheck + "\n");
+                    
+                    BrReservaciones.write("CHECK-OUT----(DD/MM/AAAA "+ varMinCheck + ":" + varHoraCheck +")\n");
+                    BrReservaciones.write("  Titular: "+varCheck+"\n");
+                    BrReservaciones.write("  Habitación: 001003\n");
+                    BrReservaciones.close();
                     BR.close();
                 } catch (Exception ex) {
 
@@ -208,13 +223,20 @@ public class Controlador implements ActionListener {
             if (vista.CedulaCheckIn.getText().length() > 0) {
 
                 try {
+                    BufferedWriter BrReservaciones = new BufferedWriter(new FileWriter("reservaciones.out", true));
                     BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in", true));
-                    BR.write("\n2\n");
+                    
+                    BR.write("2\n");
                     String varCheck = (vista.CedulaCancelacion.getText());
                     BR.write(varCheck + " ");
                     String varMinCheck = (vista.comboMinutoCancelacion.getSelectedItem().toString());
                     String varHoraCheck = (vista.comboHoraCancelacion.getSelectedItem().toString());
                     BR.write(varMinCheck + ":" + varHoraCheck + "\n");
+                    
+                    BrReservaciones.write("CANCELACIÓN-----(DD/MM/AAAA "+ varMinCheck + ":" + varHoraCheck +")\n");
+                    BrReservaciones.write("  Titular: "+varCheck+"\n");
+                    BrReservaciones.write("  Habitación: 001003\n");
+                    BrReservaciones.close();
                     BR.close();
                 } catch (Exception ex) {
 
@@ -279,19 +301,34 @@ public class Controlador implements ActionListener {
                     modelo.varG = (vista.comboDiaSalida.getSelectedItem().toString()) + " " + (vista.comboMesSalida.getSelectedItem().toString()) + " " + (vista.comboAnoSalida.getSelectedItem().toString());
 
                     BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in", true));
+                    BufferedWriter BrReservaciones = new BufferedWriter(new FileWriter("reservaciones.out", true));
+                    
                     BR.write("1\n");
                     BR.write(modelo.varF + " " + modelo.varG + "\n");
                     BR.write(modelo.varH + "\n");
                     BR.write(modelo.varE + "\n");
+                    
+                    BrReservaciones.write("RESERVACIÓN--("+"DD"+"/"+"MM"+"/"+"AAAA"+")\n");
+                    BrReservaciones.write(" Titular: ");
+                    
 
-                    BufferedReader br = new BufferedReader(new FileReader("operaciones.in"));
+                    BufferedReader br = new BufferedReader(new FileReader("operaciones.txt"));
                     String cadena;
+                    int contador=0;
                     while ((cadena = br.readLine()) != null) {
+                        contador++;
+                        if (contador==1){
+                            String[] contd= cadena.split(" ");
+                            BrReservaciones.write(contd[1]);
+                        }
                         BR.write(cadena + "\n");
                     }
+                    BrReservaciones.write("\n  Habitación "+modelo.varH+" del "+modelo.varF+" al "+modelo.varG+"(DD dias)\n");
 
                     br.close();
-
+                    BufferedWriter BREntro = new BufferedWriter(new FileWriter("operaciones.txt"));
+                    BREntro.close();
+                    BrReservaciones.close();
                     BR.close();
 
                 } catch (Exception ex) {
@@ -305,7 +342,15 @@ public class Controlador implements ActionListener {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (e.getSource() == vista.botonOperaciones) {
+            
+        } else if (e.getSource() == vista.botonReservaciones) {
+            try {
+                vista.Reservaciones();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Vista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else if (e.getSource() == vista.botonOperaciones) {
             try {
                 vista.operaciones();
             } catch (FileNotFoundException ex) {
@@ -389,7 +434,7 @@ public class Controlador implements ActionListener {
                 d = 0;
             }
             try {
-                BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.in", true));
+                BufferedWriter BR = new BufferedWriter(new FileWriter("operaciones.txt", true));
 
                 if (a == 1 && b == 1 && d == 1) {
                     modelo.bandera++;
@@ -530,6 +575,8 @@ public class Controlador implements ActionListener {
 
             modelo.BuscarArchivo();
 
+        }else if(e.getSource()== vista.botonReservaciones){
+            
         }
     }
 

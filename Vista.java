@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -29,7 +30,7 @@ public class Vista extends JFrame {
     protected JButton botonUnoHeader, botonDosHeader, botonTresHeader, botonCuatroHeader, botonAbrirArchivoInicializar,
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
             botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
-            botonReservaCarga, botonIniciaizarDos, botonPreciosDos, botonIngresarInicializar, botonIngresarPrecios;
+            botonReservaCarga, botonIniciaizarDos, botonPreciosDos, botonIngresarInicializar, botonIngresarPrecios, botonReservaciones;
     ;
     protected JTextArea textArea, textArea2, textArea3;
 
@@ -798,9 +799,15 @@ public class Vista extends JFrame {
         botonOperaciones.setBackground(myColorBotonHeader);
         botonOperaciones.setForeground(myColorBotonLetraHeader);
         botonOperaciones.setBounds(0, 45, 220, 40);
+        
+        botonReservaciones = new JButton("Reservaciones");
+        botonReservaciones.setBackground(myColorBotonHeader);
+        botonReservaciones.setForeground(myColorBotonLetraHeader);
+        botonReservaciones.setBounds(0, 90, 220, 40);
 
         panelMenuOperaciones.add(botonInicializar);
         panelMenuOperaciones.add(botonOperaciones);
+        panelMenuOperaciones.add(botonReservaciones);
         panelCuatro.add(panelMenuOperaciones);
 
         panelCuatro.add(panelInicializar);
@@ -845,6 +852,7 @@ public class Vista extends JFrame {
             }
             BR.close();
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Archivo inicializar.in no existe");
         }
     }
 
@@ -860,6 +868,22 @@ public class Vista extends JFrame {
             BR.close();
 
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Archivo operaciones.in no existe");
+        }
+    }
+    public void Reservaciones() throws FileNotFoundException {
+        try {
+            FileReader lector = new FileReader("reservaciones.out");
+            BufferedReader BR = new BufferedReader(lector);
+            String cadena;
+            textArea.setText(" ");
+            while ((cadena = BR.readLine()) != null) {
+                textArea.append(cadena + "\n");
+            }
+            BR.close();
+
+        } catch (IOException ex) {
+             JOptionPane.showMessageDialog(null, "Archivo reservaciones.out no existe");
         }
     }
 }
