@@ -31,12 +31,12 @@ public class Vista extends JFrame {
             botonAbrirArchivoPrecio, ingresarReserva, ingresarCheckIn, ingresarCheckOut, botonEnviarCargaInteractiva,
             botonReservacion, botonCheckIn, botonCheckOut, botonCancelacion, botonInicializar, botonOperaciones, ingresarCancelacion,
             botonReservaCarga, botonIniciaizarDos, botonPreciosDos, botonIngresarInicializar, botonIngresarPrecios, botonReservaciones;
-    ;
+    
     protected JTextArea textArea, textArea2, textArea3;
 
     protected JPanel panelUno, panelDos, panelTres, panelCuatro, panelHeader, panelTitulo, panelMenuOperaciones, panelInicializar, panelOperaciones,
             panelReservacion, panelCheckIn, panelCheckOut, panelCancelacion, panelAgregarUsuario, panelColorTres, panelInicializarDos, panelDosExtra, panelPreciosDos;
-    ;
+    
 
     protected JTextField cajaDeTextoCargaInteractivo, diaLlegada, mesLlegada, anoLlegada, diaSalida, mesSalida, anoSalida, CedulaCheckIn, HoraCheckIn,
             CedulaCheckOut, HoraCheckOut, CedulaCancelacion, CedulaReserva, nombreReserva, apellidoReserva, CampoTextoPisos, CampoTextoIndv, CampoTextoDoble, CampoTextoMatri,
